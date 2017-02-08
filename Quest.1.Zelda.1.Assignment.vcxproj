@@ -14,6 +14,7 @@
     <ClCompile Include="Source\ArtAssetLibrary.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameAssetLibrary.cpp" />
+    <ClCompile Include="Source\GraphicsDevice.cpp" />
     <ClCompile Include="Source\InputDevice.cpp" />
     <ClCompile Include="Source\Source.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
@@ -29,13 +30,12 @@
     <ClInclude Include="Source\Definitions.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameAssetLibrary.h" />
+    <ClInclude Include="Source\GraphicsDevice.h" />
     <ClInclude Include="Source\InputDevice.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\ObjectFactory.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\tinyxml\tinystr.h" />
-    <ClInclude Include="Source\tinyxml\tinyxml.h" />
     <ClInclude Include="Source\View.h" />
   </ItemGroup>
   <ItemGroup>

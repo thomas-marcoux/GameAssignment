@@ -1,17 +1,26 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <iostream>
+#include "SDL.h"
+#include "SDL_image.h"
 #include "View.h"
 
 class Texture
 {
 public:
-	Texture() {}
-	~Texture() {}
-	void Draw(SDL_Renderer* renderer, View* view, GAME_VEC position, GAME_FLT angle,
-		SDL_Rect* clip = nullptr);
-private:
+	Texture();
+	~Texture();
+	bool load(SDL_Renderer*, std::string);
+	void free();
+	int getWidth();
+	int getHeight();
+	void Draw(SDL_Renderer*, View*, GAME_VEC, GAME_FLT, SDL_Rect* = nullptr);
 
+private:
+	SDL_Texture* texture;
+	int width;
+	int height;
 };
 
 #endif // !TEXTURE_H

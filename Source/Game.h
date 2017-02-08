@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "ArtAssetLibrary.h"
+#include "Definitions.h"
 #include "GameAssetLibrary.h"
 #include "InputDevice.h"
 #include "Object.h"

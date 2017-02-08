@@ -2,6 +2,7 @@
 #define INPUTDEVICE_H
 
 #include <memory>
+#include "SDL.h"
 
 class InputDevice
 {

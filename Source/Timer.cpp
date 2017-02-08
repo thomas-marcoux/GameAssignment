@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "timer.h"
+#include "..\Timer.h"
 
 Timer::Timer()
 {
@@ -10,6 +11,11 @@ Timer::Timer()
     paused = false;
     started = false;
 	mpf = 0.0f;
+}
+
+bool Timer::Initialize(Uint32)
+{
+	return false;
 }
 
 bool Timer::Initialize()

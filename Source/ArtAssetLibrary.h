@@ -3,6 +3,7 @@
 
 #include <map>
 #include <memory>
+#include "GraphicsDevice.h"
 #include "Texture.h"
 
 class ArtAssetLibrary
