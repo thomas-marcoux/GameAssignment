@@ -27,6 +27,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArtAssetLibrary.h" />
+    <ClInclude Include="Source\BlueLeever.h" />
+    <ClInclude Include="Source\BlueLeeverFactory.h" />
+    <ClInclude Include="Source\BlueOctorok.h" />
+    <ClInclude Include="Source\BlueOctorokFactory.h" />
     <ClInclude Include="Source\Definitions.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameAssetLibrary.h" />
@@ -34,6 +38,10 @@
     <ClInclude Include="Source\InputDevice.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\ObjectFactory.h" />
+    <ClInclude Include="Source\RedLeever.h" />
+    <ClInclude Include="Source\RedLeeverFactory.h" />
+    <ClInclude Include="Source\RedOctorok.h" />
+    <ClInclude Include="Source\RedOctorokFactory.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\View.h" />

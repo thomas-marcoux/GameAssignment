@@ -1,11 +1,16 @@
 #include "ArtAssetLibrary.h"
 
-bool ArtAssetLibrary::AddAsset(std::string, std::string)
+bool ArtAssetLibrary::AddAsset(std::string name, std::string path)
 {
-	return false;
+	std::shared_ptr<Texture>	t(new Texture());
+
+	if (!t->load(gDevice->getRenderer(), path))
+		return false;
+	library[name] = t;
+	return true;
 }
 
-std::shared_ptr<Texture> ArtAssetLibrary::Search(std::string)
+std::shared_ptr<Texture> ArtAssetLibrary::Search(std::string name)
 {
-	return std::shared_ptr<Texture>();
+	return library.find(name)->second;
 }

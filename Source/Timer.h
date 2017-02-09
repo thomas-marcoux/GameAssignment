@@ -7,35 +7,21 @@
 class Timer
 {
 public:
-	//Initializes variables
 	Timer();
-	bool Initialize();
-
-	//The various clock actions
+	bool Initialize(GAME_INT);
 	void start();
 	void stop();
 	void pause();
 	void unpause();
-
-	//Gets the timer's time
 	GAME_INT getTicks();
-
-	//Checks the status of the timer
 	bool isStarted();
 	bool isPaused();
-	
-	//Regulate
 	void fpsRegulate();
 
 private:
-	//The clock time when the timer started
-	GAME_INT startTicks;
+	GAME_INT startTicks; //The clock time when the timer started
 	GAME_FLT mpf; //millisecond per frame
-
-	//The ticks stored when the timer was paused
-	GAME_INT pausedTicks;
-
-	//The timer status
+	GAME_INT pausedTicks; //The ticks stored when the timer was paused
 	bool paused;
 	bool started;
 };

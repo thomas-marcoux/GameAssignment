@@ -2,7 +2,10 @@
 #define INPUTDEVICE_H
 
 #include <memory>
+
+#include "Definitions.h"
 #include "SDL.h"
+
 
 class InputDevice
 {
@@ -16,13 +19,5 @@ public:
 private:
 	std::unique_ptr<SDL_Event> event;
 };
-
-InputDevice::InputDevice()
-{
-}
-
-InputDevice::~InputDevice()
-{
-}
 
 #endif // !INPUTDEVICE_H

@@ -9,7 +9,7 @@
 class ArtAssetLibrary
 {
 public:
-	ArtAssetLibrary() {}
+	ArtAssetLibrary(GraphicsDevice* gD) : gDevice(gD) {}
 	~ArtAssetLibrary() {}
 	bool AddAsset(std::string, std::string);
 	std::shared_ptr<Texture> Search(std::string);

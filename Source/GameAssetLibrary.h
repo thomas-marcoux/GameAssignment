@@ -8,7 +8,7 @@
 class GameAssetLibrary
 {
 public:
-	GameAssetLibrary() {}
+	GameAssetLibrary();
 	~GameAssetLibrary() {}
 	std::unique_ptr<Object> Search(std::string);
 
