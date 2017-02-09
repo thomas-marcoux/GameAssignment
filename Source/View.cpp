@@ -1,11 +1,15 @@
 #include "View.h"
 
-bool View::Initialize(InputDevice *, GAME_FLT, GAME_FLT)
+bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 {
-	return false;
+	iDevice = i;
+	position.x = x;
+	position.y = y;
+	return true;
 }
 
-bool View::Update(GAME_FLT)
+bool View::Update(GAME_FLT gameTime)
 {
-	return false;
+
+	return true;
 }

@@ -14,26 +14,23 @@ bool InputDevice::Initialize()
 
 GAME_EVENT InputDevice::GetEvent()
 {
-	while (SDL_PollEvent(event.get())) {
-		//If user closes the window
+	while (SDL_PollEvent(event.get()))
+	{
 		if (event->type == SDL_QUIT)
 		{
-			return Translate();
+			return GAME_QUIT;
 		}
-		//If user presses any key
 		if (event->type == SDL_KEYDOWN)
 		{
 			return Translate();
 		}
 	}
-	return Translate();
+	return GAME_NA;
 }
 
 //Translates the SDL_Event event to GAME_EVENT
 GAME_EVENT InputDevice::Translate()
 {
-	if (event->type == SDL_QUIT)
-		return GAME_QUIT;
 	switch (event->key.keysym.sym)
 	{
 	case SDLK_LEFT:

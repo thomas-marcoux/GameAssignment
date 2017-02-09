@@ -12,7 +12,7 @@ GameAssetLibrary::GameAssetLibrary()
 	library["Red Leever"] = (std::unique_ptr<ObjectFactory>)(std::unique_ptr<RedLeeverFactory>());
 }
 
-std::unique_ptr<Object> GameAssetLibrary::Search(std::string)
+std::unique_ptr<Object> GameAssetLibrary::Search(std::string object)
 {
-	return std::unique_ptr<Object>();
+	return library.find(object)->second->create();
 }
