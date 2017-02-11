@@ -6,9 +6,12 @@
 
 #include "ArtAssetLibrary.h"
 #include "Definitions.h"
+#include "Exceptions.h"
 #include "GameAssetLibrary.h"
+#include "GraphicsDevice.h"
 #include "InputDevice.h"
 #include "Object.h"
+#include "Timer.h"
 #include "View.h"
 
 class Game
@@ -24,6 +27,10 @@ public:
 	void Draw();
 
 private:
+	bool LoadGameAssets(std::string);
+	bool LoadArtAssets(std::string);
+
+private:
 	std::unique_ptr<GameAssetLibrary> gLibrary;
 	std::unique_ptr<ArtAssetLibrary> aLibrary;
 	std::unique_ptr<GraphicsDevice> gDevice;
@@ -32,6 +39,6 @@ private:
 	GAME_FLT gameTime;
 	std::unique_ptr<View> view;
 	std::vector<std::unique_ptr<Object>> objects;
-}
+};
 
 #endif // ! GAME_H

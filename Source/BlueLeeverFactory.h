@@ -7,7 +7,7 @@
 class BlueLeeverFactory : public ObjectFactory
 {
 public:
-	std::unique_ptr<Object> create() { return (std::unique_ptr<Object>)(std::make_unique<BlueLeever>()); }
+	std::unique_ptr<Object> create() { return std::make_unique<BlueLeever>(); }
 };
 
 #endif // !BLUELEEVERFACTORY_H

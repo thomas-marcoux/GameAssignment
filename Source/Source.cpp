@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 	if(!game->LoadLevel(levelConfigFile, objectConfigFile))
 	{
 		printf( "Game could not load level %s: ", levelConfigFile.c_str());
+		system("pause");
 		exit(1);
 	}
 

@@ -7,7 +7,7 @@
 class RedOctorokFactory : public ObjectFactory
 {
 public:
-	std::unique_ptr<Object> create() { return (std::unique_ptr<Object>)(std::make_unique<RedOctorok>()); }
+	std::unique_ptr<Object> create() { return std::make_unique<RedOctorok>(); }
 };
 
 #endif // !REDOCTOROKFACTORY_H

@@ -72,6 +72,21 @@
     <ClCompile Include="Source\GraphicsDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueLeever.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueOctorok.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedLeever.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedOctorok.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\leever_b.png">
@@ -154,6 +169,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\BlueLeeverFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Exceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

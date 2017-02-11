@@ -1,11 +1,6 @@
 #include<iostream>
+#include "Definitions.h"
 #include "GraphicsDevice.h"
-
-GraphicsDevice::GraphicsDevice(Uint32 width, Uint32 height) : SCREEN_WIDTH(width), SCREEN_HEIGHT(height)
-{
-	screen = NULL;
-	renderer = NULL;
-}
 
 GraphicsDevice::~GraphicsDevice()
 {

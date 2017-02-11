@@ -9,7 +9,7 @@
 class GraphicsDevice
 {
 public:
-	GraphicsDevice(Uint32, Uint32);
+	GraphicsDevice() : screen(NULL), renderer(NULL) {}
 	~GraphicsDevice();
 	bool Initialize(bool);
 	bool ShutDown();
@@ -21,10 +21,6 @@ private:
 	//Window(s) to display graphics
 	SDL_Window* screen;
 	SDL_Renderer* renderer;
-
-	//Parameter
-	const Uint32 SCREEN_WIDTH;
-	const Uint32 SCREEN_HEIGHT;
 };
 
 #endif // !GRAPHICSDEVICE_H

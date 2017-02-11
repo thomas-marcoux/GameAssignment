@@ -10,7 +10,9 @@ bool ArtAssetLibrary::AddAsset(std::string name, std::string path)
 	return true;
 }
 
+//Return an instance of the requested Texture if it is in the library, NULL otherwise.
 std::shared_ptr<Texture> ArtAssetLibrary::Search(std::string name)
 {
-	return library.find(name)->second;
+	std::map<std::string, std::shared_ptr<Texture>>::iterator it = library.find(name);
+	return (it == library.end()) ? NULL : it->second;
 }
