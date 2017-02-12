@@ -16,7 +16,7 @@ public:
 	virtual void Update(GAME_FLT) = 0;
 	virtual void Draw(GAME_FLT, View*) = 0;
 
-private:
+protected:
 	GraphicsDevice* gDevice;
 	InputDevice* iDevice;
 	std::shared_ptr<Texture> texture;

@@ -20,7 +20,8 @@ bool Game::Initialize()
 
 void Game::Reset()
 {
-
+	view.reset(NULL);
+	objects.clear();
 }
 
 //Load level file and create objects from attributes. Raises LoadException if an error occurs.
@@ -81,6 +82,8 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 	{
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
+		view = std::make_unique<View>();
+		view->Initialize(iDevice.get(), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}
@@ -94,14 +97,23 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 
 bool Game::Run()
 {
-	return true;
+	if (Update())
+		return true;
+	Draw();
+	return false;
 }
 
 bool Game::Update()
 {
-	return true;
+	if (!view->Update(0.0))
+		return true;
+	for (std::vector<std::unique_ptr<Object>>::iterator it = objects.begin(); it != objects.end(); it++)
+		it->get()->Update(0.0);
+	return false;
 }
 
 void Game::Draw()
 {
+	for (std::vector<std::unique_ptr<Object>>::iterator it = objects.begin(); it != objects.end(); it++)
+		it->get()->Draw(0.0, view.get());
 }
