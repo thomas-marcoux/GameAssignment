@@ -87,6 +87,9 @@
     <ClCompile Include="Source\RedOctorok.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\leever_b.png">
@@ -172,6 +175,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Exceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

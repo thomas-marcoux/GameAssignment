@@ -19,6 +19,7 @@
     <ClCompile Include="Source\GraphicsDevice.cpp" />
     <ClCompile Include="Source\InputDevice.cpp" />
     <ClCompile Include="Source\Object.cpp" />
+    <ClCompile Include="Source\Random.cpp" />
     <ClCompile Include="Source\RedLeever.cpp" />
     <ClCompile Include="Source\RedOctorok.cpp" />
     <ClCompile Include="Source\Source.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Source\InputDevice.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\ObjectFactory.h" />
+    <ClInclude Include="Source\Random.h" />
     <ClInclude Include="Source\RedLeever.h" />
     <ClInclude Include="Source\RedLeeverFactory.h" />
     <ClInclude Include="Source\RedOctorok.h" />

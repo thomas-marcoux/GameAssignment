@@ -12,7 +12,7 @@ bool Game::Initialize()
 	gameTime = 0;
 	view = std::make_unique<View>();
 
-	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize()
+	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS)
 		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0))
 		return true;
 	return false;
@@ -83,7 +83,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
 		view = std::make_unique<View>();
-		view->Initialize(iDevice.get(), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		view->Initialize(iDevice.get(), 0, 0);
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}
@@ -97,9 +97,11 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 
 bool Game::Run()
 {
+	timer->start();
 	if (Update())
 		return true;
 	Draw();
+	timer->fpsRegulate();
 	return false;
 }
 
@@ -114,6 +116,8 @@ bool Game::Update()
 
 void Game::Draw()
 {
+	gDevice->Begin();
 	for (std::vector<std::unique_ptr<Object>>::iterator it = objects.begin(); it != objects.end(); it++)
 		it->get()->Draw(0.0, view.get());
+	gDevice->Present();
 }

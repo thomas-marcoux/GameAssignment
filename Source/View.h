@@ -11,6 +11,8 @@ public:
 	~View() {}
 	bool Initialize(InputDevice*, GAME_FLT, GAME_FLT);
 	bool Update(GAME_FLT);
+	int	getX() { return (int)position.x; }
+	int getY() { return (int)position.y; }
 
 private:
 	InputDevice* iDevice;
