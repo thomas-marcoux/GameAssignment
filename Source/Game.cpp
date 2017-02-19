@@ -11,7 +11,6 @@ bool Game::Initialize()
 	timer = std::make_unique<Timer>();
 	gameTime = 0;
 	view = std::make_unique<View>();
-
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS)
 		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0))
 		return true;
@@ -107,7 +106,7 @@ bool Game::Run()
 
 bool Game::Update()
 {
-	if (!view->Update(0.0))
+	if (!view->Update())
 		return true;
 	for (std::vector<std::unique_ptr<Object>>::iterator it = objects.begin(); it != objects.end(); it++)
 		it->get()->Update(0.0);

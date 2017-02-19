@@ -10,14 +10,20 @@ public:
 	View() {}
 	~View() {}
 	bool Initialize(InputDevice*, GAME_FLT, GAME_FLT);
-	bool Update(GAME_FLT);
-	int	getX() { return (int)position.x; }
-	int getY() { return (int)position.y; }
+	bool Update(GAME_FLT = 0.0);
+	GAME_INT	getX() { return position.x; }
+	GAME_INT getY() { return position.y; }
+	GAME_FLT getAngle() { return angle; }
+	GAME_FLT getDegreeAngle() { return angle * 180 / PI; } //Returns angle in degree
+
+private:
+	void switchPerspective();
 
 private:
 	InputDevice* iDevice;
 	GAME_VEC position;
 	GAME_VEC center;
+	GAME_FLT angle;
 };
 
 #endif // !VIEW_H

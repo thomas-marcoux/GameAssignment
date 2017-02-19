@@ -45,6 +45,9 @@ GAME_EVENT InputDevice::Translate()
 	case SDLK_DOWN:
 		return GAME_DOWN;
 		break;
+	case SDLK_TAB:
+		return GAME_TAB;
+		break;
 	case SDLK_ESCAPE:
 		return GAME_ESC;
 		break;

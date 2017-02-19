@@ -2,9 +2,12 @@
 
 void RedLeever::Update(GAME_FLT)
 {
+	position.y += (int)movement;
+	if (abs(position.y - startPosition.y) >= MAX_DISTANCE)
+		movement *= -1.0;
 }
 
-void RedLeever::Draw(GAME_FLT p_angle, View *p_view)
+void RedLeever::Draw(GAME_FLT, View *p_view)
 {
-	texture->Draw(gDevice->getRenderer(), p_view, position, p_angle);
+	texture->Draw(gDevice->getRenderer(), p_view, position, angle);
 }

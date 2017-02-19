@@ -63,7 +63,12 @@ int Texture::getHeight()
 
 void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME_FLT angle, SDL_Rect * clip)
 {
-	SDL_Rect	rect = { (int)position.x + view->getX(), (int)position.y + view->getY(), width, height };
-
-	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle, NULL, SDL_FLIP_NONE);
+	SDL_Rect	rect = { 0, 0, width, height };
+	/*
+	rect.x = (int)position.x + view->getX() - SCREEN_WIDTH_2;
+	rect.y = (int)position.y + view->getY() - SCREEN_HEIGHT_2;
+	*/
+	rect.x = (int)position.x + view->getX();//cos(view->getAngle());
+	rect.y = (int)position.y + view->getY();//sin(view->getAngle());
+	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle + view->getDegreeAngle(), NULL, SDL_FLIP_NONE);
 }

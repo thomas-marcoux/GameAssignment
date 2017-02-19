@@ -23,6 +23,7 @@ protected:
 	GAME_VEC position;
 	GAME_VEC startPosition;
 	GAME_FLT angle;
+	GAME_FLT movement;
 };
 
 #endif // !OBJECT_H
