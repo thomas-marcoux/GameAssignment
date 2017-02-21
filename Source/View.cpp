@@ -5,8 +5,8 @@ bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 	iDevice = i;
 	position.x = x;
 	position.y = y;
-	center.x = x + SCREEN_WIDTH / 2;
-	center.y = y + SCREEN_HEIGHT / 2;
+	center.x = x + SCREEN_WIDTH_2;
+	center.y = y + SCREEN_HEIGHT_2;
 	angle = DEFAULT_VIEW_ANGLE;
 	return true;
 }
