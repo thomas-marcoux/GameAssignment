@@ -77,5 +77,5 @@ void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME
 	//Stores results in SDL_Rect
 	rect.x = (int)p.x;
 	rect.y = (int)p.y;
-	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle + view->getDegreeAngle(), NULL, SDL_FLIP_NONE);
 }
