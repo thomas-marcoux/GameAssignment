@@ -1,3 +1,4 @@
+#include <iostream>
 #include "View.h"
 
 bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
@@ -16,12 +17,12 @@ bool View::Update(GAME_FLT gameTime)
 	switch (iDevice->GetEvent())
 	{
 	case GAME_UP:
-		center.x += VIEW_MOVEMENT * cos(angle);
-		center.y += VIEW_MOVEMENT * sin(angle);
-		break;
-	case GAME_DOWN:
 		center.x -= VIEW_MOVEMENT * cos(angle);
 		center.y -= VIEW_MOVEMENT * sin(angle);
+		break;
+	case GAME_DOWN:
+		center.x += VIEW_MOVEMENT * cos(angle);
+		center.y += VIEW_MOVEMENT * sin(angle);
 		break;
 	case GAME_LEFT:
 		angle -= VIEW_ROTATION;
@@ -45,6 +46,6 @@ bool View::Update(GAME_FLT gameTime)
 void View::switchPerspective()
 {
 	angle = DEFAULT_VIEW_ANGLE;
-	center.x = 0.0;
-	center.y = 0.0;
+	center.x = SCREEN_WIDTH_2;
+	center.y = SCREEN_HEIGHT_2;
 }

@@ -72,8 +72,8 @@ void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME
 		+ cos(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterY();
 
 	//Respect the view
-	p.x += view->getX();
-	p.y += view->getY();
+	p.x -= view->getX();
+	p.y -= view->getY();
 	//Stores results in SDL_Rect
 	rect.x = (int)p.x;
 	rect.y = (int)p.y;
