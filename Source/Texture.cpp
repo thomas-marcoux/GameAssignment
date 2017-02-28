@@ -63,13 +63,19 @@ int Texture::getHeight()
 
 void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME_FLT angle, SDL_Rect * clip)
 {
-	SDL_Rect	rect = { 0, 0, width, height };
+	SDL_Rect rect = { 0, 0, width, height };
+	GAME_VEC p;
 
-	rect.x = (int)position.x + view->getX();
-	rect.y = (int)position.y + view->getY();
-	/*
-	rect.x = ((int)position.x + (int)view->getX()) * cos(view->getAngle()) - ((int)position.y + (int)view->getY())* sin(view->getAngle());
-	rect.y = ((int)position.y + (int)view->getY()) * cos(view->getAngle()) + ((int)position.x + (int)view->getX()) * sin(view->getAngle());
-	*/
-	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle + view->getDegreeAngle(), NULL, SDL_FLIP_NONE);
+	p.x = cos(view->getAngle()) * (position.x - view->getCenterX())
+		- sin(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterX();
+	p.y = sin(view->getAngle()) * (position.x - view->getCenterX())
+		+ cos(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterY();
+
+	//Respect the view
+	p.x += view->getX();
+	p.y += view->getY();
+	//Stores results in SDL_Rect
+	rect.x = (int)p.x;
+	rect.y = (int)p.y;
+	SDL_RenderCopyEx(renderer, texture, clip, &rect, angle, NULL, SDL_FLIP_NONE);
 }
