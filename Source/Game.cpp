@@ -83,6 +83,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 		LoadGameAssets(levelConfigFile);
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
+		view->setObjects(&objects);
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}

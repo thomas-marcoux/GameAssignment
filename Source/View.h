@@ -1,13 +1,16 @@
 #ifndef VIEW_H
 #define VIEW_H
 
+#include <vector>
 #include "Definitions.h"
 #include "InputDevice.h"
+
+class Object;
 
 class View
 {
 public:
-	View() {}
+	View() { objectId = 0; }
 	~View() {}
 	bool Initialize(InputDevice*, GAME_FLT, GAME_FLT);
 	bool Update(GAME_FLT = 0.0);
@@ -16,7 +19,8 @@ public:
 	GAME_FLT getCenterX() { return center.x; }
 	GAME_FLT getCenterY() { return center.y; }
 	GAME_FLT getAngle() { return angle; }
-	GAME_FLT getDegreeAngle() { return angle * 180 / PI; } //Returns angle in degree
+	GAME_FLT getDegreeAngle() { return TO_DEGREE(angle); } //Returns angle in degree
+	void setObjects(std::vector<std::unique_ptr<Object>>*o) { objects = o; }
 
 private:
 	void switchPerspective();
@@ -26,6 +30,8 @@ private:
 	GAME_VEC position;
 	GAME_VEC center;
 	GAME_FLT angle;
+	std::vector<std::unique_ptr<Object>> *objects;
+	GAME_INT objectId;
 };
 
 #endif // !VIEW_H

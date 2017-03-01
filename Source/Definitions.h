@@ -35,6 +35,8 @@ enum GAME_EVENT {GAME_NA,GAME_UP,GAME_DOWN,GAME_LEFT,GAME_RIGHT, GAME_TAB, GAME_
 
 //Constants
 const GAME_FLT PI = 3.14159f;
+#define TO_RADIAN(i) i * PI / 180
+#define TO_DEGREE(a) angle * 180 / PI
 
 //Movement
 const GAME_FLT BLUEOCTOROK_MOVEMENT = (float)2.0;

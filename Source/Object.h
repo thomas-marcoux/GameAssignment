@@ -15,6 +15,8 @@ public:
 	void Initialize(GraphicsDevice*, InputDevice*, std::shared_ptr<Texture>, GAME_VEC, GAME_FLT);
 	virtual void Update(GAME_FLT) = 0;
 	virtual void Draw(GAME_FLT, View*) = 0;
+	GAME_VEC	getPosition() { return position; }
+	GAME_FLT	getAngle() { return angle; }
 
 protected:
 	GraphicsDevice* gDevice;

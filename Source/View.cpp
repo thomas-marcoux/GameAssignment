@@ -1,5 +1,5 @@
-#include <iostream>
 #include "View.h"
+#include "Object.h"
 
 bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 {
@@ -45,7 +45,12 @@ bool View::Update(GAME_FLT gameTime)
 
 void View::switchPerspective()
 {
-	angle = DEFAULT_VIEW_ANGLE;
-	center.x = SCREEN_WIDTH_2;
-	center.y = SCREEN_HEIGHT_2;
+	Object*	o = (*objects)[objectId].get();
+	GAME_VEC p = o->getPosition();
+
+	center.x = p.x;
+	center.y = p.y;
+	angle = -TO_RADIAN(o->getAngle());
+	objectId++;
+	objectId %= (*objects).size();
 }
