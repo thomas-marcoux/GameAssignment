@@ -6,6 +6,7 @@
 #include "SDL_image.h"
 #include "View.h"
 
+//SDL texture class, will draw texture to the renderer
 class Texture
 {
 public:

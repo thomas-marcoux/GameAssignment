@@ -6,6 +6,7 @@ Timer::Timer()
 	mpf = 0.0f;
 }
 
+//Sets mpf in accordance with fps
 bool Timer::Initialize(GAME_INT fps)
 {
 	if (fps > 0)
@@ -17,9 +18,10 @@ bool Timer::Initialize(GAME_INT fps)
 	
 }
 
+//Get the current clock time
 void Timer::start()
 {
-    startTicks = SDL_GetTicks(); //Get the current clock time
+    startTicks = SDL_GetTicks();
 }
 
 //Gets the timer's time
@@ -28,9 +30,9 @@ GAME_INT Timer::getTicks()
 	return SDL_GetTicks() - startTicks;
 }
 
+//Pause for a length of time such that frame rate is maintained
 void Timer::fpsRegulate()
 {
-	//Pause for a length of time such that frame rate is maintained
 	if(getTicks() < mpf)
 	{
 		SDL_Delay((GAME_INT)mpf - getTicks());

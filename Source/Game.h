@@ -14,6 +14,7 @@
 #include "Timer.h"
 #include "View.h"
 
+//Base game class
 class Game
 {
 public:

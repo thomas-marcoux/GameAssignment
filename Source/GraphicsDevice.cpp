@@ -2,6 +2,7 @@
 #include "Definitions.h"
 #include "GraphicsDevice.h"
 
+//Calls shutdown method on object destruction
 GraphicsDevice::~GraphicsDevice()
 {
 	if (!ShutDown())
@@ -11,6 +12,7 @@ GraphicsDevice::~GraphicsDevice()
 	}
 }
 
+//Initialize SDL components
 bool GraphicsDevice::Initialize(bool fullScreen)
 {
 	//Initialize all SDL subsystems
@@ -46,11 +48,12 @@ bool GraphicsDevice::Initialize(bool fullScreen)
 		std::cout << "Renderer could not be created. SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
 		return false;
 	}
-	//Set the background color (default)
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	//Set the background color
+	SDL_SetRenderDrawColor(renderer, 244, 214, 159, 255);
 	return true;
 }
 
+//Properly frees SDL components
 bool GraphicsDevice::ShutDown()
 {
 	//Free the window
@@ -65,16 +68,19 @@ bool GraphicsDevice::ShutDown()
 	return true;
 }
 
+//Clear renderer
 void GraphicsDevice::Begin()
 {
 	SDL_RenderClear(renderer);
 }
 
+//Displays renderer
 void GraphicsDevice::Present()
 {
 	SDL_RenderPresent(renderer);
 }
 
+//Returns renderer
 SDL_Renderer* GraphicsDevice::getRenderer()
 {
 	return(renderer);

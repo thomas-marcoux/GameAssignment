@@ -1,5 +1,6 @@
 #include "ArtAssetLibrary.h"
 
+//Make texture object from object file
 bool ArtAssetLibrary::AddAsset(std::string name, std::string path)
 {
 	std::shared_ptr<Texture>	t(new Texture());

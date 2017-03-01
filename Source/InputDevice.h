@@ -6,7 +6,7 @@
 #include "Definitions.h"
 #include "SDL.h"
 
-
+//SDL input class
 class InputDevice
 {
 public:

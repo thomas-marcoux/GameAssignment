@@ -7,6 +7,7 @@
 
 class Object;
 
+//View class, manages camera movement
 class View
 {
 public:

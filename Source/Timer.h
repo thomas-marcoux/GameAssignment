@@ -4,6 +4,7 @@
 #include"SDL.h"
 #include"Definitions.h"
 
+//SDL Timer class, regulates framerate
 class Timer
 {
 public:

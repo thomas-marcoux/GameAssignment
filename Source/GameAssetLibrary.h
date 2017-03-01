@@ -5,6 +5,7 @@
 #include <memory>
 #include "ObjectFactory.h"
 
+//Object factory manager
 class GameAssetLibrary
 {
 public:

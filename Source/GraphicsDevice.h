@@ -4,8 +4,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-#define WINDOW_NAME "Quest1"
-
+//SDL graphics rendering class
 class GraphicsDevice
 {
 public:

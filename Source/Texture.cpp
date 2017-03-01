@@ -1,10 +1,11 @@
 #include "Definitions.h"
 #include "Texture.h"
 
+//Constructor
 Texture::Texture() : width(SPRITE_WIDTH), height(SPRITE_HEIGHT), texture(NULL)
 {}
 
-
+//Calls the free method
 Texture::~Texture()
 {
 	free();
@@ -38,7 +39,7 @@ bool Texture::load(SDL_Renderer* renderer, std::string path)
 	return (texture != NULL);
 }
 
-
+//Checks texture exists and properly frees its ressources
 void Texture::free()
 {
 	if (texture != NULL)
@@ -61,6 +62,7 @@ int Texture::getHeight()
 	return height;
 }
 
+//Adjusts object's texture's position and angle given the view's coordinates and angle, then draws result on renderer
 void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME_FLT angle, SDL_Rect * clip)
 {
 	SDL_Rect rect = { 0, 0, width, height };
@@ -70,8 +72,7 @@ void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME
 		- sin(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterX();
 	p.y = sin(view->getAngle()) * (position.x - view->getCenterX())
 		+ cos(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterY();
-
-	//Respect the view
+	//Respects the view
 	p.x -= view->getX();
 	p.y -= view->getY();
 	//Stores results in SDL_Rect

@@ -6,6 +6,7 @@
 #include "GraphicsDevice.h"
 #include "Texture.h"
 
+//Stores object textures
 class ArtAssetLibrary
 {
 public:

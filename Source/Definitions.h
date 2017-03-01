@@ -14,6 +14,7 @@ typedef struct GAME_VEC
 //========================================
 //Base Game Constants
 //========================================
+#define WINDOW_NAME "Quest1"
 const GAME_INT SCREEN_WIDTH = 800;
 const GAME_INT SCREEN_HEIGHT = 600;
 const GAME_INT SCREEN_WIDTH_2 = SCREEN_WIDTH / 2;
@@ -36,11 +37,11 @@ enum GAME_EVENT {GAME_NA,GAME_UP,GAME_DOWN,GAME_LEFT,GAME_RIGHT, GAME_TAB, GAME_
 //Constants
 const GAME_FLT PI = 3.14159f;
 #define TO_RADIAN(i) i * PI / 180
-#define TO_DEGREE(a) angle * 180 / PI
+#define TO_DEGREE(a) a * 180 / PI
 
 //Movement
-const GAME_FLT BLUEOCTOROK_MOVEMENT = (float)2.0;
-const GAME_FLT REDOCTOROK_MOVEMENT = (float)0.08;
+const GAME_FLT BLUEOCTOROK_MOVEMENT = (float)0.8;
+const GAME_FLT REDOCTOROK_MOVEMENT = (float)0.06;
 const GAME_FLT REDOCTOROK_RADIUS = (float)2.0;
 const GAME_FLT BLUELEEVER_MOVEMENT = (float)2.0;
 const GAME_FLT REDLEEVER_MOVEMENT = (float)2.0;

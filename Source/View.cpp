@@ -1,6 +1,7 @@
 #include "View.h"
 #include "Object.h"
 
+//Initializes View attributes
 bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 {
 	iDevice = i;
@@ -12,6 +13,7 @@ bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 	return true;
 }
 
+//Update view according to the game event
 bool View::Update(GAME_FLT gameTime)
 {
 	switch (iDevice->GetEvent())
@@ -43,6 +45,7 @@ bool View::Update(GAME_FLT gameTime)
 	return true;
 }
 
+//Update view with the coordinates of one of the objects
 void View::switchPerspective()
 {
 	Object*	o = (*objects)[objectId].get();

@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "View.h"
 
+//Abstract object class, enemies inherit from this class
 class Object
 {
 public:

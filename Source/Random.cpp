@@ -1,12 +1,14 @@
 #include <random>
 #include "Random.h"
 
+//Initializes random engine
 std::default_random_engine &global_urng()
 {
 	static std::default_random_engine  u{};
 	return u;
 }
 
+//Get random integer in range from -> thru
 int random(int from, int thru)
 {
 	static std::uniform_int_distribution<>  d{};

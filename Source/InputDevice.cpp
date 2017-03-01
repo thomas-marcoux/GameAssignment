@@ -1,6 +1,7 @@
 #include <iostream>
 #include "InputDevice.h"
 
+//Initializes SDL event attribute
 bool InputDevice::Initialize()
 {
 	event = std::make_unique<SDL_Event>();
@@ -12,6 +13,7 @@ bool InputDevice::Initialize()
 	return true;
 }
 
+//Polls for events and returns the corresponding GAME_EVENT
 GAME_EVENT InputDevice::GetEvent()
 {
 	while (SDL_PollEvent(event.get()))

@@ -2,6 +2,7 @@
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 
+//Make Game class' attributes and initializes them
 bool Game::Initialize()
 {
 	gLibrary = std::make_unique<GameAssetLibrary>();
@@ -17,6 +18,7 @@ bool Game::Initialize()
 	return false;
 }
 
+//Reset view and objects
 void Game::Reset()
 {
 	view.reset(NULL);
@@ -37,6 +39,7 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 	if (!doc.LoadFile(levelConfigFile.c_str())) throw LoadException(LOAD_ERROR);
 	gameAssetNode = TiXmlHandle(doc.RootElement()).FirstChild("GameAsset").Element();
 	if (!gameAssetNode) throw LoadException(PARSE_ERROR);
+	//Goes through every game asset node
 	for (gameAssetNode; gameAssetNode; gameAssetNode = gameAssetNode->NextSiblingElement())
 	{
 		if (gameAssetNode->QueryFloatAttribute("x", &vec.x) || gameAssetNode->QueryFloatAttribute("y", &vec.y)
@@ -62,6 +65,7 @@ bool Game::LoadArtAssets(std::string objectConfigFile)
 	TiXmlElement* creatureNode;
 	const char *attr_name, *attr_path;
 
+	//Tries to open the level configFile, raises an error if it cannot
 	if (!doc.LoadFile(objectConfigFile.c_str())) throw LoadException(LOAD_ERROR);
 	creatureNode = TiXmlHandle(doc.RootElement()).FirstChild("Creature").Element();
 	if (!creatureNode) throw LoadException(PARSE_ERROR);
@@ -75,6 +79,7 @@ bool Game::LoadArtAssets(std::string objectConfigFile)
 	return true;
 }
 
+//Loads game info from both config files, catches errors occuring during loading
 bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 {
 	try
@@ -95,6 +100,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 	}
 }
 
+//Runs one game frame and regulate the fps
 bool Game::Run()
 {
 	timer->start();
@@ -105,6 +111,7 @@ bool Game::Run()
 	return false;
 }
 
+//Update all game actors
 bool Game::Update()
 {
 	if (!view->Update())
@@ -114,6 +121,7 @@ bool Game::Update()
 	return false;
 }
 
+//Draw all sprites
 void Game::Draw()
 {
 	gDevice->Begin();
