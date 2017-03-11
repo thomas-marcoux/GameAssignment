@@ -6,7 +6,7 @@
 class BlueOctorok : public Object
 {
 public:
-	BlueOctorok() { movement = BLUEOCTOROK_MOVEMENT; }
+	BlueOctorok();
 	void Update(GAME_FLT);
 	void Draw(GAME_FLT, View*);
 };

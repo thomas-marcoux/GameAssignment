@@ -1,4 +1,10 @@
 #include "BlueOctorok.h"
+#include "Random.h"
+
+BlueOctorok::BlueOctorok()
+{
+	movement = random(BLUEOCTOROK_MOVEMENT_MIN, BLUEOCTOROK_MOVEMENT_MAX);
+}
 
 //Update object's position
 void BlueOctorok::Update(GAME_FLT)
