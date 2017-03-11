@@ -6,9 +6,12 @@
 class RedLeever : public Object
 {
 public:
-	RedLeever() { movement = REDLEEVER_MOVEMENT; }
+	RedLeever();
 	void Update(GAME_FLT);
 	void Draw(GAME_FLT, View*);
+
+private:
+	GAME_INT maxDistance;
 };
 
 #endif // !REDLEEVER_H

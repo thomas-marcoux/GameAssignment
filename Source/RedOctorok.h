@@ -6,12 +6,13 @@
 class RedOctorok : public Object
 {
 public:
-	RedOctorok() { movement = REDOCTOROK_MOVEMENT; radius = REDOCTOROK_RADIUS; }
+	RedOctorok();
 	void Update(GAME_FLT);
 	void Draw(GAME_FLT, View*);
 
 private:
 	GAME_FLT radius;
+	GAME_FLT movementAngle;
 };
 
 #endif // !REDOCTOROK_H

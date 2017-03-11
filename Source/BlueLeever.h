@@ -6,9 +6,12 @@
 class BlueLeever : public Object
 {
 public:
-	BlueLeever() { movement = BLUELEEVER_MOVEMENT; }
+	BlueLeever();
 	void Update(GAME_FLT);
 	void Draw(GAME_FLT, View*);
+
+private:
+	GAME_INT maxDistance;
 };
 
 #endif // !BLUELEEVER_H

@@ -1,10 +1,17 @@
 #include "BlueLeever.h"
+#include "Random.h"
+
+BlueLeever::BlueLeever()
+{
+	movement = BLUELEEVER_MOVEMENT;
+	maxDistance = random(MIN_DISTANCE, MAX_DISTANCE);
+}
 
 //Update object position
 void BlueLeever::Update(GAME_FLT)
 {
 	position.y += (int)movement;
-	if (abs(position.y - startPosition.y) >= MAX_DISTANCE)
+	if (abs(position.y - startPosition.y) >= maxDistance)
 		movement *= -1.0;
 }
 

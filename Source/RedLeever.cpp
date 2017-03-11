@@ -1,10 +1,17 @@
 #include "RedLeever.h"
+#include "Random.h"
+
+RedLeever::RedLeever()
+{
+	movement = REDLEEVER_MOVEMENT;
+	maxDistance = random(MIN_DISTANCE, MAX_DISTANCE);
+}
 
 //Update object's position
 void RedLeever::Update(GAME_FLT)
 {
 	position.x += (int)movement;
-	if (abs(position.x - startPosition.x) >= MAX_DISTANCE)
+	if (abs(position.x - startPosition.x) >= maxDistance)
 		movement *= -1.0;
 }
 

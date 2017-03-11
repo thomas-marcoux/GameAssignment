@@ -1,13 +1,21 @@
 #include "RedOctorok.h"
+#include "Random.h"
+
+RedOctorok::RedOctorok()
+{
+	movement = REDOCTOROK_MOVEMENT;
+	movementAngle = 0;
+	radius = random(REDOCTOROK_RADIUS_MIN, REDOCTOROK_RADIUS_MAX);
+}
 
 //Update object's position
 void RedOctorok::Update(GAME_FLT)
 {
-	angle -= movement;
-	position.x += -5*radius * cos(angle);
-	position.y += -5*radius * sin(angle);
-	if (angle <= -360.0)
-		angle = 0;
+	movementAngle -= movement;
+	position.x += -radius * cos(movementAngle);
+	position.y += -radius * sin(movementAngle);
+	if (movementAngle <= -PI2)
+		movementAngle = 0;
 }
 
 //Calls object's texture's draw method
