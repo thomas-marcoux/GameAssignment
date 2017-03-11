@@ -4,7 +4,7 @@
 BlueLeever::BlueLeever()
 {
 	movement = BLUELEEVER_MOVEMENT;
-	maxDistance = random(MIN_DISTANCE, MAX_DISTANCE);
+	maxDistance = random(LEEVER_MIN_DISTANCE, LEEVER_MAX_DISTANCE);
 }
 
 //Update object position

@@ -67,11 +67,16 @@ void Texture::Draw(SDL_Renderer * renderer, View * view, GAME_VEC position, GAME
 {
 	SDL_Rect rect = { 0, 0, width, height };
 	GAME_VEC p;
+	GAME_VEC d;
+	GAME_FLT cos_view = cos(view->getAngle());
+	GAME_FLT sin_view = sin(view->getAngle());
 
-	p.x = cos(view->getAngle()) * (position.x - view->getCenterX())
-		- sin(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterX();
-	p.y = sin(view->getAngle()) * (position.x - view->getCenterX())
-		+ cos(view->getAngle()) * (position.y - view->getCenterY()) + view->getCenterY();
+	//Calculate distance to center
+	d.x = position.x - view->getCenterX();
+	d.y = position.y - view->getCenterY();
+	//Rotate around center
+	p.x = cos_view * d.x - sin_view * d.y + view->getCenterX();
+	p.y = sin_view * d.x + cos_view * d.y + view->getCenterY();
 	//Respects the view
 	p.x -= view->getX();
 	p.y -= view->getY();
