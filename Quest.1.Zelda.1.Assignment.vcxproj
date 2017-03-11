@@ -55,14 +55,21 @@
     <ClInclude Include="Source\View.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Images\arrow.png" />
     <Image Include="Assets\Images\leever_b.png" />
     <Image Include="Assets\Images\leever_r.png" />
+    <Image Include="Assets\Images\link_d.png" />
+    <Image Include="Assets\Images\link_l.png" />
+    <Image Include="Assets\Images\link_r.png" />
+    <Image Include="Assets\Images\link_u.png" />
     <Image Include="Assets\Images\octorok_b.png" />
     <Image Include="Assets\Images\octorok_r.png" />
+    <Image Include="Assets\Images\rock.png" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Assets\Config\level1.old.xml" />
     <Xml Include="Assets\Config\level1.xml" />
-    <Xml Include="Assets\Config\level2.xml" />
+    <Xml Include="Assets\Config\level2.old.xml" />
     <Xml Include="Assets\Config\objects.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

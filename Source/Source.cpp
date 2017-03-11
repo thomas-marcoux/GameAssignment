@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	//Load Level
 	//========================================
 	game->Reset();
-	std::string levelConfigFile= "./Assets/Config/level2.xml";
+	std::string levelConfigFile= "./Assets/Config/level1.xml";
 	std::string objectConfigFile = "./Assets/Config/objects.xml";
 	if(!game->LoadLevel(levelConfigFile, objectConfigFile))
 	{

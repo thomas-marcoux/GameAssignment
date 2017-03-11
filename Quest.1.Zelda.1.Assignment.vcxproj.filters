@@ -92,31 +92,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Images\leever_b.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Assets\Images\leever_r.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Assets\Images\octorok_b.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Assets\Images\octorok_r.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Assets\Config\level1.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="Assets\Config\level2.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="Assets\Config\objects.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Source\ArtAssetLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -180,5 +155,51 @@
     <ClInclude Include="Source\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\leever_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\leever_r.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\link_d.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\link_l.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\link_r.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\link_u.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\octorok_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\octorok_r.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Images\rock.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Assets\Config\level1.old.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Config\level1.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Config\level2.old.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Config\objects.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
