@@ -19,18 +19,18 @@ bool View::Update(GAME_FLT gameTime)
 	switch (iDevice->GetEvent())
 	{
 	case GAME_UP:
-		center.x -= VIEW_MOVEMENT * cos(angle);
-		center.y -= VIEW_MOVEMENT * sin(angle);
+		center.x -= VIEW_MOVEMENT * sin(angle);
+		center.y -= VIEW_MOVEMENT * cos(angle);
 		break;
 	case GAME_DOWN:
-		center.x += VIEW_MOVEMENT * cos(angle);
-		center.y += VIEW_MOVEMENT * sin(angle);
+		center.x += VIEW_MOVEMENT * sin(angle);
+		center.y += VIEW_MOVEMENT * cos(angle);
 		break;
 	case GAME_LEFT:
-		angle -= VIEW_ROTATION;
+		angle += VIEW_ROTATION;
 		break;
 	case GAME_RIGHT:
-		angle += VIEW_ROTATION;
+		angle -= VIEW_ROTATION;
 		break;
 	case GAME_TAB:
 		switchPerspective();
