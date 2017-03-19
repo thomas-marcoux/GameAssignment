@@ -62,17 +62,17 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 bool Game::LoadArtAssets(std::string objectConfigFile)
 {
 	TiXmlDocument doc;
-	TiXmlElement* creatureNode;
+	TiXmlElement* itemNode;
 	const char *attr_name, *attr_path;
 
 	//Tries to open the level configFile, raises an error if it cannot
 	if (!doc.LoadFile(objectConfigFile.c_str())) throw LoadException(LOAD_ERROR);
-	creatureNode = TiXmlHandle(doc.RootElement()).FirstChild("Creature").Element();
-	if (!creatureNode) throw LoadException(PARSE_ERROR);
-	for (creatureNode; creatureNode; creatureNode = creatureNode->NextSiblingElement())
+	itemNode = TiXmlHandle(doc.RootElement()).FirstChild("Item").Element();
+	if (!itemNode) throw LoadException(PARSE_ERROR);
+	for (itemNode; itemNode; itemNode = itemNode->NextSiblingElement())
 	{
-		attr_name = creatureNode->Attribute("name");
-		attr_path = creatureNode->Attribute("sprite");
+		attr_name = itemNode->Attribute("name");
+		attr_path = itemNode->Attribute("sprite");
 		if (!attr_name || !attr_path) throw LoadException(PARSE_ERROR); //Checks attributes exist
 		aLibrary->AddAsset(attr_name, attr_path);
 	}
