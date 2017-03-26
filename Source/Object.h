@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <memory>
+#include "Component.h"
 #include "GraphicsDevice.h"
 #include "InputDevice.h"
 #include "Texture.h"
@@ -18,15 +19,13 @@ public:
 	virtual void Draw(GAME_FLT, View*) = 0;
 	GAME_VEC	getPosition() { return position; }
 	GAME_FLT	getAngle() { return angle; }
+	void addComponent(std::unique_ptr<Component>);
 
 protected:
 	GraphicsDevice* gDevice;
 	InputDevice* iDevice;
 	std::shared_ptr<Texture> texture;
-	GAME_VEC position;
-	GAME_VEC startPosition;
-	GAME_FLT angle;
-	GAME_FLT movement;
+	std::vector<std::unique_ptr<Component>>	components;
 };
 
 #endif // !OBJECT_H

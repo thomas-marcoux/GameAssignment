@@ -10,6 +10,14 @@ typedef struct GAME_VEC
     GAME_FLT x;
     GAME_FLT y;
 } GAME_VEC;
+typedef struct GAME_OBJECTFACTORY_INITIALIZERS
+{
+	const char*	name;
+	GAME_VEC	pos;
+	GAME_FLT	angle;
+	bool	radius;
+	bool	vertical;
+} GAME_OBJECTFACTORY_INITIALIZERS;
 
 //========================================
 //Base Game Constants
@@ -46,8 +54,7 @@ const GAME_FLT BLUEOCTOROK_MOVEMENT_MAX = (float)1.2;
 const GAME_FLT REDOCTOROK_MOVEMENT = PI/356;
 const GAME_FLT REDOCTOROK_RADIUS_MIN = (float)0.7;
 const GAME_FLT REDOCTOROK_RADIUS_MAX = (float)1.5;
-const GAME_FLT BLUELEEVER_MOVEMENT = (float)2.0;
-const GAME_FLT REDLEEVER_MOVEMENT = (float)2.0;
+const GAME_FLT LEEVER_MOVEMENT = (float)2.0;
 const int LEEVER_MIN_DISTANCE = 50;
 const int LEEVER_MAX_DISTANCE = 150;
 const GAME_INT VIEW_MOVEMENT = 10;

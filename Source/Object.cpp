@@ -6,7 +6,9 @@ void Object::Initialize(GraphicsDevice *g, InputDevice *i, std::shared_ptr<Textu
 	gDevice = g;
 	iDevice = i;
 	texture = t;
-	startPosition = s;
-	position = s;
-	angle = a;
+}
+
+void Object::addComponent(std::unique_ptr<Component> component)
+{
+	components.push_back(std::move(component));
 }

@@ -1,0 +1,62 @@
+#include "ObjectFactory.h"
+#include "BodyComponentFactory.h"
+#include "SpriteComponentFactory.h"
+#include "SlideBehaviorComponentFactory.h"
+#include "CircleBehaviorComponentFactory.h.h"
+#include "PlayerInputComponentFactory.h"
+
+ObjectFactory::ObjectFactory()
+{
+	cLibrary["Body"] = std::make_unique<BodyComponentFactory>();
+	cLibrary["Sprite"] = std::make_unique<SpriteComponentFactory>();
+	cLibrary["Slide"] = std::make_unique<SlideBehaviorComponentFactory>();
+	cLibrary["Circle"] = std::make_unique<CircleBehaviorComponentFactory>();
+	cLibrary["Input"] = std::make_unique<PlayerInputComponentFactory>();
+}
+
+//Return an instance of the requested component if it is in the factory, NULL otherwise.
+std::unique_ptr<Component> ObjectFactory::Search(std::string& component, std::unique_ptr<Object>& owner)
+{
+	std::map<std::string, std::unique_ptr<ComponentFactory>>::iterator it = cLibrary.find(component);
+	return (it == cLibrary.end()) ? NULL : it->second->create(owner);
+}
+
+std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
+{
+	TiXmlElement* componentNode;
+	std::vector<std::string>	componentNames;
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;;
+
+	GOI.name = gameAssetNode->Attribute("name");
+	GOI.pos.x = 0.0f;
+	GOI.pos.y = 0.0f;
+	GOI.angle = 0.0f;
+	GOI.radius = false;
+	GOI.vertical = false;
+	componentNode = TiXmlHandle(gameAssetNode).FirstChild("Component").Element();
+	if (!componentNode) throw LoadException(PARSE_ERROR);
+	for (componentNode; componentNode; componentNode = componentNode->NextSiblingElement())
+	{
+		componentNames.push_back(componentNode->Attribute("name"));
+		componentNode->QueryFloatAttribute("x", &GOI.pos.x);
+		componentNode->QueryFloatAttribute("y", &GOI.pos.y);
+		componentNode->QueryFloatAttribute("angle", &GOI.angle);
+		componentNode->QueryBoolAttribute("radius", &GOI.radius);
+		componentNode->QueryBoolAttribute("vertical", &GOI.vertical);
+	}
+	return create(componentNames, GOI);
+}
+
+std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string> &componentNames, GAME_OBJECTFACTORY_INITIALIZERS& GOI)
+{
+	std::unique_ptr<Object>		object = std::make_unique<Object>();
+	std::unique_ptr<Component>	component;
+
+	for (std::vector<std::string>::iterator it = componentNames.begin(); it != componentNames.end(); ++it)
+	{
+		component = Search(*it, object);
+		component.get()->Initialize(GOI);
+		object.get()->addComponent(std::move(component));
+	}
+	return std::move(object);
+}

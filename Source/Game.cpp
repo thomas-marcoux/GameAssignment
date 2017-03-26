@@ -5,10 +5,10 @@
 //Make Game class' attributes and initializes them
 bool Game::Initialize()
 {
-	gLibrary = std::make_unique<GameAssetLibrary>();
 	gDevice = std::make_unique<GraphicsDevice>();
 	aLibrary = std::make_unique<ArtAssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
+	oFactory = std::make_unique<ObjectFactory>();
 	timer = std::make_unique<Timer>();
 	gameTime = 0;
 	view = std::make_unique<View>();
@@ -30,33 +30,15 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 {
 	TiXmlDocument doc;
 	TiXmlElement* gameAssetNode;
-	const char	*name;
-	GAME_VEC	vec;
-	GAME_FLT	angle;
-	std::shared_ptr<Texture>	texture;
-	std::unique_ptr<Object>		object;
 
 	if (!doc.LoadFile(levelConfigFile.c_str())) throw LoadException(LOAD_ERROR);
 	gameAssetNode = TiXmlHandle(doc.RootElement()).FirstChild("GameAsset").Element();
 	if (!gameAssetNode) throw LoadException(PARSE_ERROR);
-	//Goes through every game asset node
+	//Goes through every game asset node and sends them to the object factory which returns an object
 	for (gameAssetNode; gameAssetNode; gameAssetNode = gameAssetNode->NextSiblingElement())
-	{
-		if (gameAssetNode->QueryFloatAttribute("x", &vec.x) || gameAssetNode->QueryFloatAttribute("y", &vec.y)
-			|| gameAssetNode->QueryFloatAttribute("angle", &angle))
-			throw LoadException(PARSE_ERROR); //Checks all attributes are fetched successfully.
-		name = gameAssetNode->Attribute("name");
-		if (!name) throw LoadException(PARSE_ERROR);
-		texture = aLibrary.get()->Search(name);
-		if (!texture) throw LoadException(BAD_SPRITE); //Checks the sprite requested is in the art assets.
-		object = gLibrary.get()->Search(name);
-		if (!object) throw LoadException(BAD_SPRITE); //Checks the sprite requested is in the object factory.
-		object->Initialize(gDevice.get(), iDevice.get(), texture, vec, angle);
-		objects.push_back(std::move(object));
-		}
+		objects.push_back(oFactory.get()->create(gameAssetNode));		
 	return true;
 }
-
 
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
 bool Game::LoadArtAssets(std::string objectConfigFile)
@@ -86,6 +68,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 	{
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
+		//Load Textures in SpriteComponent
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
 		view->setObjects(&objects);

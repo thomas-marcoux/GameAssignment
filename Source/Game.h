@@ -7,10 +7,10 @@
 #include "ArtAssetLibrary.h"
 #include "Definitions.h"
 #include "Exceptions.h"
-#include "GameAssetLibrary.h"
 #include "GraphicsDevice.h"
 #include "InputDevice.h"
 #include "Object.h"
+#include "ObjectFactory.h"
 #include "Timer.h"
 #include "View.h"
 
@@ -32,10 +32,10 @@ private:
 	bool LoadArtAssets(std::string);
 
 private:
-	std::unique_ptr<GameAssetLibrary> gLibrary;
 	std::unique_ptr<ArtAssetLibrary> aLibrary;
 	std::unique_ptr<GraphicsDevice> gDevice;
 	std::unique_ptr<InputDevice> iDevice;
+	std::unique_ptr<ObjectFactory> oFactory;
 	std::unique_ptr<Timer> timer;
 	GAME_FLT gameTime;
 	std::unique_ptr<View> view;
