@@ -68,10 +68,10 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 	{
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
-		//Load Textures in SpriteComponent
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
 		view->setObjects(&objects);
+		//Load Textures & gDevice in SpriteComponent
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}

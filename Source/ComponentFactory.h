@@ -6,7 +6,7 @@
 class ComponentFactory
 {
 public:
-	virtual std::unique_ptr<Component> create(std::unique_ptr<Object>&) = 0;
+	virtual std::shared_ptr<Component> create(std::shared_ptr<Object>) = 0;
 };
 
 #endif // !COMPONENTFACTORY_H

@@ -8,7 +8,7 @@
 class PlayerInputComponentFactory : public ComponentFactory
 {
 public:
-	std::unique_ptr<Component> create(std::unique_ptr<Object>& owner) { return std::make_unique<PlayerInputComponent>(owner); }
+	std::shared_ptr<Component> create(std::shared_ptr<Object> owner) { return std::make_unique<PlayerInputComponent>(owner); }
 };
 
 #endif // !PLAYERINPUTCOMPONENTFACTORY_H

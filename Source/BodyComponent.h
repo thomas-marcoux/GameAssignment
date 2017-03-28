@@ -6,9 +6,9 @@
 class BodyComponent : public Component
 {
 public:
-	BodyComponent(std::unique_ptr<Object>& owner) : Component(owner) {}
+	BodyComponent(std::shared_ptr<Object>);
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
-	std::unique_ptr<Object> Update() {}
+	std::shared_ptr<Object> Update() {}
 	bool Finish() { return false; }
 
 private:

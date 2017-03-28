@@ -8,7 +8,7 @@
 class SlideBehaviorComponentFactory : public ComponentFactory
 {
 public:
-	std::unique_ptr<Component> create(std::unique_ptr<Object>& owner) { return std::make_unique<SlideBehaviorComponent>(owner); }
+	std::shared_ptr<Component> create(std::shared_ptr<Object> owner) { return std::make_shared<SlideBehaviorComponent>(owner); }
 };
 
 #endif // !SLIDEBEHAVIORCOMPONENTFACTORY_H

@@ -6,10 +6,13 @@
 class PlayerInputComponent : public Component
 {
 public:
-	PlayerInputComponent(std::unique_ptr<Object>& owner) : Component(owner) {}
+	PlayerInputComponent(std::shared_ptr<Object> owner) : Component(owner) {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	std::unique_ptr<Object> Update();
 	bool Finish();
+
+private:
+	InputDevice* iDevice;
 };
 
 #endif // !PLAYERINPUTCOMPONENT_H

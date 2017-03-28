@@ -8,7 +8,7 @@
 class SpriteComponentFactory : public ComponentFactory
 {
 public:
-	std::unique_ptr<Component> create(std::unique_ptr<Object>& owner) { return std::make_unique<SpriteComponent>(owner); }
+	std::shared_ptr<Component> create(std::shared_ptr<Object> owner) { return std::make_shared<SpriteComponent>(owner); }
 };
 
 #endif // !SPRITECOMPONENTFACTORY_H
