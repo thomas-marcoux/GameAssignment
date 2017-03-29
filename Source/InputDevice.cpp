@@ -4,37 +4,53 @@
 //Initializes SDL event attribute
 bool InputDevice::Initialize()
 {
-	event = std::make_unique<SDL_Event>();
-	if (!event)
+	_event = std::make_unique<SDL_Event>();
+	if (!_event)
 	{
 		std::cout << "SDL Event could not initialize." << std::endl;
 		return false;
 	}
+	_events.assign(NB_EVENTS, false);
 	return true;
 }
 
 //Polls for events and returns the corresponding GAME_EVENT
-GAME_EVENT InputDevice::GetEvent()
+void InputDevice::Update()
 {
-	while (SDL_PollEvent(event.get()))
+	while (SDL_PollEvent(_event.get()))
 	{
-		if (event->type == SDL_QUIT)
+		if (_event->type == SDL_QUIT)
 		{
-			return GAME_QUIT;
+			_events[GAME_QUIT] = true;
 		}
-		if (event->type == SDL_KEYDOWN)
+		if (_event->type == SDL_KEYDOWN)
 		{
-			return Translate();
+			_events[Translate()] = true;
+		}
+		if (_event->type == SDL_KEYUP)
+		{
+			_events[Translate()] = false;
 		}
 	}
-	return GAME_NA;
 }
 
 //Translates the SDL_Event event to GAME_EVENT
 GAME_EVENT InputDevice::Translate()
 {
-	switch (event->key.keysym.sym)
+	switch (_event->key.keysym.sym)
 	{
+	case SDLK_w:
+		return GAME_W;
+		break;
+	case SDLK_a:
+		return GAME_A;
+		break;
+	case SDLK_s:
+		return GAME_S;
+		break;
+	case SDLK_d:
+		return GAME_D;
+		break;
 	case SDLK_LEFT:
 		return GAME_LEFT;
 		break;
@@ -55,4 +71,9 @@ GAME_EVENT InputDevice::Translate()
 		break;
 	}
 	return GAME_NA;
+}
+
+bool InputDevice::GetEvent(GAME_EVENT event)
+{
+	return _events[event];
 }

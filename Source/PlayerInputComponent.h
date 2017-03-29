@@ -10,6 +10,7 @@ public:
 	PlayerInputComponent(std::shared_ptr<Object> owner) : Component(owner) {}
 	~PlayerInputComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
+	bool Initialize(InputDevice*);
 	std::unique_ptr<Object> Update();
 	bool Finish();
 

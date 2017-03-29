@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "SpriteComponent.h"
+#include "PlayerInputComponent.h"
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 
@@ -77,6 +79,20 @@ bool Game::LoadSprites()
 	return true;
 }
 
+//Loads InputDevice into Player
+bool Game::LoadPlayer()
+{
+	std::shared_ptr<PlayerInputComponent> player;
+
+	for (auto object : objects)
+	{
+		player = object->GetComponent<PlayerInputComponent>();
+		if (player)
+			player->Initialize(iDevice.get());
+	}
+	return true;
+}
+
 //Loads game info from both config files, catches errors occuring during loading
 bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 {
@@ -85,6 +101,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
 		LoadSprites();
+		LoadPlayer();
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
 		view->setObjects(&objects);

@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <vector>
 #include "Definitions.h"
 #include "SDL.h"
 
@@ -13,11 +14,15 @@ public:
 	InputDevice() {}
 	~InputDevice() {}
 	bool Initialize();
-	GAME_EVENT GetEvent();
+	void Update();
+	bool GetEvent(GAME_EVENT);
+
+private:
 	GAME_EVENT Translate();
 
 private:
-	std::unique_ptr<SDL_Event> event;
+	std::unique_ptr<SDL_Event> _event;
+	std::vector<bool>	_events;
 };
 
 #endif // !INPUTDEVICE_H
