@@ -4,16 +4,17 @@
 #include <memory>
 #include "Definitions.h"
 #include "Exceptions.h"
-#include "Object.h"
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
+#include "Object.h"
 
 class Component
 {
 public:
-	Component(std::shared_ptr<Object> owner) : _owner(owner) {}
+	Component(std::shared_ptr<Object>);
+	~Component() {}
 	virtual bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers) = 0;
-	virtual std::shared_ptr<Object> Update() = 0;
+	virtual std::unique_ptr<Object> Update() = 0;
 	virtual bool Finish() = 0;
 
 protected:

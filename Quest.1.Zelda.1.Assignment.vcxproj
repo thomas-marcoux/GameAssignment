@@ -14,6 +14,7 @@
     <ClCompile Include="Source\ArtAssetLibrary.cpp" />
     <ClCompile Include="Source\BodyComponent.cpp" />
     <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
+    <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GraphicsDevice.cpp" />
     <ClCompile Include="Source\InputDevice.cpp" />

@@ -1,6 +1,9 @@
 #include "SpriteComponent.h"
+#include "BodyComponent.h"
+#include "GraphicsDevice.h"
+#include "Object.h"
 
-SpriteComponent::SpriteComponent(std::unique_ptr<Object>& owner) : Component(owner)
+SpriteComponent::SpriteComponent(std::shared_ptr<Object> owner) : Component(owner)
 {
 	_name = "";
 	_gDevice = NULL;
@@ -20,14 +23,19 @@ bool SpriteComponent::Finish()
 
 bool SpriteComponent::Initialize(GraphicsDevice* gDevice, std::shared_ptr<Texture> texture)
 {
+	if (!texture)
+		return false;
 	_gDevice = gDevice;
 	_texture = texture;
-	_gDevice->AddSprite(this);
+	_gDevice->addSprite(this);
 	return true;
 }
 
 bool SpriteComponent::Draw(View* p_view)
 {
-	_texture->Draw(_gDevice->getRenderer(), p_view, position, angle);
+	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
+
+	if (!body)	return false;
+	_texture->Draw(_gDevice->getRenderer(), p_view, body->getPosition(), body->getAngle());
 	return true;
 }

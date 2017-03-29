@@ -2,11 +2,13 @@
 #define PLAYERINPUTCOMPONENT_H
 
 #include "Component.h"
+#include "InputDevice.h"
 
 class PlayerInputComponent : public Component
 {
 public:
 	PlayerInputComponent(std::shared_ptr<Object> owner) : Component(owner) {}
+	~PlayerInputComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	std::unique_ptr<Object> Update();
 	bool Finish();

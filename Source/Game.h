@@ -11,6 +11,7 @@
 #include "InputDevice.h"
 #include "Object.h"
 #include "ObjectFactory.h"
+#include "SpriteComponent.h"
 #include "Timer.h"
 #include "View.h"
 
@@ -30,6 +31,7 @@ public:
 private:
 	bool LoadGameAssets(std::string);
 	bool LoadArtAssets(std::string);
+	bool LoadSprites();
 
 private:
 	std::unique_ptr<ArtAssetLibrary> aLibrary;
@@ -39,7 +41,7 @@ private:
 	std::unique_ptr<Timer> timer;
 	GAME_FLT gameTime;
 	std::unique_ptr<View> view;
-	std::vector<std::unique_ptr<Object>> objects;
+	std::vector<std::shared_ptr<Object>> objects;
 };
 
 #endif // ! GAME_H

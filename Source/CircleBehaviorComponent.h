@@ -7,12 +7,14 @@ class CircleBehaviorComponent : public Component
 {
 public:
 	CircleBehaviorComponent(std::shared_ptr<Object> owner) : Component(owner) {}
+	~CircleBehaviorComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
-	std::shared_ptr<Object> Update();
+	std::unique_ptr<Object> Update();
 	bool Finish();
 
 private:
 	GAME_FLT _radius;
+	GAME_FLT _movement;
 	GAME_FLT _movementAngle;
 };
 

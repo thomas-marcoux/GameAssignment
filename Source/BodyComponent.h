@@ -7,15 +7,20 @@ class BodyComponent : public Component
 {
 public:
 	BodyComponent(std::shared_ptr<Object>);
+	~BodyComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
-	std::shared_ptr<Object> Update() {}
+	std::unique_ptr<Object> Update() { return NULL; }
 	bool Finish() { return false; }
+	GAME_VEC	getPosition() { return _position; }
+	GAME_VEC	getStartPosition() { return _startPosition; }
+	GAME_FLT	getAngle() { return _angle; }
+	void setPosition(GAME_VEC pos) { _position = pos; }
+	void setAngle(GAME_FLT angle) { _angle = angle; }
 
 private:
 	GAME_VEC _position;
 	GAME_VEC _startPosition;
 	GAME_FLT _angle;
-	GAME_FLT _movement;
 };
 
 #endif // !BODYCOMPONENT_H

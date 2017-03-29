@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ArtAssetLibrary.h"
 
 //Make texture object from object file

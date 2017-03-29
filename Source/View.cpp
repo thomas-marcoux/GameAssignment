@@ -48,6 +48,7 @@ bool View::Update(GAME_FLT gameTime)
 //Update view with the coordinates of one of the objects
 void View::switchPerspective()
 {
+	/*
 	Object*	o = (*objects)[objectId].get();
 	GAME_VEC p = o->getPosition();
 
@@ -56,4 +57,5 @@ void View::switchPerspective()
 	angle = -TO_RADIAN(o->getAngle());
 	objectId++;
 	objectId %= (*objects).size();
+	*/
 }

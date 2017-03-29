@@ -55,8 +55,11 @@ std::shared_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 	for (std::vector<std::string>::iterator it = componentNames.begin(); it != componentNames.end(); ++it)
 	{
 		component = Search(*it, object);
-		component.get()->Initialize(GOI);
-		object.get()->addComponent(std::move(component));
+		if (component)
+		{
+			component->Initialize(GOI);
+			object->addComponent(std::move(component));
+		}
 	}
 	return std::move(object);
 }

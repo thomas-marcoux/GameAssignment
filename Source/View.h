@@ -21,7 +21,7 @@ public:
 	GAME_FLT getCenterY() { return center.y; }
 	GAME_FLT getAngle() { return angle; }
 	GAME_FLT getDegreeAngle() { return TO_DEGREE(angle); } //Returns angle in degree
-	void setObjects(std::vector<std::unique_ptr<Object>>*o) { objects = o; }
+	void setObjects(std::vector<std::shared_ptr<Object>>*o) { objects = o; }
 
 private:
 	void switchPerspective();
@@ -31,7 +31,7 @@ private:
 	GAME_VEC position;
 	GAME_VEC center;
 	GAME_FLT angle;
-	std::vector<std::unique_ptr<Object>> *objects;
+	std::vector<std::shared_ptr<Object>> *objects;
 	GAME_INT objectId;
 };
 

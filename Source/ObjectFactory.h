@@ -12,6 +12,7 @@ class ObjectFactory
 {
 public:
 	ObjectFactory();
+	~ObjectFactory() {}
 	std::shared_ptr<Object> create(TiXmlElement*);
 
 private:

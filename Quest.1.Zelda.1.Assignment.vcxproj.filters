@@ -81,7 +81,7 @@
     <ClCompile Include="Source\BodyComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SlideBehaviorComponent.cpp">
+    <ClCompile Include="Source\SpriteComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerInputComponent.cpp">
@@ -90,7 +90,10 @@
     <ClCompile Include="Source\CircleBehaviorComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SpriteComponent.cpp">
+    <ClCompile Include="Source\SlideBehaviorComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,15 +140,6 @@
     <ClInclude Include="Source\SpriteComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerInputComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SlideBehaviorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CircleBehaviorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BodyComponentFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
@@ -155,16 +149,25 @@
     <ClInclude Include="Source\SpriteComponentFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SlideBehaviorComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CircleBehaviorComponentFactory.h.h">
-      <Filter>Header Files\Factories</Filter>
+    <ClInclude Include="Source\ObjectFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerInputComponentFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ObjectFactory.h">
+    <ClInclude Include="Source\PlayerInputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CircleBehaviorComponentFactory.h.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SlideBehaviorComponentFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CircleBehaviorComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SlideBehaviorComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

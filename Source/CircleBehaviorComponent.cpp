@@ -1,39 +1,48 @@
 #include "CircleBehaviorComponent.h"
+#include "BodyComponent.h"
+#include "Object.h"
 #include "Random.h"
 
 bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
 {
 	if (initializers.radius)
 	{
-		movement = REDOCTOROK_MOVEMENT;
-		movementAngle = TO_RADIAN(angle);
+		_movement = REDOCTOROK_MOVEMENT;
+		_movementAngle = TO_RADIAN(initializers.angle);
 		_radius = random(REDOCTOROK_RADIUS_MIN, REDOCTOROK_RADIUS_MAX);
 	}
 	else
 	{
 		_radius = 0;
-		movement = random(BLUEOCTOROK_MOVEMENT_MIN, BLUEOCTOROK_MOVEMENT_MAX);
+		_movement = random(BLUEOCTOROK_MOVEMENT_MIN, BLUEOCTOROK_MOVEMENT_MAX);
 	}
-		
+	return true;
 }
 
 std::unique_ptr<Object> CircleBehaviorComponent::Update()
 {
+	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
+	if (!body) return NULL;
+	GAME_VEC position = body->getPosition();
+	GAME_FLT angle = body->getAngle();
+
 	if (_radius)
 	{
-		movementAngle -= movement;
-		position.x += -_radius * cos(movementAngle);
-		position.y += -_radius * sin(movementAngle);
-		if (movementAngle <= -PI2)
-			movementAngle = 0;
-		angle = TO_DEGREE(movementAngle) - 90; //Adjusts angle so the octorok is facing forward
+		_movementAngle -= _movement;
+		position.x += -_radius * cos(_movementAngle);
+		position.y += -_radius * sin(_movementAngle);
+		if (_movementAngle <= -PI2)
+			_movementAngle = 0;
+		angle = TO_DEGREE(_movementAngle) - 90; //Adjusts angle so the octorok is facing forward
+		body->setPosition(position);
 	}
 	else
 	{
-		angle -= movement;
+		angle -= _movement;
 		if (angle <= -360.0)
 			angle = 0;
 	}
+	body->setAngle(angle);
 	return NULL;
 }
 

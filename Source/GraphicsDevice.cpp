@@ -1,6 +1,7 @@
 #include<iostream>
 #include "Definitions.h"
 #include "GraphicsDevice.h"
+#include "SpriteComponent.h"
 
 //Calls shutdown method on object destruction
 GraphicsDevice::~GraphicsDevice()
@@ -80,8 +81,19 @@ void GraphicsDevice::Present()
 	SDL_RenderPresent(renderer);
 }
 
+void GraphicsDevice::Draw(View* p_view)
+{
+	for (auto sprite : sprites)
+		sprite->Draw(p_view);
+}
+
 //Returns renderer
 SDL_Renderer* GraphicsDevice::getRenderer()
 {
 	return(renderer);
+}
+
+void GraphicsDevice::addSprite(SpriteComponent *sprite)
+{
+	sprites.push_back(sprite);
 }
