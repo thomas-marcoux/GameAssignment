@@ -74,12 +74,12 @@ bool Game::LoadSprites()
 		sprite = object->GetComponent<SpriteComponent>();
 		if (!sprite) throw LoadException(NO_COMPONENT);
 		name = sprite->getName();
-		if (!sprite->Initialize(gDevice.get(), aLibrary->Search(name))) throw LoadException(NO_SPRITE, name);
+		sprite->Initialize(gDevice.get(), aLibrary->Search(name));
 	}
 	return true;
 }
 
-//Loads InputDevice into Player
+//Loads PlayerInputComponent
 bool Game::LoadPlayer()
 {
 	std::shared_ptr<PlayerInputComponent> player;
@@ -88,7 +88,14 @@ bool Game::LoadPlayer()
 	{
 		player = object->GetComponent<PlayerInputComponent>();
 		if (player)
+		{
 			player->Initialize(iDevice.get());
+			player->LoadTexture(LINK_TEXTURE_UP, aLibrary->Search("Link Up"));
+			player->LoadTexture(LINK_TEXTURE_DOWN, aLibrary->Search("Link Down"));
+			player->LoadTexture(LINK_TEXTURE_LEFT, aLibrary->Search("Link Left"));
+			player->LoadTexture(LINK_TEXTURE_RIGHT, aLibrary->Search("Link Right"));
+			player->LoadTexture(TEXTURE_ARROW, aLibrary->Search("Arrow"));
+		}
 	}
 	return true;
 }
@@ -130,10 +137,18 @@ bool Game::Run()
 //Update all game actors
 bool Game::Update()
 {
+	std::unique_ptr<Object>	r;
+
 	if (!view->Update())
 		return true;
-	for (auto object : objects)
-		object->Update();
+	for (std::vector<std::shared_ptr<Object>>::iterator object = objects.begin(); object != objects.end(); ++object)
+	{
+		r = (*object)->Update();
+		if ((*object)->isDead())
+			objects.erase(object);
+		if (r)
+			objects.push_back(std::move(r));
+	}
 	return false;
 }
 

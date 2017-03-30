@@ -26,6 +26,7 @@
     <ClCompile Include="Source\Source.cpp" />
     <ClCompile Include="Source\SpriteComponent.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\TimedLifeComponent.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\tinyxml\tinystr.cpp" />
     <ClCompile Include="Source\tinyxml\tinyxml.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="Source\SpriteComponent.h" />
     <ClInclude Include="Source\SpriteComponentFactory.h" />
     <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\TimedLifeComponent.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\View.h" />
   </ItemGroup>

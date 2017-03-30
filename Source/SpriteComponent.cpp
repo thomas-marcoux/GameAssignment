@@ -23,12 +23,17 @@ bool SpriteComponent::Finish()
 
 bool SpriteComponent::Initialize(GraphicsDevice* gDevice, std::shared_ptr<Texture> texture)
 {
+	_gDevice = gDevice;
+	_gDevice->addSprite(this);
 	if (!texture)
 		return false;
-	_gDevice = gDevice;
 	_texture = texture;
-	_gDevice->addSprite(this);
 	return true;
+}
+
+void SpriteComponent::setTexture(std::shared_ptr<Texture> texture)
+{
+	_texture = texture;
 }
 
 bool SpriteComponent::Draw(View* p_view)

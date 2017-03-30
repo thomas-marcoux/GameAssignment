@@ -17,6 +17,7 @@ public:
 	bool Finish();
 	bool Draw(View*);
 	std::string getName() { return _name; }
+	void setTexture(std::shared_ptr<Texture>);
 
 private:
 	std::string	_name;

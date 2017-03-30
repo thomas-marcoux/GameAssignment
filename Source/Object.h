@@ -14,9 +14,9 @@ class Component;
 class Object
 {
 public:
-	Object() {}
-	~Object() { /*components.clear();*/ }
-	void Update();
+	Object();
+	~Object();
+	std::unique_ptr<Object> Update();
 	void addComponent(std::shared_ptr<Component>);
 	template<class T>
 	std::shared_ptr<T> GetComponent()
@@ -31,9 +31,11 @@ public:
 		}
 		return NULL;
 	}
+	bool isDead() { return dead; }
 
 protected:
 	std::vector<std::shared_ptr<Component>>	components;
+	bool dead;
 };
 
 #endif // !OBJECT_H

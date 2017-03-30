@@ -10,5 +10,4 @@
   <Item name="Link Left" sprite="./Assets/Images/link_l.png"/>
   <Item name="Link Right" sprite="./Assets/Images/link_r.png"/>
   <Item name="Link Up" sprite="./Assets/Images/link_u.png"/>
-  <Item name="Link" sprite="./Assets/Images/link_u.png"/>
 </Objects>
