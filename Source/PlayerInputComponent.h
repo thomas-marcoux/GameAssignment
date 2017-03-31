@@ -17,6 +17,9 @@ public:
 	bool Finish();
 
 private:
+	std::unique_ptr<Object> CreateArrow();
+
+private:
 	InputDevice* iDevice;
 	std::vector<std::shared_ptr<Texture>>	_textures;
 };

@@ -72,7 +72,9 @@ const GAME_FLT LINK_LEFT = PI;
 
 //Arrow
 const GAME_INT ARROW_HEALTH = 100;
-const GAME_INT ARROW_TRAVEL = 5;
+const GAME_INT ARROW_HEALTH_DECREMENT = 5;
+const GAME_INT ARROW_MOVEMENT = 5;
+
 
 //Player Textures
 enum TEXTURE_ID {

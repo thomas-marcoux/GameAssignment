@@ -2,7 +2,7 @@
 
 TimedLifeComponent::TimedLifeComponent(std::shared_ptr<Object> owner) : Component(owner)
 {
-	health = ARROW_HEALTH;
+	_health = 0;
 }
 
 bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
@@ -10,13 +10,20 @@ bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers
 	return true;
 }
 
+bool TimedLifeComponent::Initialize(GAME_INT health, GAME_INT decrement)
+{
+	_health = health;
+	_decrement = decrement;
+	return true;
+}
+
 std::unique_ptr<Object> TimedLifeComponent::Update()
 {
-	health -= ARROW_TRAVEL;
+	_health -= _decrement;
 	return NULL;
 }
 
 bool TimedLifeComponent::Finish()
 {
-	return (health <= 0) ? true : false;
+	return (_health <= 0) ? true : false;
 }
