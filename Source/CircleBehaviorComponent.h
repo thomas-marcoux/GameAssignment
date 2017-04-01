@@ -6,7 +6,7 @@
 class CircleBehaviorComponent : public Component
 {
 public:
-	CircleBehaviorComponent(std::shared_ptr<Object> owner) : Component(owner) {}
+	CircleBehaviorComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~CircleBehaviorComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	std::unique_ptr<Object> Update();

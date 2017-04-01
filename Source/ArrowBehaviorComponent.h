@@ -6,7 +6,6 @@
 class ArrowBehaviorComponent : public Component
 {
 public:
-	ArrowBehaviorComponent(std::shared_ptr<Object> owner) : Component(owner) {}
 	~ArrowBehaviorComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers) { return true; }
 	bool Initialize(GAME_INT);

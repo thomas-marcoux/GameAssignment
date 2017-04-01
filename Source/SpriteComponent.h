@@ -9,7 +9,7 @@ class GraphicsDevice;
 class SpriteComponent : public Component
 {
 public:
-	SpriteComponent(std::shared_ptr<Object>);
+	SpriteComponent(std::unique_ptr<Object> const&);
 	~SpriteComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	bool Initialize(GraphicsDevice*, std::shared_ptr<Texture>);

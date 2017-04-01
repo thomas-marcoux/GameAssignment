@@ -3,7 +3,7 @@
 #include "GraphicsDevice.h"
 #include "Object.h"
 
-SpriteComponent::SpriteComponent(std::shared_ptr<Object> owner) : Component(owner)
+SpriteComponent::SpriteComponent(std::unique_ptr<Object> const& owner) : Component(owner)
 {
 	_name = "";
 	_gDevice = NULL;
@@ -38,7 +38,7 @@ void SpriteComponent::setTexture(std::shared_ptr<Texture> texture)
 
 bool SpriteComponent::Draw(View* p_view)
 {
-	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
+	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 
 	if (!body)	return false;
 	_texture->Draw(_gDevice->getRenderer(), p_view, body->getPosition(), body->getAngle());

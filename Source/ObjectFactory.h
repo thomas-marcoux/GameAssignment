@@ -13,11 +13,11 @@ class ObjectFactory
 public:
 	ObjectFactory();
 	~ObjectFactory() {}
-	std::shared_ptr<Object> create(TiXmlElement*);
+	std::unique_ptr<Object> create(TiXmlElement*);
 
 private:
-	std::shared_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS);
-	std::shared_ptr<Component> Search(std::string const&, std::shared_ptr<Object>);
+	std::unique_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS);
+	std::unique_ptr<Component> Search(std::string const&, std::unique_ptr<Object> const&);
 
 private:
 	std::map<std::string, std::unique_ptr<ComponentFactory>>	cLibrary;

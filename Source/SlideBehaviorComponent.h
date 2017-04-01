@@ -6,7 +6,7 @@
 class SlideBehaviorComponent : public Component
 {
 public:
-	SlideBehaviorComponent(std::shared_ptr<Object> owner) : Component(owner) {}
+	SlideBehaviorComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~SlideBehaviorComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	std::unique_ptr<Object> Update();

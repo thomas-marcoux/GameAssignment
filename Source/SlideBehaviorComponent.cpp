@@ -13,7 +13,7 @@ bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initiali
 
 std::unique_ptr<Object> SlideBehaviorComponent::Update()
 {
-	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
+	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;
 	GAME_VEC position = body->getPosition();
 	GAME_VEC startPosition = body->getStartPosition();

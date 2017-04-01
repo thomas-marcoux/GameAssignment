@@ -6,7 +6,7 @@
 class TimedLifeComponent : public Component
 {
 public:
-	TimedLifeComponent(std::shared_ptr<Object>);
+	TimedLifeComponent(std::unique_ptr<Object> const&);
 	~TimedLifeComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	bool Initialize(GAME_INT, GAME_INT);

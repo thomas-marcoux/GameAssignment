@@ -9,7 +9,7 @@ bool ArrowBehaviorComponent::Initialize(GAME_INT movement)
 
 std::unique_ptr<Object> ArrowBehaviorComponent::Update()
 {
-	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
+	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;
 	GAME_VEC position = body->getPosition();
 

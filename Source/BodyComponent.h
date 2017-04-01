@@ -6,7 +6,7 @@
 class BodyComponent : public Component
 {
 public:
-	BodyComponent(std::shared_ptr<Object>);
+	BodyComponent(std::unique_ptr<Object> const&);
 	~BodyComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	std::unique_ptr<Object> Update() { return NULL; }

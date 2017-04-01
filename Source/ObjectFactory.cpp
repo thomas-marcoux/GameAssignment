@@ -15,13 +15,13 @@ ObjectFactory::ObjectFactory()
 }
 
 //Return an instance of the requested component if it is in the factory, NULL otherwise.
-std::shared_ptr<Component> ObjectFactory::Search(std::string const& component, std::shared_ptr<Object> owner)
+std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, std::unique_ptr<Object> const& owner)
 {
 	std::map<std::string, std::unique_ptr<ComponentFactory>>::iterator it = cLibrary.find(component);
 	return (it == cLibrary.end()) ? NULL : it->second->create(owner);
 }
 
-std::shared_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
+std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 {
 	TiXmlElement* componentNode;
 	std::vector<std::string>	componentNames;
@@ -47,10 +47,10 @@ std::shared_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 	return create(componentNames, GOI);
 }
 
-std::shared_ptr<Object> ObjectFactory::create(std::vector<std::string>& componentNames, GAME_OBJECTFACTORY_INITIALIZERS GOI)
+std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componentNames, GAME_OBJECTFACTORY_INITIALIZERS GOI)
 {
-	std::shared_ptr<Object>		object = std::make_shared<Object>();
-	std::shared_ptr<Component>	component;
+	std::unique_ptr<Object>		object = std::make_unique<Object>();
+	std::unique_ptr<Component>	component;
 
 	for (std::vector<std::string>::iterator it = componentNames.begin(); it != componentNames.end(); ++it)
 	{
@@ -61,5 +61,5 @@ std::shared_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 			object->addComponent(std::move(component));
 		}
 	}
-	return std::move(object);
+	return object;
 }

@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(std::shared_ptr<Object> owner)
+Component::Component(std::unique_ptr<Object> const& owner)
 {
-	_owner = owner;
+	_owner = owner.get();
 }

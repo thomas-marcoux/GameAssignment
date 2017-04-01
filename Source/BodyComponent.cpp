@@ -1,6 +1,6 @@
 #include "BodyComponent.h"
 
-BodyComponent::BodyComponent(std::shared_ptr<Object> owner) : Component(owner)
+BodyComponent::BodyComponent(std::unique_ptr<Object> const& owner) : Component(owner)
 {
 
 }

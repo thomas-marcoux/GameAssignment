@@ -14,20 +14,20 @@ Object::~Object()
 std::unique_ptr<Object> Object::Update()
 {
 	std::unique_ptr<Object>	o;
-	std::unique_ptr<Object>	r = NULL;
-
-	for (auto comp : components)
+	std::unique_ptr<Object>	r;
+	
+	for (auto const& component : components)
 	{
-		o = comp->Update();
+		o = component->Update();
 		if (o)
 			r = std::move(o);
-		if (comp->Finish())
+		if (component->Finish())
 			dead = true;
 	}
-	return r;
+	return (r) ? std::move(r) : nullptr;
 }
 
-void Object::addComponent(std::shared_ptr<Component> component)
+void Object::addComponent(std::unique_ptr<Component> component)
 {
 	components.push_back(std::move(component));
 }

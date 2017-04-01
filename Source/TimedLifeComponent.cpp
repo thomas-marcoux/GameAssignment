@@ -1,6 +1,6 @@
 #include "TimedLifeComponent.h"
 
-TimedLifeComponent::TimedLifeComponent(std::shared_ptr<Object> owner) : Component(owner)
+TimedLifeComponent::TimedLifeComponent(std::unique_ptr<Object> const&  owner) : Component(owner)
 {
 	_health = 0;
 }

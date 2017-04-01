@@ -7,7 +7,7 @@
 class PlayerInputComponent : public Component
 {
 public:
-	PlayerInputComponent(std::shared_ptr<Object> owner) : Component(owner) {}
+	PlayerInputComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~PlayerInputComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	bool Initialize(InputDevice*);

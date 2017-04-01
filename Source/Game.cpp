@@ -66,10 +66,10 @@ bool Game::LoadArtAssets(std::string objectConfigFile)
 //Loads Textures and GraphicsDevice into the Sprite components, throws error for missing sprites
 bool Game::LoadSprites()
 {
-	std::shared_ptr<SpriteComponent>	sprite;
+	SpriteComponent *sprite;
 	std::string name = "";
 
-	for (auto object : objects)
+	for (auto const& object : objects)
 	{
 		sprite = object->GetComponent<SpriteComponent>();
 		if (!sprite) throw LoadException(NO_COMPONENT);
@@ -82,9 +82,8 @@ bool Game::LoadSprites()
 //Loads PlayerInputComponent
 bool Game::LoadPlayer()
 {
-	std::shared_ptr<PlayerInputComponent> player;
-
-	for (auto object : objects)
+	PlayerInputComponent *player;
+	for (auto const& object : objects)
 	{
 		player = object->GetComponent<PlayerInputComponent>();
 		if (player)
@@ -111,7 +110,6 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 		LoadPlayer();
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
-		view->setObjects(&objects);
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}
@@ -137,17 +135,20 @@ bool Game::Run()
 //Update all game actors
 bool Game::Update()
 {
-	std::unique_ptr<Object>	r;
-
 	if (!view->Update())
 		return true;
-	for (std::vector<std::shared_ptr<Object>>::iterator object = objects.begin(); object != objects.end(); ++object)
+	for (auto object = objects.begin(); object != objects.end(); object++)
 	{
-		r = (*object)->Update();
+		std::unique_ptr<Object>	r;
+		r = std::move((*object)->Update());
 		if ((*object)->isDead())
+		{
+			std::cout << "object is dead\n";
 			objects.erase(object);
+		}
 		if (r)
 			objects.push_back(std::move(r));
+		r.release();
 	}
 	return false;
 }

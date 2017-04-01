@@ -32,26 +32,9 @@ bool View::Update(GAME_FLT gameTime)
 		angle += VIEW_ROTATION;
 	if (iDevice->GetEvent(GAME_A))
 		angle -= VIEW_ROTATION;
-	if (iDevice->GetEvent(GAME_TAB))
-		switchPerspective();
 	if (iDevice->GetEvent(GAME_ESC) || iDevice->GetEvent(GAME_QUIT))
 		return false;
 	position.x = center.x - SCREEN_WIDTH_2;
 	position.y = center.y - SCREEN_HEIGHT_2;
 	return true;
-}
-
-//Update view with the coordinates of one of the objects
-void View::switchPerspective()
-{
-	Object*	o = (*objects)[objectId].get();
-	std::shared_ptr<BodyComponent> body = o->GetComponent<BodyComponent>(); 
-	if (!body) return;
-	GAME_VEC p = body->getPosition();
-
-	center.x = p.x;
-	center.y = p.y;
-	angle = -TO_RADIAN(body->getAngle());
-	objectId++;
-	objectId %= (*objects).size();
 }

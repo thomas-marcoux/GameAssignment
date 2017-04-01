@@ -11,14 +11,14 @@
 class Component
 {
 public:
-	Component(std::shared_ptr<Object>);
+	Component(std::unique_ptr<Object> const&);
 	~Component() {}
 	virtual bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers) = 0;
 	virtual std::unique_ptr<Object> Update() = 0;
 	virtual bool Finish() = 0;
 
 protected:
-	std::shared_ptr<Object>	_owner;
+	Object*	_owner;
 };
 
 #endif // !COMPONENT_H

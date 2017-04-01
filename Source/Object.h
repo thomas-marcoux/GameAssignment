@@ -17,14 +17,14 @@ public:
 	Object();
 	~Object();
 	std::unique_ptr<Object> Update();
-	void addComponent(std::shared_ptr<Component>);
+	void addComponent(std::unique_ptr<Component>);
 	template<class T>
-	std::shared_ptr<T> GetComponent()
+	T* GetComponent()
 	{
-		for (auto comp : components)
+		for (auto const& comp : components)
 		{
-			std::shared_ptr<T> target;
-			if ((target = std::dynamic_pointer_cast<T>(comp)))
+			T* target;
+			if ((target = dynamic_cast<T*>(comp.get())))
 			{
 				return(target);
 			}
@@ -34,7 +34,7 @@ public:
 	bool isDead() { return dead; }
 
 protected:
-	std::vector<std::shared_ptr<Component>>	components;
+	std::vector<std::unique_ptr<Component>>	components;
 	bool dead;
 };
 
