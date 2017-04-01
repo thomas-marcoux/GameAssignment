@@ -8,6 +8,7 @@
 class BodyComponentFactory : public ComponentFactory
 {
 public:
+	std::unique_ptr<Component> create(std::unique_ptr<Object> const& owner) { return std::make_unique<BodyComponent>(owner); }
 };
 
 #endif // !BODYCOMPONENTFACTORY_H

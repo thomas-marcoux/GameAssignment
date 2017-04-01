@@ -24,7 +24,7 @@ bool PlayerInputComponent::LoadTexture(TEXTURE_ID id, std::shared_ptr<Texture> t
 
 std::unique_ptr<Object> PlayerInputComponent::Update()
 {
-	std::shared_ptr<BodyComponent> body = _owner->GetComponent<BodyComponent>();
+	BodyComponent* body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;
 	GAME_VEC p = body->getPosition();
 	GAME_FLT angle = body->getAngle();
@@ -56,9 +56,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update()
 		p.y += LINK_MOVEMENT * sin(angle);
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
-	{
-		return CreateArrow();
-	}
+		return std::move(CreateArrow());
 	body->setPosition(p);
 	body->setAngle(angle);
 	return NULL;
@@ -66,8 +64,8 @@ std::unique_ptr<Object> PlayerInputComponent::Update()
 
 void PlayerInputComponent::UpdateTexture()
 {
-	std::shared_ptr<BodyComponent>	body = _owner->GetComponent<BodyComponent>();
-	std::shared_ptr<SpriteComponent> sprite = _owner->GetComponent<SpriteComponent>();
+	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
+	SpriteComponent* sprite = _owner->GetComponent<SpriteComponent>();
 
 	if (!body || !sprite) return;
 	GAME_FLT angle = body->getAngle();
@@ -90,25 +88,21 @@ bool PlayerInputComponent::Finish()
 std::unique_ptr<Object> PlayerInputComponent::CreateArrow()
 {
 	std::unique_ptr<Object> object = std::make_unique<Object>();
-	std::shared_ptr<BodyComponent> body = std::make_shared<BodyComponent>(object);
-	/*
-	std::shared_ptr<SpriteComponent> sprite = std::make_shared<SpriteComponent>(object);
-	std::shared_ptr<TimedLifeComponent> tlc = std::make_shared<TimedLifeComponent>(object);
-	std::shared_ptr<ArrowBehaviorComponent> arrow = std::make_shared<ArrowBehaviorComponent>(object);
-	std::shared_ptr<BodyComponent>	link_body = _owner->GetComponent<BodyComponent>();
-	std::shared_ptr<SpriteComponent>	link_sprite = _owner->GetComponent<SpriteComponent>();
+	std::unique_ptr<BodyComponent> body = std::make_unique<BodyComponent>(object);
+	std::unique_ptr<SpriteComponent> sprite = std::make_unique<SpriteComponent>(object);
+	std::unique_ptr<TimedLifeComponent> tlc = std::make_unique<TimedLifeComponent>(object);
+	std::unique_ptr<ArrowBehaviorComponent> arrow = std::make_unique<ArrowBehaviorComponent>(object);
+	BodyComponent*	link_body = _owner->GetComponent<BodyComponent>();
+	SpriteComponent*	link_sprite = _owner->GetComponent<SpriteComponent>();
 
 	body->setPosition(link_body->getPosition());
 	body->setAngle(link_body->getAngle());
 	sprite->Initialize(link_sprite->getGDevice(), _textures[TEXTURE_ARROW]);
 	tlc->Initialize(ARROW_HEALTH, ARROW_HEALTH_DECREMENT);
 	arrow->Initialize(ARROW_MOVEMENT);
-	*/
 	object->addComponent(std::move(body));
-	/*
 	object->addComponent(std::move(sprite));
 	object->addComponent(std::move(tlc));
 	object->addComponent(std::move(arrow));
-	*/
 	return std::move(object);
 }
