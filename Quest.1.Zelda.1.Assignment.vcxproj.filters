@@ -102,6 +102,9 @@
     <ClCompile Include="Source\ArrowBehaviorComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ArrowFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArtAssetLibrary.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="Source\ArrowBehaviorComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ArrowFactory.h">
+      <Filter>Header Files\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

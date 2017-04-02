@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\ArrowBehaviorComponent.cpp" />
+    <ClCompile Include="Source\ArrowFactory.cpp" />
     <ClCompile Include="Source\ArtAssetLibrary.cpp" />
     <ClCompile Include="Source\BodyComponent.cpp" />
     <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
@@ -37,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArrowBehaviorComponent.h" />
+    <ClInclude Include="Source\ArrowFactory.h" />
     <ClInclude Include="Source\ArtAssetLibrary.h" />
     <ClInclude Include="Source\BodyComponent.h" />
     <ClInclude Include="Source\BodyComponentFactory.h" />

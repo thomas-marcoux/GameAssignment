@@ -2,12 +2,13 @@
 #define PLAYERINPUTCOMPONENT_H
 
 #include "Component.h"
+#include "ArrowFactory.h"
 #include "InputDevice.h"
 
 class PlayerInputComponent : public Component
 {
 public:
-	PlayerInputComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
+	PlayerInputComponent(std::unique_ptr<Object> const&);
 	~PlayerInputComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
 	bool Initialize(InputDevice*);
@@ -17,11 +18,9 @@ public:
 	bool Finish();
 
 private:
-	std::unique_ptr<Object> CreateArrow();
-
-private:
 	InputDevice* iDevice;
 	std::vector<std::shared_ptr<Texture>>	_textures;
+	std::unique_ptr<ArrowFactory> arrowFactory;
 };
 
 #endif // !PLAYERINPUTCOMPONENT_H
