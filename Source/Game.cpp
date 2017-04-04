@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Game.h"
 #include "SpriteComponent.h"
 #include "PlayerInputComponent.h"
@@ -15,7 +16,7 @@ bool Game::Initialize()
 	gameTime = 0;
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS)
-		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0))
+		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary.get()))
 		return true;
 	return false;
 }
@@ -75,6 +76,13 @@ bool Game::LoadSprites()
 		if (!sprite) throw LoadException(NO_COMPONENT);
 		name = sprite->getName();
 		sprite->Initialize(gDevice.get(), aLibrary->Search(name));
+		if (name == "Link")
+		{
+			sprite->LoadTexture(TEXTURE_UP, aLibrary->Search("Link Up"));
+			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->Search("Link Down"));
+			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->Search("Link Left"));
+			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->Search("Link Right"));
+		}	
 	}
 	return true;
 }
@@ -87,14 +95,7 @@ bool Game::LoadPlayer()
 	{
 		player = object->GetComponent<PlayerInputComponent>();
 		if (player)
-		{
-			player->Initialize(iDevice.get());
-			player->LoadTexture(LINK_TEXTURE_UP, aLibrary->Search("Link Up"));
-			player->LoadTexture(LINK_TEXTURE_DOWN, aLibrary->Search("Link Down"));
-			player->LoadTexture(LINK_TEXTURE_LEFT, aLibrary->Search("Link Left"));
-			player->LoadTexture(LINK_TEXTURE_RIGHT, aLibrary->Search("Link Right"));
-			player->LoadTexture(TEXTURE_ARROW, aLibrary->Search("Arrow"));
-		}
+			player->Initialize(iDevice.get(), oFactory.get());
 	}
 	return true;
 }
@@ -135,22 +136,33 @@ bool Game::Run()
 //Update all game actors
 bool Game::Update()
 {
+	std::unique_ptr<Object> new_object = nullptr;
+	std::unique_ptr<Object>	r;
+	int id = 0;
+
 	if (!view->Update())
 		return true;
-	for (auto object = objects.begin(); object != objects.end(); object++)
+	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
-		std::unique_ptr<Object>	r;
 		r = std::move((*object)->Update());
 		if ((*object)->isDead())
-		{
-			std::cout << "object is dead\n";
-			objects.erase(object);
-		}
+			deadObjectIDs.push_back(id);
 		if (r)
-			objects.push_back(std::move(r));
-		r.release();
+			new_object = std::move(r);
 	}
+	if (new_object)
+		objects.push_back(std::move(new_object));
+	Finish();
 	return false;
+}
+
+void Game::Finish()
+{
+	while (deadObjectIDs.size() > 0)
+	{
+		objects.erase(objects.begin() + deadObjectIDs.back());
+		deadObjectIDs.pop_back();
+	}
 }
 
 //Draw all sprites

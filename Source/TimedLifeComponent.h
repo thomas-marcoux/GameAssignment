@@ -8,7 +8,7 @@ class TimedLifeComponent : public Component
 public:
 	TimedLifeComponent(std::unique_ptr<Object> const&);
 	~TimedLifeComponent() {}
-	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
+	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	bool Initialize(GAME_INT, GAME_INT);
 	std::unique_ptr<Object> Update();
 	bool Finish();

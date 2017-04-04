@@ -10,19 +10,21 @@ class SpriteComponent : public Component
 {
 public:
 	SpriteComponent(std::unique_ptr<Object> const&);
-	~SpriteComponent() {}
-	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
+	~SpriteComponent();
+	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	bool Initialize(GraphicsDevice*, std::shared_ptr<Texture>);
 	std::unique_ptr<Object> Update() { return NULL; }
 	bool Finish();
 	bool Draw(View*);
 	std::string getName() { return _name; }
 	GraphicsDevice* getGDevice() { return _gDevice; }
-	void setTexture(std::shared_ptr<Texture>);
+	bool LoadTexture(TEXTURE_ID, std::shared_ptr<Texture>);
+	void UpdateTexture();
 
 private:
 	std::string	_name;
 	std::shared_ptr<Texture> _texture;
+	std::vector<std::shared_ptr<Texture>>	_textures;
 	GraphicsDevice* _gDevice;
 };
 

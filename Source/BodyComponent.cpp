@@ -5,7 +5,7 @@ BodyComponent::BodyComponent(std::unique_ptr<Object> const& owner) : Component(o
 
 }
 
-bool BodyComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
+bool BodyComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	_startPosition = initializers.pos;
 	_position = _startPosition;

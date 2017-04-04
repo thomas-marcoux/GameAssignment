@@ -21,6 +21,7 @@ public:
 	void Draw(View*);
 	SDL_Renderer* getRenderer();
 	void addSprite(SpriteComponent*);
+	void removeSprite(SpriteComponent*);
 
 private:
 	//Window(s) to display graphics

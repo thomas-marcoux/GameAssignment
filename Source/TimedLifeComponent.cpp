@@ -2,11 +2,13 @@
 
 TimedLifeComponent::TimedLifeComponent(std::unique_ptr<Object> const&  owner) : Component(owner)
 {
-	_health = 0;
+
 }
 
-bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
+bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
+	_health = initializers.arrow_health;
+	_decrement = initializers.arrow_decrement;
 	return true;
 }
 

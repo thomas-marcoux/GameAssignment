@@ -8,23 +8,23 @@ Object::Object()
 
 Object::~Object()
 {
-	components.clear();
+
 }
 
 std::unique_ptr<Object> Object::Update()
 {
-	std::unique_ptr<Object>	o;
-	std::unique_ptr<Object>	r;
-	
+	std::unique_ptr<Object>	new_object = nullptr;
+	std::unique_ptr<Object> o;
+
 	for (auto const& component : components)
 	{
 		o = component->Update();
 		if (o)
-			r = std::move(o);
+			new_object = std::move(o);
 		if (component->Finish())
 			dead = true;
 	}
-	return (r) ? std::move(r) : nullptr;
+	return new_object;
 }
 
 void Object::addComponent(std::unique_ptr<Component> component)

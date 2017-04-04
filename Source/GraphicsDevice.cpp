@@ -1,4 +1,5 @@
 #include<iostream>
+#include <algorithm>
 #include "Definitions.h"
 #include "GraphicsDevice.h"
 #include "SpriteComponent.h"
@@ -96,4 +97,9 @@ SDL_Renderer* GraphicsDevice::getRenderer()
 void GraphicsDevice::addSprite(SpriteComponent *sprite)
 {
 	sprites.push_back(sprite);
+}
+
+void GraphicsDevice::removeSprite(SpriteComponent* toRemove)
+{
+	sprites.erase(std::remove(sprites.begin(), sprites.end(), toRemove));
 }

@@ -8,7 +8,7 @@ class SlideBehaviorComponent : public Component
 public:
 	SlideBehaviorComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~SlideBehaviorComponent() {}
-	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
+	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	std::unique_ptr<Object> Update();
 	bool Finish() { return false; }
 

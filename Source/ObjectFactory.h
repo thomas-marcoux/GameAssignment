@@ -3,6 +3,7 @@
 
 #include <map>
 #include <memory>
+#include "ArtAssetLibrary.h"
 #include "ComponentFactory.h"
 #include "Object.h"
 #include "tinyxml\tinystr.h"
@@ -13,14 +14,17 @@ class ObjectFactory
 public:
 	ObjectFactory();
 	~ObjectFactory() {}
+	bool Initialize(ArtAssetLibrary*);
 	std::unique_ptr<Object> create(TiXmlElement*);
+	std::unique_ptr<Object> createArrow(Object*);
 
 private:
-	std::unique_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS);
+	std::unique_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::unique_ptr<Component> Search(std::string const&, std::unique_ptr<Object> const&);
 
 private:
 	std::map<std::string, std::unique_ptr<ComponentFactory>>	cLibrary;
+	ArtAssetLibrary* aLibrary;
 };
 
 #endif // !OBJECTFACTORY_H

@@ -3,7 +3,7 @@
 #include "Object.h"
 #include "Random.h"
 
-bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
+bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	_vertical = initializers.vertical;
 	_movement = LEEVER_MOVEMENT;

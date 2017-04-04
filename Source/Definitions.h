@@ -17,6 +17,9 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	GAME_FLT	angle;
 	bool	radius;
 	bool	vertical;
+	GAME_INT	arrow_health;
+	GAME_INT	arrow_decrement;
+	GAME_INT	arrow_movement;
 } GAME_OBJECTFACTORY_INITIALIZERS;
 
 //========================================
@@ -65,20 +68,22 @@ const GAME_FLT DEFAULT_VIEW_ANGLE = 0;
 const GAME_FLT VIEW_ROTATION = PI / 36;
 //Player Movement
 const GAME_INT LINK_MOVEMENT = 3;
-const GAME_FLT LINK_UP = PI / 2;
-const GAME_FLT LINK_DOWN = 3 * PI / 2;
-const GAME_FLT LINK_RIGHT = 0;
-const GAME_FLT LINK_LEFT = PI;
+
+//Angles
+const GAME_FLT FACE_UP = PI / 2;
+const GAME_FLT FACE_DOWN = 3 * PI / 2;
+const GAME_FLT FACE_RIGHT = 0;
+const GAME_FLT FACE_LEFT = PI;
 
 //Arrow
-const GAME_INT ARROW_HEALTH = 100;
+const GAME_INT ARROW_HEALTH = 350;
 const GAME_INT ARROW_HEALTH_DECREMENT = 5;
-const GAME_INT ARROW_MOVEMENT = 5;
+const GAME_INT ARROW_MOVEMENT = 3;
 
 
-//Player Textures
+//Textures
 enum TEXTURE_ID {
-	LINK_TEXTURE_UP, LINK_TEXTURE_DOWN, LINK_TEXTURE_LEFT, LINK_TEXTURE_RIGHT, TEXTURE_ARROW, NB_TEXTURES
+	TEXTURE_UP, TEXTURE_DOWN, TEXTURE_LEFT, TEXTURE_RIGHT, TEXTURE_ARROW, NB_TEXTURES
 };
 
 #endif // !DEFINITIONS_H

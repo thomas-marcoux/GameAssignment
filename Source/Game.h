@@ -32,6 +32,7 @@ private:
 	bool LoadArtAssets(std::string);
 	bool LoadSprites();
 	bool LoadPlayer();
+	void Finish();
 
 private:
 	std::unique_ptr<ArtAssetLibrary> aLibrary;
@@ -42,6 +43,7 @@ private:
 	GAME_FLT gameTime;
 	std::unique_ptr<View> view;
 	std::vector<std::unique_ptr<Object>> objects;
+	std::vector<int> deadObjectIDs;
 };
 
 #endif // ! GAME_H

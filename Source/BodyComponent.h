@@ -8,7 +8,7 @@ class BodyComponent : public Component
 public:
 	BodyComponent(std::unique_ptr<Object> const&);
 	~BodyComponent() {}
-	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers);
+	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	std::unique_ptr<Object> Update() { return NULL; }
 	bool Finish() { return false; }
 	GAME_VEC	getPosition() { return _position; }

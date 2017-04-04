@@ -3,7 +3,7 @@
 #include "Object.h"
 #include "Random.h"
 
-bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
+bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	if (initializers.radius)
 	{

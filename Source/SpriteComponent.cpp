@@ -8,9 +8,15 @@ SpriteComponent::SpriteComponent(std::unique_ptr<Object> const& owner) : Compone
 	_name = "";
 	_gDevice = NULL;
 	_texture = NULL;
+	_textures.assign(NB_TEXTURES, nullptr);
 }
 
-bool SpriteComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers)
+SpriteComponent::~SpriteComponent()
+{
+	_gDevice->removeSprite(this);
+}
+
+bool SpriteComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	_name = initializers.name;
 	return true;
@@ -31,9 +37,25 @@ bool SpriteComponent::Initialize(GraphicsDevice* gDevice, std::shared_ptr<Textur
 	return true;
 }
 
-void SpriteComponent::setTexture(std::shared_ptr<Texture> texture)
+bool SpriteComponent::LoadTexture(TEXTURE_ID id, std::shared_ptr<Texture> texture)
 {
-	_texture = texture;
+	_textures[id] = texture;
+	return false;
+}
+
+void SpriteComponent::UpdateTexture()
+{
+	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
+	GAME_FLT angle = body->getAngle();
+
+	if (angle == FACE_DOWN)
+		_texture = _textures[TEXTURE_DOWN];
+	else if (angle == FACE_RIGHT)
+		_texture = _textures[TEXTURE_RIGHT];
+	else if (angle == FACE_LEFT)
+		_texture = _textures[TEXTURE_LEFT];
+	else
+		_texture = _textures[TEXTURE_UP];
 }
 
 bool SpriteComponent::Draw(View* p_view)

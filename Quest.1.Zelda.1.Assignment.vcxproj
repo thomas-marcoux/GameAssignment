@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\ArrowBehaviorComponent.cpp" />
-    <ClCompile Include="Source\ArrowFactory.cpp" />
     <ClCompile Include="Source\ArtAssetLibrary.cpp" />
     <ClCompile Include="Source\BodyComponent.cpp" />
     <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
@@ -38,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArrowBehaviorComponent.h" />
-    <ClInclude Include="Source\ArrowFactory.h" />
+    <ClInclude Include="Source\ArrowBehaviorComponentFactory.h" />
     <ClInclude Include="Source\ArtAssetLibrary.h" />
     <ClInclude Include="Source\BodyComponent.h" />
     <ClInclude Include="Source\BodyComponentFactory.h" />
@@ -62,6 +61,7 @@
     <ClInclude Include="Source\SpriteComponentFactory.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\TimedLifeComponent.h" />
+    <ClInclude Include="Source\TimedLifeComponentFactory.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\View.h" />
   </ItemGroup>

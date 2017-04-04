@@ -8,8 +8,7 @@ class ArrowBehaviorComponent : public Component
 public:
 	ArrowBehaviorComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~ArrowBehaviorComponent() {}
-	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS initializers) { return true; }
-	bool Initialize(GAME_INT);
+	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	std::unique_ptr<Object> Update();
 	bool Finish() { return false; }
 
