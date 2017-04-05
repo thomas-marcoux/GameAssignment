@@ -15,6 +15,7 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	const char*	name;
 	GAME_VEC	pos;
 	GAME_FLT	angle;
+	GAME_FLT	movement_angle;
 	bool	radius;
 	bool	vertical;
 	GAME_INT	arrow_health;
@@ -49,9 +50,10 @@ enum GAME_EVENT {GAME_NA, GAME_W, GAME_A, GAME_S, GAME_D,
 
 //Constants
 const GAME_FLT PI = 3.14159f;
+const GAME_FLT PI_2 = PI / 2;
 const GAME_FLT PI2 = 2 * PI;
-#define TO_RADIAN(i) i * PI / 180
-#define TO_DEGREE(a) a * 180 / PI
+#define TO_RADIAN(i) (i * PI / 180)
+#define TO_DEGREE(a) (a * 180 / PI)
 
 //Movement
 const GAME_FLT BLUEOCTOROK_MOVEMENT_MIN = (float)0.4;
@@ -70,8 +72,8 @@ const GAME_FLT VIEW_ROTATION = PI / 36;
 const GAME_INT LINK_MOVEMENT = 3;
 
 //Angles
-const GAME_FLT FACE_UP = PI / 2;
-const GAME_FLT FACE_DOWN = 3 * PI / 2;
+const GAME_FLT FACE_UP = PI_2;
+const GAME_FLT FACE_DOWN = 3 * PI_2;
 const GAME_FLT FACE_RIGHT = 0;
 const GAME_FLT FACE_LEFT = PI;
 

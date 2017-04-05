@@ -7,7 +7,7 @@ bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& i
 {
 	_vertical = initializers.vertical;
 	_movement = LEEVER_MOVEMENT;
-	_maxDistance = random(LEEVER_MIN_DISTANCE, LEEVER_MAX_DISTANCE);
+	_maxDistance = (GAME_FLT)random(LEEVER_MIN_DISTANCE, LEEVER_MAX_DISTANCE);
 	return true;
 }
 

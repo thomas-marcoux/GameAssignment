@@ -14,6 +14,7 @@ public:
 
 private:
 	GAME_FLT _movement;
+	GAME_FLT _movementAngle;
 };
 
 #endif // !ARROWBEHAVIORCOMPONENT_H

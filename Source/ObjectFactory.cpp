@@ -65,11 +65,13 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	SpriteComponent*	link_sprite = player->GetComponent<SpriteComponent>();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 	GAME_VEC link_pos = link_body->getPosition();
+	GAME_FLT angle = link_body->getAngle();
 
 	GOI.name = "Arrow";
 	GOI.pos.x = link_pos.x;
 	GOI.pos.y = link_pos.y;
-	GOI.angle = link_body->getAngle();
+	GOI.angle = -(angle - PI_2) * 180 / PI;
+	GOI.movement_angle = angle;
 	GOI.arrow_health = ARROW_HEALTH;
 	GOI.arrow_decrement = ARROW_HEALTH_DECREMENT;
 	GOI.arrow_movement = ARROW_MOVEMENT;

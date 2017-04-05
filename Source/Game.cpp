@@ -128,6 +128,7 @@ bool Game::Run()
 	timer->start();
 	if (Update())
 		return true;
+	Finish();
 	Draw();
 	timer->fpsRegulate();
 	return false;
@@ -152,7 +153,6 @@ bool Game::Update()
 	}
 	if (new_object)
 		objects.push_back(std::move(new_object));
-	Finish();
 	return false;
 }
 
