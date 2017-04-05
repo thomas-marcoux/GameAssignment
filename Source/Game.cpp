@@ -95,7 +95,7 @@ bool Game::LoadPlayer()
 	{
 		player = object->GetComponent<PlayerInputComponent>();
 		if (player)
-			player->Initialize(iDevice.get(), oFactory.get());
+			player->Initialize(iDevice.get(), oFactory.get(), view.get());
 	}
 	return true;
 }
@@ -105,12 +105,12 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 {
 	try
 	{
+		view = std::make_unique<View>();
+		view->Initialize(iDevice.get(), 0, 0);
 		LoadArtAssets(objectConfigFile);
 		LoadGameAssets(levelConfigFile);
 		LoadSprites();
 		LoadPlayer();
-		view = std::make_unique<View>();
-		view->Initialize(iDevice.get(), 0, 0);
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}

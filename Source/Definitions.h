@@ -70,6 +70,7 @@ const GAME_FLT DEFAULT_VIEW_ANGLE = 0;
 const GAME_FLT VIEW_ROTATION = PI / 36;
 //Player Movement
 const GAME_INT LINK_MOVEMENT = 3;
+const GAME_INT DIST_TO_BORDER = 50;
 
 //Angles
 const GAME_FLT FACE_UP = PI_2;

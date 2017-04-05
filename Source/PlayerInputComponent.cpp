@@ -12,10 +12,12 @@ bool PlayerInputComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& ini
 	return true;
 }
 
-bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF)
+bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* v)
 {
 	iDevice = iD;
 	oFactory = oF;
+	view = v;
+	view->setPlayer(_owner);
 	return true;
 }
 

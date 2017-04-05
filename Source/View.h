@@ -21,6 +21,7 @@ public:
 	GAME_FLT getCenterY() { return center.y; }
 	GAME_FLT getAngle() { return angle; }
 	GAME_FLT getDegreeAngle() { return TO_DEGREE(angle); } //Returns angle in degree
+	void setPlayer(Object* p) { player = p;}
 
 private:
 	InputDevice* iDevice;
@@ -28,6 +29,7 @@ private:
 	GAME_VEC center;
 	GAME_FLT angle;
 	GAME_INT objectId;
+	Object* player;
 };
 
 #endif // !VIEW_H

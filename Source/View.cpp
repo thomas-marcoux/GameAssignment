@@ -17,7 +17,16 @@ bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 //Update view according to the game event
 bool View::Update(GAME_FLT gameTime)
 {
-	iDevice->Update();
+	GAME_VEC	body = player->GetComponent<BodyComponent>()->getPosition();
+
+	if (body.x - position.x <= DIST_TO_BORDER)
+		center.x -= VIEW_MOVEMENT;
+	if (position.x + SCREEN_WIDTH - body.x - SPRITE_WIDTH <= DIST_TO_BORDER)
+		center.x += VIEW_MOVEMENT;
+	if (body.y - position.y <= DIST_TO_BORDER)
+		center.y -= VIEW_MOVEMENT;
+	if (position.y + SCREEN_HEIGHT - body.y - SPRITE_HEIGHT <= DIST_TO_BORDER)
+		center.y += VIEW_MOVEMENT;
 	if (iDevice->GetEvent(GAME_W))
 	{
 		center.x -= VIEW_MOVEMENT * sin(angle);
