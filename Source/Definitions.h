@@ -26,7 +26,7 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 //========================================
 //Base Game Constants
 //========================================
-#define WINDOW_NAME "Quest1"
+#define WINDOW_NAME "Quest2"
 const GAME_INT SCREEN_WIDTH = 800;
 const GAME_INT SCREEN_HEIGHT = 600;
 const GAME_INT SCREEN_WIDTH_2 = SCREEN_WIDTH / 2;
@@ -86,7 +86,13 @@ const GAME_INT ARROW_MOVEMENT = 3;
 
 //Textures
 enum TEXTURE_ID {
-	TEXTURE_UP, TEXTURE_DOWN, TEXTURE_LEFT, TEXTURE_RIGHT, TEXTURE_ARROW, NB_TEXTURES
+	TEXTURE_UP, TEXTURE_DOWN, TEXTURE_LEFT, TEXTURE_RIGHT, NB_TEXTURES
 };
+
+//Error messages
+#define NO_SPRITE "Sprite not found: "
+#define NO_COMPONENT "Sprite Component failed to load."
+#define LOAD_ERROR "File does not exist: "
+#define PARSE_ERROR "File has been corrupted: "
 
 #endif // !DEFINITIONS_H

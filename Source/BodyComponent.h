@@ -3,6 +3,7 @@
 
 #include "Component.h"
 
+//Manages Object's physical location
 class BodyComponent : public Component
 {
 public:

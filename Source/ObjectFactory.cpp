@@ -6,6 +6,7 @@
 #include "PlayerInputComponentFactory.h"
 #include "TimedLifeComponentFactory.h"
 #include "ArrowBehaviorComponentFactory.h"
+#include "Exceptions.h"
 
 ObjectFactory::ObjectFactory()
 {

@@ -3,6 +3,7 @@
 
 #include "Component.h"
 
+//Updates Leever Objects' BodyComponent by sliding horizontally or vertically
 class SlideBehaviorComponent : public Component
 {
 public:

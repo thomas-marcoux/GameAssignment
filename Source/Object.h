@@ -10,7 +10,7 @@
 
 class Component;
 
-//Abstract object class, enemies inherit from this class
+//Game Actor class
 class Object
 {
 public:

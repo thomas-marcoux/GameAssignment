@@ -3,11 +3,9 @@
 
 #include <memory>
 #include "Definitions.h"
-#include "Exceptions.h"
-#include "tinyxml\tinystr.h"
-#include "tinyxml\tinyxml.h"
 #include "Object.h"
 
+//Base Component class
 class Component
 {
 public:

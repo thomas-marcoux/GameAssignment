@@ -3,6 +3,7 @@
 
 #include "Component.h"
 
+//Decreases health until Object death
 class TimedLifeComponent : public Component
 {
 public:

@@ -6,6 +6,7 @@
 #include "ObjectFactory.h"
 #include "View.h"
 
+//Queries InputDevice for input, updates the Object's other components
 class PlayerInputComponent : public Component
 {
 public:

@@ -3,6 +3,7 @@
 
 #include "Component.h"
 
+//Updates Octorok Objects's BodyComponent by circling around a point or on itself
 class CircleBehaviorComponent : public Component
 {
 public:

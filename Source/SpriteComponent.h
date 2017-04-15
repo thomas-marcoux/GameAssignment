@@ -6,6 +6,7 @@
 
 class GraphicsDevice;
 
+//Manages Object display
 class SpriteComponent : public Component
 {
 public:

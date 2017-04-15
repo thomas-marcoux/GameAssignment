@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <vector>
-
 #include "ArtAssetLibrary.h"
 #include "Definitions.h"
 #include "Exceptions.h"
