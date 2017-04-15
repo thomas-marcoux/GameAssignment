@@ -37,12 +37,14 @@ bool SpriteComponent::Initialize(GraphicsDevice* gDevice, std::shared_ptr<Textur
 	return true;
 }
 
+//Add texture to a vector for objects facing different directions
 bool SpriteComponent::LoadTexture(TEXTURE_ID id, std::shared_ptr<Texture> texture)
 {
 	_textures[id] = texture;
 	return false;
 }
 
+//Update the active texture depending on what direction the object is facing
 void SpriteComponent::UpdateTexture()
 {
 	BodyComponent*	body = _owner->GetComponent<BodyComponent>();

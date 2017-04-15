@@ -32,6 +32,7 @@ bool ObjectFactory::Initialize(ArtAssetLibrary* aL)
 	return true;
 }
 
+//Create an object based on data read from gameAssetNode
 std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 {
 	TiXmlElement* componentNode;
@@ -58,6 +59,7 @@ std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 	return create(componentNames, GOI);
 }
 
+//Create arrow from player Object
 std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 {
 	std::unique_ptr<Object>	arrow;
@@ -81,6 +83,7 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	return arrow;
 }
 
+//Create each component, call their Initialize method and add them to the new object
 std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componentNames, GAME_OBJECTFACTORY_INITIALIZERS const& GOI)
 {
 	std::unique_ptr<Object>		object = std::make_unique<Object>();

@@ -11,6 +11,7 @@ Object::~Object()
 
 }
 
+//Call each Component's update method, if one returns a new object, returns it. If a Component's Finish method returns true, kill the object
 std::unique_ptr<Object> Object::Update()
 {
 	std::unique_ptr<Object>	new_object = nullptr;

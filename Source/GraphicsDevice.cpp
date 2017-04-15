@@ -82,6 +82,7 @@ void GraphicsDevice::Present()
 	SDL_RenderPresent(renderer);
 }
 
+//Draw each sprite
 void GraphicsDevice::Draw(View* p_view)
 {
 	for (auto sprite : sprites)

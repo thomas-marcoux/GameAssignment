@@ -146,16 +146,17 @@ bool Game::Update()
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
 		r = std::move((*object)->Update());
-		if ((*object)->isDead())
+		if ((*object)->isDead()) //If object is dead, store its ID to be deleted
 			deadObjectIDs.push_back(id);
 		if (r)
 			new_object = std::move(r);
 	}
-	if (new_object)
+	if (new_object) //If a new object has been created, add it to the vector
 		objects.push_back(std::move(new_object));
 	return false;
 }
 
+//Delete dead objects
 void Game::Finish()
 {
 	while (deadObjectIDs.size() > 0)

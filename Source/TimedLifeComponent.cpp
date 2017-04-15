@@ -12,13 +12,6 @@ bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initi
 	return true;
 }
 
-bool TimedLifeComponent::Initialize(GAME_INT health, GAME_INT decrement)
-{
-	_health = health;
-	_decrement = decrement;
-	return true;
-}
-
 std::unique_ptr<Object> TimedLifeComponent::Update()
 {
 	_health -= _decrement;
@@ -27,5 +20,5 @@ std::unique_ptr<Object> TimedLifeComponent::Update()
 
 bool TimedLifeComponent::Finish()
 {
-	return (_health <= 0) ? true : false;
+	return (_health <= 0);
 }
