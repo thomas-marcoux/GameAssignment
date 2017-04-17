@@ -102,6 +102,9 @@
     <ClCompile Include="Source\ArrowBehaviorComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PhysicsDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArtAssetLibrary.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Source\ArrowBehaviorComponentFactory.h">
       <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicsDevice.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

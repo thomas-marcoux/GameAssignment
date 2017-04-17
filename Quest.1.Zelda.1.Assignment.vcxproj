@@ -21,6 +21,7 @@
     <ClCompile Include="Source\InputDevice.cpp" />
     <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\ObjectFactory.cpp" />
+    <ClCompile Include="Source\PhysicsDevice.cpp" />
     <ClCompile Include="Source\PlayerInputComponent.cpp" />
     <ClCompile Include="Source\Random.cpp" />
     <ClCompile Include="Source\SlideBehaviorComponent.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Source\InputDevice.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\ObjectFactory.h" />
+    <ClInclude Include="Source\PhysicsDevice.h" />
     <ClInclude Include="Source\PlayerInputComponent.h" />
     <ClInclude Include="Source\PlayerInputComponentFactory.h" />
     <ClInclude Include="Source\Random.h" />

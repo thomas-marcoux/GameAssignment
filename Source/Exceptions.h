@@ -8,7 +8,7 @@
 class LoadException : public std::exception
 {
 public:
-	LoadException(std::string s, std::string file = "") : msg(s+file) {}
+	LoadException(const char* s, std::string file = "") : msg(s+file) {}
 	~LoadException() {}
 	std::string getMsg() { return msg; }
 

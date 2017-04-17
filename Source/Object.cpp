@@ -1,5 +1,6 @@
 #include "Object.h"
 #include "Component.h"
+#include "SpriteComponent.h"
 
 Object::Object()
 {
@@ -31,4 +32,9 @@ std::unique_ptr<Object> Object::Update()
 void Object::addComponent(std::unique_ptr<Component> component)
 {
 	components.push_back(std::move(component));
+}
+
+std::shared_ptr<Texture> Object::getTexture()
+{
+	return GetComponent<SpriteComponent>()->getTexture();
 }

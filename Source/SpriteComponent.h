@@ -19,6 +19,7 @@ public:
 	bool Draw(View*);
 	std::string getName() { return _name; }
 	GraphicsDevice* getGDevice() { return _gDevice; }
+	std::shared_ptr<Texture> getTexture() { return _texture; }
 	bool LoadTexture(TEXTURE_ID, std::shared_ptr<Texture>);
 	void UpdateTexture();
 

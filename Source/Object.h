@@ -32,6 +32,7 @@ public:
 		return NULL;
 	}
 	bool isDead() { return dead; }
+	std::shared_ptr<Texture>	getTexture();
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;

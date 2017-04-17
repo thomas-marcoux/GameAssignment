@@ -10,6 +10,11 @@ typedef struct GAME_VEC
     GAME_FLT x;
     GAME_FLT y;
 } GAME_VEC;
+
+//Physics
+enum GAME_OBJECT_SHAPE { GAME_RECTANGLE, GAME_CIRCLE };
+enum GAME_BODY_TYPE { GAME_STATIC, GAME_KINEMATIC, GAME_DYNAMIC };
+
 typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 {
 	const char*	name;
@@ -21,6 +26,13 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	GAME_INT	arrow_health;
 	GAME_INT	arrow_decrement;
 	GAME_INT	arrow_movement;
+	GAME_OBJECT_SHAPE	shape;
+	GAME_BODY_TYPE		body_type;
+	GAME_FLT	density;
+	GAME_FLT	friction;
+	GAME_FLT	restitution;
+	GAME_FLT	angularDamping;
+	GAME_FLT	linearDamping;
 } GAME_OBJECTFACTORY_INITIALIZERS;
 
 //========================================
@@ -52,8 +64,9 @@ enum GAME_EVENT {GAME_NA, GAME_W, GAME_A, GAME_S, GAME_D,
 const GAME_FLT PI = 3.14159f;
 const GAME_FLT PI_2 = PI / 2;
 const GAME_FLT PI2 = 2 * PI;
-#define TO_RADIAN(i) (i * PI / 180)
-#define TO_DEGREE(a) (a * 180 / PI)
+inline GAME_FLT TO_RADIAN(GAME_FLT d) {	return d * PI / 180; }
+inline GAME_FLT TO_DEGREE(GAME_FLT r) { return r * 180 / PI; }
+const float fPRV = 10.0f;
 
 //Movement
 const GAME_FLT BLUEOCTOROK_MOVEMENT_MIN = (float)0.4;
@@ -82,7 +95,6 @@ const GAME_FLT FACE_LEFT = PI;
 const GAME_INT ARROW_HEALTH = 350;
 const GAME_INT ARROW_HEALTH_DECREMENT = 5;
 const GAME_INT ARROW_MOVEMENT = 3;
-
 
 //Textures
 enum TEXTURE_ID {
