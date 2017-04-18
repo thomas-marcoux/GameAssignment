@@ -3,11 +3,12 @@
 
 #include <map>
 #include <memory>
-#include "ArtAssetLibrary.h"
 #include "ComponentFactory.h"
-#include "Object.h"
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
+
+class ArtAssetLibrary;
+class Object;
 
 class ObjectFactory
 {

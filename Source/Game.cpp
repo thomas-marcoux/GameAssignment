@@ -12,10 +12,11 @@ bool Game::Initialize()
 	aLibrary = std::make_unique<ArtAssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
 	oFactory = std::make_unique<ObjectFactory>();
+	pDevice = std::make_unique<PhysicsDevice>();
 	timer = std::make_unique<Timer>();
 	gameTime = 0;
 	view = std::make_unique<View>();
-	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS)
+	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
 		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary.get()))
 		return true;
 	return false;

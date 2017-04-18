@@ -2,9 +2,11 @@
 #define TEXTURE_H
 
 #include <iostream>
+#include "Definitions.h"
 #include "SDL.h"
 #include "SDL_image.h"
-#include "View.h"
+
+class View;
 
 //SDL texture class, will draw texture to the renderer
 class Texture

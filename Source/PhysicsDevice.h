@@ -3,7 +3,8 @@
 
 #include "Box2D/Box2D.h"
 #include "Definitions.h"
-#include "Object.h"
+
+class Object;
 
 class PhysicsDevice
 {

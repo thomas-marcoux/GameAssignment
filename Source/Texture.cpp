@@ -1,5 +1,7 @@
 #include "Definitions.h"
 #include "Texture.h"
+#include "View.h"
+
 
 //Constructor
 Texture::Texture() : width(SPRITE_WIDTH), height(SPRITE_HEIGHT), texture(NULL)

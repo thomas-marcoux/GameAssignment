@@ -4,9 +4,9 @@
 #include <vector>
 #include "SDL.h"
 #include "SDL_image.h"
-#include "View.h"
 
 class SpriteComponent;
+class View;
 
 //SDL graphics rendering class
 class GraphicsDevice

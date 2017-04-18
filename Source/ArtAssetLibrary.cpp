@@ -1,5 +1,7 @@
 #include <iostream>
 #include "ArtAssetLibrary.h"
+#include "GraphicsDevice.h"
+#include "Texture.h"
 
 //Make texture object from object file
 bool ArtAssetLibrary::AddAsset(std::string name, std::string path)

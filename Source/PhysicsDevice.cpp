@@ -1,4 +1,6 @@
 #include "PhysicsDevice.h"
+#include "Object.h"
+#include "Texture.h"
 
 PhysicsDevice::PhysicsDevice()
 {

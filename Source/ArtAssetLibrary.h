@@ -3,8 +3,9 @@
 
 #include <map>
 #include <memory>
-#include "GraphicsDevice.h"
-#include "Texture.h"
+
+class GraphicsDevice;
+class Texture;
 
 //Stores object textures
 class ArtAssetLibrary

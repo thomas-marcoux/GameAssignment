@@ -3,6 +3,7 @@
 #include "Definitions.h"
 #include "GraphicsDevice.h"
 #include "SpriteComponent.h"
+#include "View.h"
 
 //Calls shutdown method on object destruction
 GraphicsDevice::~GraphicsDevice()

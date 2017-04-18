@@ -1,6 +1,7 @@
 #include "View.h"
-#include "Object.h"
 #include "BodyComponent.h"
+#include "InputDevice.h"
+#include "Object.h"
 
 //Initializes View attributes
 bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)

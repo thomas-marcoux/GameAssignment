@@ -10,6 +10,7 @@
 #include "InputDevice.h"
 #include "Object.h"
 #include "ObjectFactory.h"
+#include "PhysicsDevice.h"
 #include "Timer.h"
 #include "View.h"
 
@@ -38,6 +39,7 @@ private:
 	std::unique_ptr<GraphicsDevice> gDevice;
 	std::unique_ptr<InputDevice> iDevice;
 	std::unique_ptr<ObjectFactory> oFactory;
+	std::unique_ptr<PhysicsDevice> pDevice;
 	std::unique_ptr<Timer> timer;
 	GAME_FLT gameTime;
 	std::unique_ptr<View> view;

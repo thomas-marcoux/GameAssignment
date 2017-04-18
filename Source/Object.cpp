@@ -1,6 +1,10 @@
 #include "Object.h"
 #include "Component.h"
+#include "GraphicsDevice.h"
+#include "InputDevice.h"
 #include "SpriteComponent.h"
+#include "Texture.h"
+#include "View.h"
 
 Object::Object()
 {

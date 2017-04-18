@@ -2,9 +2,10 @@
 #define PLAYERINPUTCOMPONENT_H
 
 #include "Component.h"
-#include "InputDevice.h"
-#include "ObjectFactory.h"
-#include "View.h"
+
+class InputDevice;
+class ObjectFactory;
+class View;
 
 //Queries InputDevice for input, updates the Object's other components
 class PlayerInputComponent : public Component

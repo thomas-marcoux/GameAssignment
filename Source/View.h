@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "Definitions.h"
-#include "InputDevice.h"
 
 class Object;
+class InputDevice;
 
 //View class, manages camera movement
 class View

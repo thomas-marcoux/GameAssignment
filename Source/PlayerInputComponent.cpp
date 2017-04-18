@@ -1,6 +1,9 @@
 #include "PlayerInputComponent.h"
 #include "BodyComponent.h"
+#include "InputDevice.h"
+#include "ObjectFactory.h"
 #include "SpriteComponent.h"
+#include "View.h"
 
 PlayerInputComponent::PlayerInputComponent(std::unique_ptr<Object> const& owner) : Component(owner)
 {

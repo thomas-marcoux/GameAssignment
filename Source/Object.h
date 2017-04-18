@@ -3,12 +3,12 @@
 
 #include <memory>
 #include <vector>
-#include "GraphicsDevice.h"
-#include "InputDevice.h"
-#include "Texture.h"
-#include "View.h"
 
 class Component;
+class GraphicsDevice;
+class InputDevice;
+class Texture;
+class View;
 
 //Game Actor class
 class Object
