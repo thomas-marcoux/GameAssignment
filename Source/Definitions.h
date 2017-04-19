@@ -28,6 +28,8 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	GAME_INT	arrow_movement;
 	GAME_OBJECT_SHAPE	shape;
 	GAME_BODY_TYPE		body_type;
+	GAME_FLT	width; //radius
+	GAME_FLT	height;
 	GAME_FLT	density;
 	GAME_FLT	friction;
 	GAME_FLT	restitution;

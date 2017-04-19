@@ -1,5 +1,6 @@
 #include "ObjectFactory.h"
 #include "ArtAssetLibrary.h"
+#include "PhysicsDevice.h"
 #include "BodyComponentFactory.h"
 #include "SpriteComponentFactory.h"
 #include "SlideBehaviorComponentFactory.h"
@@ -28,9 +29,10 @@ std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, s
 	return (it == cLibrary.end()) ? nullptr : it->second->create(owner);
 }
 
-bool ObjectFactory::Initialize(ArtAssetLibrary* aL)
+bool ObjectFactory::Initialize(std::unique_ptr<ArtAssetLibrary> const& aL, std::unique_ptr<PhysicsDevice> const& pD)
 {
-	aLibrary = aL;
+	aLibrary = aL.get();
+	pDevice = pD.get();
 	return true;
 }
 
@@ -82,6 +84,7 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	GOI.arrow_movement = ARROW_MOVEMENT;
 	arrow = create(componentNames, GOI);
 	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->Search("Arrow"));
+	loadPhysics(arrow);
 	return arrow;
 }
 
@@ -100,5 +103,60 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 			object->addComponent(std::move(component));
 		}
 	}
+	object->setType(GOI.name);
 	return object;
+}
+
+void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object)
+{
+	std::string type = object->getType();
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+
+	GOI.body_type = GAME_DYNAMIC;
+	GOI.shape = GAME_CIRCLE;
+	GOI.width = (GAME_FLT)object->getTexture()->getWidth() / 2.0f;
+	GOI.height = 1.0f;
+	GOI.density = 2.0f;
+	GOI.friction = 0.0f;
+	GOI.restitution = 4.0f;
+	GOI.angularDamping = 0.0f;
+	GOI.linearDamping = 0.0f;
+	if (type == "Link")
+	{
+		GOI.density = 1.0f;
+		GOI.friction = 0.3f;
+		GOI.restitution = 18.0f;
+		GOI.angularDamping = 10.0f;
+		GOI.linearDamping = 1.0f;
+	}
+	if (type.find("Leever"))
+	{
+		GOI.shape = GAME_RECTANGLE;
+		GOI.width = (GAME_FLT)object->getTexture()->getWidth();
+		GOI.height = (GAME_FLT)object->getTexture()->getHeight();
+		GOI.friction = 0.9f;
+		GOI.angularDamping = 5.0f;
+		GOI.linearDamping = 0.1f;
+	}
+	if (type == "Rock")
+	{
+		GOI.body_type = GAME_STATIC;
+		GOI.density = 25.0f;
+		GOI.restitution = 20.0f;
+	}
+	if (type.find("Octorok"))
+	{
+		GOI.density = 13.0f;
+		GOI.friction = 0.9f;
+		GOI.angularDamping = 20.0f;
+	}
+	if (type == "Arrow")
+	{
+		GOI.shape = GAME_RECTANGLE;
+		GOI.width = (GAME_FLT)object->getTexture()->getWidth();
+		GOI.height = (GAME_FLT)object->getTexture()->getHeight();
+		GOI.density = 0.5f;
+		GOI.restitution = 1.0f;
+	}
+	pDevice->CreateFixture(object.get(), GOI);
 }

@@ -8,16 +8,19 @@
 //Make Game class' attributes and initializes them
 bool Game::Initialize()
 {
+	GAME_VEC gravity;
+	gravity.x = 0;
+	gravity.y = 200;
 	gDevice = std::make_unique<GraphicsDevice>();
 	aLibrary = std::make_unique<ArtAssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
 	oFactory = std::make_unique<ObjectFactory>();
-	pDevice = std::make_unique<PhysicsDevice>();
+	pDevice = std::make_unique<PhysicsDevice>(gravity);
 	timer = std::make_unique<Timer>();
 	gameTime = 0;
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
-		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary.get()))
+		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary, pDevice))
 		return true;
 	return false;
 }
@@ -83,6 +86,7 @@ bool Game::LoadSprites()
 			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->Search("Link Down"));
 			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->Search("Link Left"));
 			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->Search("Link Right"));
+			sprite->UpdateTexture();
 		}	
 	}
 	return true;
@@ -101,6 +105,13 @@ bool Game::LoadPlayer()
 	return true;
 }
 
+bool Game::LoadPhysics()
+{
+	for (auto const& object : objects)
+		oFactory->loadPhysics(object);
+	return true;
+}
+
 //Loads game info from both config files, catches errors occuring during loading
 bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 {
@@ -112,6 +123,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
 		LoadGameAssets(levelConfigFile);
 		LoadSprites();
 		LoadPlayer();
+		LoadPhysics();
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}
@@ -152,6 +164,7 @@ bool Game::Update()
 		if (r)
 			new_object = std::move(r);
 	}
+	pDevice->Update(timer->getTime());
 	if (new_object) //If a new object has been created, add it to the vector
 		objects.push_back(std::move(new_object));
 	return false;

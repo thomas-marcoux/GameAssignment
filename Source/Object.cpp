@@ -8,6 +8,7 @@
 
 Object::Object()
 {
+	type = "null";
 	dead = false;
 }
 

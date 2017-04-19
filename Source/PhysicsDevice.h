@@ -9,7 +9,6 @@ class Object;
 class PhysicsDevice
 {
 public:
-	PhysicsDevice();
 	PhysicsDevice(GAME_VEC const&);
 	~PhysicsDevice();
 	bool Initialize();

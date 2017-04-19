@@ -2,10 +2,6 @@
 #include "Object.h"
 #include "Texture.h"
 
-PhysicsDevice::PhysicsDevice()
-{
-}
-
 PhysicsDevice::PhysicsDevice(GAME_VEC const& gravity) :
 	gravity(GV2PV(gravity))
 {
@@ -53,10 +49,10 @@ bool PhysicsDevice::CreateFixture(Object *object, GAME_OBJECTFACTORY_INITIALIZER
 	switch (GOI.shape)
 	{
 	case GAME_RECTANGLE:
-		pShape.SetAsBox(RW2PW(object->getTexture()->getWidth() / 2.0f), RW2PW(object->getTexture()->getHeight() / 2.0f)); 
+		pShape.SetAsBox(RW2PW(GOI.width), RW2PW(GOI.height)); 
 		shapefd.shape = &pShape; break;
 	case GAME_CIRCLE:
-		cShape.m_radius = (RW2PW(object->getTexture()->getWidth() / 2.0f));
+		cShape.m_radius = (RW2PW(GOI.width));
 		shapefd.shape = &cShape; break;
 	}
 	shapefd.density = GOI.density;

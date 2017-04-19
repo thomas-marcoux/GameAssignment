@@ -8,6 +8,7 @@
 #include "tinyxml\tinyxml.h"
 
 class ArtAssetLibrary;
+class PhysicsDevice;
 class Object;
 
 class ObjectFactory
@@ -15,10 +16,11 @@ class ObjectFactory
 public:
 	ObjectFactory();
 	~ObjectFactory() {}
-	bool Initialize(ArtAssetLibrary*);
+	bool Initialize(std::unique_ptr<ArtAssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&);
+	void loadPhysics(std::unique_ptr<Object> const&);
 	std::unique_ptr<Object> create(TiXmlElement*);
 	std::unique_ptr<Object> createArrow(Object*);
-
+	
 private:
 	std::unique_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::unique_ptr<Component> Search(std::string const&, std::unique_ptr<Object> const&);
@@ -26,6 +28,7 @@ private:
 private:
 	std::map<std::string, std::unique_ptr<ComponentFactory>>	cLibrary;
 	ArtAssetLibrary* aLibrary;
+	PhysicsDevice*	pDevice;
 };
 
 #endif // !OBJECTFACTORY_H

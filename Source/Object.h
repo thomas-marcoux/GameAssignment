@@ -32,10 +32,13 @@ public:
 		return NULL;
 	}
 	bool isDead() { return dead; }
+	std::string getType() { return type; }
 	std::shared_ptr<Texture>	getTexture();
+	void setType(std::string t) { type = t; }
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;
+	std::string type;
 	bool dead;
 };
 

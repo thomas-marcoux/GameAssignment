@@ -32,6 +32,7 @@ private:
 	bool LoadArtAssets(std::string);
 	bool LoadSprites();
 	bool LoadPlayer();
+	bool LoadPhysics();
 	void Finish();
 
 private:
