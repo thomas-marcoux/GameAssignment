@@ -48,7 +48,7 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 }
 
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
-bool Game::LoadArtAssets(std::string objectConfigFile)
+bool Game::LoadAssets(std::string objectConfigFile, std::string physicsConfigFile)
 {
 	TiXmlDocument doc;
 	TiXmlElement* itemNode;
@@ -113,13 +113,13 @@ bool Game::LoadPhysics()
 }
 
 //Loads game info from both config files, catches errors occuring during loading
-bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile)
+bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile)
 {
 	try
 	{
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
-		LoadArtAssets(objectConfigFile);
+		LoadAssets(objectConfigFile, physicsConfigFile);
 		LoadGameAssets(levelConfigFile);
 		LoadSprites();
 		LoadPlayer();

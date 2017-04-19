@@ -89,6 +89,7 @@
     </Xml>
     <Xml Include="Assets\Config\level2.old.xml" />
     <Xml Include="Assets\Config\objects.xml" />
+    <Xml Include="Assets\Config\Physics.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6D0C0CC1-2E46-41F4-94C1-0F91F125C4A8}</ProjectGuid>

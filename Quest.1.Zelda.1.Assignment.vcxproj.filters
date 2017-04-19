@@ -243,5 +243,8 @@
     <Xml Include="Assets\Config\level1.noPhysics.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="Assets\Config\Physics.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
