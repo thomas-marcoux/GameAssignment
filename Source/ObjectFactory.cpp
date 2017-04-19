@@ -1,5 +1,5 @@
 #include "ObjectFactory.h"
-#include "ArtAssetLibrary.h"
+#include "AssetLibrary.h"
 #include "PhysicsDevice.h"
 #include "BodyComponentFactory.h"
 #include "SpriteComponentFactory.h"
@@ -29,7 +29,7 @@ std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, s
 	return (it == cLibrary.end()) ? nullptr : it->second->create(owner);
 }
 
-bool ObjectFactory::Initialize(std::unique_ptr<ArtAssetLibrary> const& aL, std::unique_ptr<PhysicsDevice> const& pD)
+bool ObjectFactory::Initialize(std::unique_ptr<AssetLibrary> const& aL, std::unique_ptr<PhysicsDevice> const& pD)
 {
 	aLibrary = aL.get();
 	pDevice = pD.get();
@@ -111,7 +111,10 @@ void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object)
 {
 	std::string type = object->getType();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+	BodyComponent* body = object->GetComponent<BodyComponent>();
 
+	GOI.pos = body->getPosition();
+	GOI.angle = body->getAngle();
 	GOI.body_type = GAME_DYNAMIC;
 	GOI.shape = GAME_CIRCLE;
 	GOI.width = (GAME_FLT)object->getTexture()->getWidth() / 2.0f;

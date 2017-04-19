@@ -14,6 +14,13 @@ PhysicsDevice::~PhysicsDevice()
 bool PhysicsDevice::Initialize()
 {
 	world = std::make_unique<b2World>(gravity);
+	if (!world)
+		return false;
+	b2BodyDef bd;
+	b2Body* edge = world->CreateBody(&bd);
+	b2EdgeShape shape;
+	shape.Set(b2Vec2(RW2PW(-50.0f), RW2PW(600.0f)), b2Vec2(RW2PW(800.0f), RW2PW(600.0f)));
+	edge->CreateFixture(&shape, 0);
 	return (world) ? true : false;
 }
 
@@ -59,6 +66,7 @@ bool PhysicsDevice::CreateFixture(Object *object, GAME_OBJECTFACTORY_INITIALIZER
 	shapefd.friction = GOI.friction;
 	shapefd.restitution = GOI.restitution;
 	body->CreateFixture(&shapefd);
+	object->setPhysics(this);
 	return true;
 }
 
@@ -121,7 +129,7 @@ bool PhysicsDevice::SetAngle(Object * object, GAME_FLT angle)
 GAME_FLT PhysicsDevice::GetAngularVelocity(Object * object)
 {
 	b2Body* body = FindBody(object);
-	return TO_DEGREE(body->GetAngularVelocity());
+	return PW2RW(body->GetAngularVelocity());
 }
 
 GAME_VEC PhysicsDevice::GetPosition(Object * object)

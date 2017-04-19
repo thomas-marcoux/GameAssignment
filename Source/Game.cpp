@@ -12,7 +12,7 @@ bool Game::Initialize()
 	gravity.x = 0;
 	gravity.y = 200;
 	gDevice = std::make_unique<GraphicsDevice>();
-	aLibrary = std::make_unique<ArtAssetLibrary>(gDevice.get());
+	aLibrary = std::make_unique<AssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
 	oFactory = std::make_unique<ObjectFactory>();
 	pDevice = std::make_unique<PhysicsDevice>(gravity);

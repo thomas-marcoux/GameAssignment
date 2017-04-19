@@ -1,5 +1,5 @@
-#ifndef  ARTASSETLIBRARY_H
-#define ARTASSETLIBRARY_H
+#ifndef  ASSETLIBRARY_H
+#define ASSETLIBRARY_H
 
 #include <map>
 #include <memory>
@@ -8,11 +8,11 @@ class GraphicsDevice;
 class Texture;
 
 //Stores object textures
-class ArtAssetLibrary
+class AssetLibrary
 {
 public:
-	ArtAssetLibrary(GraphicsDevice* gD) : gDevice(gD) {}
-	~ArtAssetLibrary() {}
+	AssetLibrary(GraphicsDevice* gD) : gDevice(gD) {}
+	~AssetLibrary() {}
 	bool AddAsset(std::string, std::string);
 	std::shared_ptr<Texture> Search(std::string);
 
@@ -21,4 +21,4 @@ private:
 	GraphicsDevice* gDevice;
 };
 
-#endif // ! ARTASSETLIBRARY_H
+#endif // ! ASSETLIBRARY_H

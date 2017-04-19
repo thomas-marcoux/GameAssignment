@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <vector>
-#include "ArtAssetLibrary.h"
+#include "AssetLibrary.h"
 #include "Definitions.h"
 #include "Exceptions.h"
 #include "GraphicsDevice.h"
@@ -36,7 +36,7 @@ private:
 	void Finish();
 
 private:
-	std::unique_ptr<ArtAssetLibrary> aLibrary;
+	std::unique_ptr<AssetLibrary> aLibrary;
 	std::unique_ptr<GraphicsDevice> gDevice;
 	std::unique_ptr<InputDevice> iDevice;
 	std::unique_ptr<ObjectFactory> oFactory;

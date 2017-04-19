@@ -7,6 +7,7 @@
 class Component;
 class GraphicsDevice;
 class InputDevice;
+class PhysicsDevice;
 class Texture;
 class View;
 
@@ -35,11 +36,15 @@ public:
 	std::string getType() { return type; }
 	std::shared_ptr<Texture>	getTexture();
 	void setType(std::string t) { type = t; }
+	void setPhysics(PhysicsDevice* p) { pDevice = p; }
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;
 	std::string type;
 	bool dead;
+
+public:
+	PhysicsDevice*	pDevice;
 };
 
 #endif // !OBJECT_H

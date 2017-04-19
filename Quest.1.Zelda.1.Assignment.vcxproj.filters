@@ -45,9 +45,6 @@
     <ClCompile Include="Source\tinyxml\tinyxmlparser.cpp">
       <Filter>Source Files\Devices &amp; Libraries</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ArtAssetLibrary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -105,11 +102,11 @@
     <ClCompile Include="Source\PhysicsDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\AssetLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\ArtAssetLibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -194,6 +191,9 @@
     <ClInclude Include="Source\PhysicsDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\AssetLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\arrow.png">
@@ -238,6 +238,9 @@
       <Filter>Resource Files</Filter>
     </Xml>
     <Xml Include="Assets\Config\objects.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Config\level1.noPhysics.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

@@ -7,7 +7,7 @@
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 
-class ArtAssetLibrary;
+class AssetLibrary;
 class PhysicsDevice;
 class Object;
 
@@ -16,7 +16,7 @@ class ObjectFactory
 public:
 	ObjectFactory();
 	~ObjectFactory() {}
-	bool Initialize(std::unique_ptr<ArtAssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&);
+	bool Initialize(std::unique_ptr<AssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&);
 	void loadPhysics(std::unique_ptr<Object> const&);
 	std::unique_ptr<Object> create(TiXmlElement*);
 	std::unique_ptr<Object> createArrow(Object*);
@@ -27,7 +27,7 @@ private:
 
 private:
 	std::map<std::string, std::unique_ptr<ComponentFactory>>	cLibrary;
-	ArtAssetLibrary* aLibrary;
+	AssetLibrary* aLibrary;
 	PhysicsDevice*	pDevice;
 };
 

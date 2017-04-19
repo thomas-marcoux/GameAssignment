@@ -4,6 +4,7 @@
 #include <memory>
 #include "Definitions.h"
 #include "Object.h"
+#include "PhysicsDevice.h"
 
 //Base Component class
 class Component

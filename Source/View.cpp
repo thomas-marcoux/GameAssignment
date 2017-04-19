@@ -28,7 +28,6 @@ bool View::Update(GAME_FLT gameTime)
 		center.y -= VIEW_MOVEMENT;
 	if (position.y + SCREEN_HEIGHT - body.y - SPRITE_HEIGHT <= DIST_TO_BORDER)
 		center.y += VIEW_MOVEMENT;
-	/*
 	if (iDevice->GetEvent(GAME_W))
 	{
 		center.x -= VIEW_MOVEMENT * sin(angle);
@@ -43,7 +42,6 @@ bool View::Update(GAME_FLT gameTime)
 		angle += VIEW_ROTATION;
 	if (iDevice->GetEvent(GAME_A))
 		angle -= VIEW_ROTATION;
-	*/
 	if (iDevice->GetEvent(GAME_ESC) || iDevice->GetEvent(GAME_QUIT))
 		return false;
 	position.x = center.x - SCREEN_WIDTH_2;
