@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include "Definitions.h"
 
 class Component;
 class GraphicsDevice;
@@ -17,7 +18,7 @@ class Object
 public:
 	Object();
 	~Object();
-	std::unique_ptr<Object> Update();
+	std::unique_ptr<Object> Update(GAME_FLT);
 	void addComponent(std::unique_ptr<Component>);
 	template<class T>
 	T* GetComponent()

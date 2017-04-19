@@ -15,7 +15,7 @@ public:
 	~PlayerInputComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	bool Initialize(InputDevice*, ObjectFactory*, View*);
-	std::unique_ptr<Object> Update();
+	std::unique_ptr<Object> Update(GAME_FLT);
 	bool Finish();
 
 private:

@@ -10,7 +10,7 @@ public:
 	BodyComponent(std::unique_ptr<Object> const&);
 	~BodyComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
-	std::unique_ptr<Object> Update() { return NULL; }
+	std::unique_ptr<Object> Update(GAME_FLT) { return NULL; }
 	bool Finish() { return false; }
 	GAME_VEC	getPosition() { return _position; }
 	GAME_VEC	getStartPosition() { return _startPosition; }

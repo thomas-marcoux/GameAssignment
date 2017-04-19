@@ -8,7 +8,7 @@ bool ArrowBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& i
 	return true;
 }
 
-std::unique_ptr<Object> ArrowBehaviorComponent::Update()
+std::unique_ptr<Object> ArrowBehaviorComponent::Update(GAME_FLT dt)
 {
 	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;

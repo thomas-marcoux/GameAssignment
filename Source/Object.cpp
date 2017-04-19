@@ -18,14 +18,14 @@ Object::~Object()
 }
 
 //Call each Component's update method, if one returns a new object, returns it. If a Component's Finish method returns true, kill the object
-std::unique_ptr<Object> Object::Update()
+std::unique_ptr<Object> Object::Update(GAME_FLT dt)
 {
 	std::unique_ptr<Object>	new_object = nullptr;
 	std::unique_ptr<Object> o;
 
 	for (auto const& component : components)
 	{
-		o = component->Update();
+		o = component->Update(dt);
 		if (o)
 			new_object = std::move(o);
 		if (component->Finish())

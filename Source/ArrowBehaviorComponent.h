@@ -9,7 +9,7 @@ public:
 	ArrowBehaviorComponent(std::unique_ptr<Object> const& owner) : Component(owner) {}
 	~ArrowBehaviorComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
-	std::unique_ptr<Object> Update();
+	std::unique_ptr<Object> Update(GAME_FLT);
 	bool Finish() { return false; }
 
 private:

@@ -24,7 +24,7 @@ bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* 
 	return true;
 }
 
-std::unique_ptr<Object> PlayerInputComponent::Update()
+std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 {
 	BodyComponent* body = _owner->GetComponent<BodyComponent>();
 	GAME_VEC p = body->getPosition();

@@ -152,19 +152,20 @@ bool Game::Update()
 {
 	std::unique_ptr<Object> new_object = nullptr;
 	std::unique_ptr<Object>	r;
+	GAME_FLT time = timer->getTime();
 	int id = 0;
 
 	if (!view->Update())
 		return true;
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
-		r = std::move((*object)->Update());
+		r = std::move((*object)->Update(time));
 		if ((*object)->isDead()) //If object is dead, store its ID to be deleted
 			deadObjectIDs.push_back(id);
 		if (r)
 			new_object = std::move(r);
 	}
-	pDevice->Update(timer->getTime());
+	pDevice->Update(time);
 	if (new_object) //If a new object has been created, add it to the vector
 		objects.push_back(std::move(new_object));
 	return false;

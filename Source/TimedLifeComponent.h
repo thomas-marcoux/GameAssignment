@@ -10,7 +10,7 @@ public:
 	TimedLifeComponent(std::unique_ptr<Object> const&);
 	~TimedLifeComponent() {}
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
-	std::unique_ptr<Object> Update();
+	std::unique_ptr<Object> Update(GAME_FLT);
 	bool Finish();
 
 private:

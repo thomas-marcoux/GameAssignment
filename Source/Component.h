@@ -13,7 +13,7 @@ public:
 	Component(std::unique_ptr<Object> const&);
 	virtual ~Component() {}
 	virtual bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers) = 0;
-	virtual std::unique_ptr<Object> Update() = 0;
+	virtual std::unique_ptr<Object> Update(GAME_FLT) = 0;
 	virtual bool Finish() = 0;
 
 protected:

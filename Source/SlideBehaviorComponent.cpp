@@ -11,7 +11,7 @@ bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& i
 	return true;
 }
 
-std::unique_ptr<Object> SlideBehaviorComponent::Update()
+std::unique_ptr<Object> SlideBehaviorComponent::Update(GAME_FLT dt)
 {
 	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;

@@ -14,7 +14,7 @@ public:
 	~SpriteComponent();
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	bool Initialize(GraphicsDevice*, std::shared_ptr<Texture>);
-	std::unique_ptr<Object> Update() { return NULL; }
+	std::unique_ptr<Object> Update(GAME_FLT) { return NULL; }
 	bool Finish();
 	bool Draw(View*);
 	std::string getName() { return _name; }

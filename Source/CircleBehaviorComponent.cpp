@@ -19,7 +19,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 	return true;
 }
 
-std::unique_ptr<Object> CircleBehaviorComponent::Update()
+std::unique_ptr<Object> CircleBehaviorComponent::Update(GAME_FLT dt)
 {
 	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
 	if (!body) return NULL;
