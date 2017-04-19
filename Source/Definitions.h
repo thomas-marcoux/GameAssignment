@@ -40,7 +40,7 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 //========================================
 //Base Game Constants
 //========================================
-#define WINDOW_NAME "Quest2"
+#define WINDOW_NAME "Quest3"
 const GAME_INT SCREEN_WIDTH = 800;
 const GAME_INT SCREEN_HEIGHT = 600;
 const GAME_INT SCREEN_WIDTH_2 = SCREEN_WIDTH / 2;

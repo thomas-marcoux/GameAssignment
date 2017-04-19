@@ -35,6 +35,7 @@ private:
 	b2Body* FindBody(Object*);
 	b2Vec2 GV2PV(GAME_VEC gv);
 	GAME_VEC PV2GV(b2Vec2 pv);
+	GAME_VEC AlignCenters(Object* object);	
 	
 private:
 	std::unique_ptr<b2World>	world;

@@ -44,15 +44,15 @@ std::unique_ptr<Object> PlayerInputComponent::Update()
 	}
 	if (iDevice->GetEvent(GAME_LEFT))
 	{
-		angle = FACE_LEFT;
-		p.x += LINK_MOVEMENT * cos(angle);
-		//_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) - 2.0f * dt);
+		//angle = FACE_LEFT;
+		//p.x += LINK_MOVEMENT * cos(angle);
+		_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) - 2.0f * dt);
 	}
 	if (iDevice->GetEvent(GAME_RIGHT))
 	{
-		angle = FACE_RIGHT;
-		p.x += LINK_MOVEMENT * cos(angle);
-		//_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) + 2.0f * dt);
+		//angle = FACE_RIGHT;
+		//p.x += LINK_MOVEMENT * cos(angle);
+		_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) + 2.0f * dt);
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 		return oFactory->createArrow(_owner);

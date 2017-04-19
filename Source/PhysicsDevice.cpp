@@ -134,8 +134,7 @@ GAME_FLT PhysicsDevice::GetAngularVelocity(Object * object)
 
 GAME_VEC PhysicsDevice::GetPosition(Object * object)
 {
-	b2Body* body = FindBody(object);
-	return PV2GV(body->GetPosition());
+	return AlignCenters(object);
 }
 
 GAME_FLT PhysicsDevice::GetAngle(Object * object)
@@ -177,4 +176,16 @@ GAME_VEC PhysicsDevice::PV2GV(b2Vec2 pv)
 	gv.x = PW2RW(pv.x);
 	gv.y = PW2RW(pv.y);
 	return gv;
+}
+
+GAME_VEC PhysicsDevice::AlignCenters(Object * object)
+{
+	b2Body* body = FindBody(object);
+	b2Vec2 physPosition = body->GetPosition();
+	GAME_VEC position;
+	std::shared_ptr<Texture> texture = object->getTexture();
+	
+	position.x = PW2RW(physPosition.x) - (texture->getWidth() / 2);
+	position.y = PW2RW(physPosition.y) - (texture->getHeight() / 2);
+	return position;
 }

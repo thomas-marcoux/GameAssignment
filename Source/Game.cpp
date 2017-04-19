@@ -10,7 +10,7 @@ bool Game::Initialize()
 {
 	GAME_VEC gravity;
 	gravity.x = 0;
-	gravity.y = 200;
+	gravity.y = 0;
 	gDevice = std::make_unique<GraphicsDevice>();
 	aLibrary = std::make_unique<AssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
