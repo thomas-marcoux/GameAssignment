@@ -3,6 +3,7 @@
 
 #include <map>
 #include <memory>
+#include "Definitions.h"
 
 class GraphicsDevice;
 class Texture;
@@ -13,11 +14,20 @@ class AssetLibrary
 public:
 	AssetLibrary(GraphicsDevice* gD) : gDevice(gD) {}
 	~AssetLibrary() {}
-	bool AddAsset(std::string, std::string);
-	std::shared_ptr<Texture> Search(std::string);
+	bool LoadArt(std::string);
+	bool LoadPhysics(std::string);
+	bool AddArtAsset(std::string, std::string);
+	bool AddPhysicsAsset(std::string const&, GAME_OBJECTFACTORY_INITIALIZERS const&);
+	std::shared_ptr<Texture> SearchArt(std::string);
+	std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>	SearchPhysics(std::string);
 
 private:
-	std::map<std::string, std::shared_ptr<Texture>> library;
+	GAME_BODY_TYPE	getBodyType(char const*);
+	GAME_OBJECT_SHAPE	getShape(char const*);
+
+private:
+	std::map<std::string, std::shared_ptr<Texture>> artLibrary;
+	std::map <std::string, std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>> physicsLibrary;
 	GraphicsDevice* gDevice;
 };
 

@@ -83,7 +83,7 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	GOI.arrow_decrement = ARROW_HEALTH_DECREMENT;
 	GOI.arrow_movement = ARROW_MOVEMENT;
 	arrow = create(componentNames, GOI);
-	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->Search("Arrow"));
+	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
 	loadPhysics(arrow);
 	return arrow;
 }
@@ -110,56 +110,20 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object)
 {
 	std::string type = object->getType();
-	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+	GAME_OBJECTFACTORY_INITIALIZERS GOI = *aLibrary->SearchPhysics(type);
 	BodyComponent* body = object->GetComponent<BodyComponent>();
 
 	GOI.pos = body->getPosition();
 	GOI.angle = body->getAngle();
-	GOI.body_type = GAME_DYNAMIC;
-	GOI.shape = GAME_CIRCLE;
-	GOI.width = (GAME_FLT)object->getTexture()->getWidth() / 2.0f;
-	GOI.height = 1.0f;
-	GOI.density = 2.0f;
-	GOI.friction = 0.0f;
-	GOI.restitution = 4.0f;
-	GOI.angularDamping = 0.0f;
-	GOI.linearDamping = 0.0f;
-	if (type == "Link")
+	if (GOI.shape == GAME_CIRCLE)
 	{
-		GOI.density = 1.0f;
-		GOI.friction = 0.3f;
-		GOI.restitution = 18.0f;
-		GOI.angularDamping = 10.0f;
-		GOI.linearDamping = 1.0f;
+		GOI.width = (GAME_FLT)object->getTexture()->getWidth() / 2.0f;
+		GOI.height = 0.0f;
 	}
-	if (type.find("Leever"))
+	if (GOI.shape == GAME_RECTANGLE)
 	{
-		GOI.shape = GAME_RECTANGLE;
 		GOI.width = (GAME_FLT)object->getTexture()->getWidth();
 		GOI.height = (GAME_FLT)object->getTexture()->getHeight();
-		GOI.friction = 0.9f;
-		GOI.angularDamping = 5.0f;
-		GOI.linearDamping = 0.1f;
-	}
-	if (type == "Rock")
-	{
-		GOI.body_type = GAME_STATIC;
-		GOI.density = 25.0f;
-		GOI.restitution = 20.0f;
-	}
-	if (type.find("Octorok"))
-	{
-		GOI.density = 13.0f;
-		GOI.friction = 0.9f;
-		GOI.angularDamping = 20.0f;
-	}
-	if (type == "Arrow")
-	{
-		GOI.shape = GAME_RECTANGLE;
-		GOI.width = (GAME_FLT)object->getTexture()->getWidth();
-		GOI.height = (GAME_FLT)object->getTexture()->getHeight();
-		GOI.density = 0.5f;
-		GOI.restitution = 1.0f;
 	}
 	pDevice->CreateFixture(object.get(), GOI);
 }

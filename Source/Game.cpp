@@ -50,21 +50,8 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
 bool Game::LoadAssets(std::string objectConfigFile, std::string physicsConfigFile)
 {
-	TiXmlDocument doc;
-	TiXmlElement* itemNode;
-	const char *attr_name, *attr_path;
-
-	//Tries to open the level configFile, raises an error if it cannot
-	if (!doc.LoadFile(objectConfigFile.c_str())) throw LoadException(LOAD_ERROR, objectConfigFile);
-	itemNode = TiXmlHandle(doc.RootElement()).FirstChild("Item").Element();
-	if (!itemNode) throw LoadException(PARSE_ERROR, objectConfigFile);
-	for (itemNode; itemNode; itemNode = itemNode->NextSiblingElement())
-	{
-		attr_name = itemNode->Attribute("name");
-		attr_path = itemNode->Attribute("sprite");
-		if (!attr_name || !attr_path) throw LoadException(PARSE_ERROR, objectConfigFile); //Checks attributes exist
-		aLibrary->AddAsset(attr_name, attr_path);
-	}
+	if (!aLibrary->LoadArt(objectConfigFile) || !aLibrary->LoadPhysics(physicsConfigFile))
+		return false;
 	return true;
 }
 
@@ -79,13 +66,13 @@ bool Game::LoadSprites()
 		sprite = object->GetComponent<SpriteComponent>();
 		if (!sprite) throw LoadException(NO_COMPONENT);
 		name = sprite->getName();
-		sprite->Initialize(gDevice.get(), aLibrary->Search(name));
+		sprite->Initialize(gDevice.get(), aLibrary->SearchArt(name));
 		if (name == "Link")
 		{
-			sprite->LoadTexture(TEXTURE_UP, aLibrary->Search("Link Up"));
-			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->Search("Link Down"));
-			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->Search("Link Left"));
-			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->Search("Link Right"));
+			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Link Up"));
+			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Link Down"));
+			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Link Left"));
+			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Link Right"));
 			sprite->UpdateTexture();
 		}	
 	}
