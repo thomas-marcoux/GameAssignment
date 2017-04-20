@@ -14,13 +14,6 @@ PhysicsDevice::~PhysicsDevice()
 bool PhysicsDevice::Initialize()
 {
 	world = std::make_unique<b2World>(gravity);
-	if (!world)
-		return false;
-	b2BodyDef bd;
-	b2Body* edge = world->CreateBody(&bd);
-	b2EdgeShape shape;
-	shape.Set(b2Vec2(RW2PW(-50.0f), RW2PW(600.0f)), b2Vec2(RW2PW(800.0f), RW2PW(600.0f)));
-	edge->CreateFixture(&shape, 0);
 	return (world) ? true : false;
 }
 

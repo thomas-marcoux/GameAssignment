@@ -29,13 +29,20 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	BodyComponent* body = _owner->GetComponent<BodyComponent>();
 	GAME_VEC p = body->getPosition();
 	GAME_FLT angle = body->getAngle();
+	GAME_INT forceMultiplier = 1500;
+	GAME_VEC applyForce;
 
+	std::cout << "x = " << p.x << " y = " << p.y << std::endl;
 	_owner->GetComponent<SpriteComponent>()->UpdateTexture();
 	iDevice->Update();
 	if (iDevice->GetEvent(GAME_UP))
 	{
-		angle = FACE_UP;
-		p.y -= LINK_MOVEMENT * sin(angle);
+		//angle = FACE_UP;
+		//_owner->pDevice->SetLinearVelocity(_owner, _owner->pDevice->GetLinearVelocity(_owner));
+		applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
+		applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
+		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
+		//p.y -= LINK_MOVEMENT * sin(angle);
 	}
 	if (iDevice->GetEvent(GAME_DOWN))
 	{

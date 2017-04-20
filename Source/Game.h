@@ -18,7 +18,7 @@
 class Game
 {
 public:
-	Game() {}
+	Game() : dt(1.0f / 100.0f) {}
 	~Game() {}
 	bool Initialize();
 	void Reset();
@@ -42,7 +42,7 @@ private:
 	std::unique_ptr<ObjectFactory> oFactory;
 	std::unique_ptr<PhysicsDevice> pDevice;
 	std::unique_ptr<Timer> timer;
-	GAME_FLT gameTime;
+	const GAME_FLT dt; //Time per frame
 	std::unique_ptr<View> view;
 	std::vector<std::unique_ptr<Object>> objects;
 	std::vector<int> deadObjectIDs;

@@ -38,9 +38,3 @@ void Timer::fpsRegulate()
 		SDL_Delay((GAME_INT)mpf - getTicks());
 	}
 }
-
-//Gets physics time
-GAME_FLT Timer::getTime()
-{
-	return SDL_GetTicks() / 50.0f;
-}

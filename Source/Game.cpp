@@ -9,15 +9,14 @@
 bool Game::Initialize()
 {
 	GAME_VEC gravity;
-	gravity.x = 0;
-	gravity.y = 0;
+	gravity.x = 0.0f;
+	gravity.y = 0.0f;
 	gDevice = std::make_unique<GraphicsDevice>();
 	aLibrary = std::make_unique<AssetLibrary>(gDevice.get());
 	iDevice = std::make_unique<InputDevice>();
 	oFactory = std::make_unique<ObjectFactory>();
 	pDevice = std::make_unique<PhysicsDevice>(gravity);
 	timer = std::make_unique<Timer>();
-	gameTime = 0;
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
 		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary, pDevice))
@@ -139,20 +138,19 @@ bool Game::Update()
 {
 	std::unique_ptr<Object> new_object = nullptr;
 	std::unique_ptr<Object>	r;
-	GAME_FLT time = timer->getTime();
 	int id = 0;
 
 	if (!view->Update())
 		return true;
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
-		r = std::move((*object)->Update(time));
+		r = std::move((*object)->Update(dt));
 		if ((*object)->isDead()) //If object is dead, store its ID to be deleted
 			deadObjectIDs.push_back(id);
 		if (r)
 			new_object = std::move(r);
 	}
-	pDevice->Update(time);
+	pDevice->Update(dt);
 	if (new_object) //If a new object has been created, add it to the vector
 		objects.push_back(std::move(new_object));
 	return false;
@@ -163,7 +161,10 @@ void Game::Finish()
 {
 	while (deadObjectIDs.size() > 0)
 	{
-		objects.erase(objects.begin() + deadObjectIDs.back());
+		GAME_INT id = deadObjectIDs.back();
+		Object* object = objects[id].get();
+		object->pDevice->SetStopPhysics(object);
+		objects.erase(objects.begin() + id);
 		deadObjectIDs.pop_back();
 	}
 }

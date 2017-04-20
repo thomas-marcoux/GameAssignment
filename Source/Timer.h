@@ -13,7 +13,6 @@ public:
 	void start();
 	GAME_INT getTicks();
 	void fpsRegulate();
-	GAME_FLT getTime();
 
 private:
 	GAME_INT startTicks; //The clock time when the timer started
