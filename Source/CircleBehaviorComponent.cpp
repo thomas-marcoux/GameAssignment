@@ -43,7 +43,7 @@ std::unique_ptr<Object> CircleBehaviorComponent::Update(GAME_FLT dt)
 		angle -= _movement;
 		if (angle <= -360.0)
 			angle = 0;
-			*/
+		*/
 	}
 	body->setAngle(angle);
 	return NULL;

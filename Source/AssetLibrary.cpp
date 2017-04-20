@@ -28,9 +28,9 @@ bool AssetLibrary::LoadArt(std::string objectConfigFile)
 }
 
 //Translates text to body_type, default is static
-GAME_BODY_TYPE	AssetLibrary::getBodyType(char const* type)
+GAME_BODY_TYPE	AssetLibrary::getBodyType(std::string const& type)
 {
-	if (!type) throw LoadException(PARSE_ERROR, "physicsConfigFile");
+	if (type.empty()) throw LoadException(PARSE_ERROR, "physicsConfigFile");
 	if (type == "dynamic")
 		return GAME_DYNAMIC;
 	if (type == "kinematic")
@@ -39,9 +39,9 @@ GAME_BODY_TYPE	AssetLibrary::getBodyType(char const* type)
 }
 
 //Translates text to object_shape, default is circle
-GAME_OBJECT_SHAPE AssetLibrary::getShape(char const* shape)
+GAME_OBJECT_SHAPE AssetLibrary::getShape(std::string const& shape)
 {
-	if (!shape) throw LoadException(PARSE_ERROR, "physicsConfigFile");
+	if (shape.empty()) throw LoadException(PARSE_ERROR, "physicsConfigFile");
 	if (shape == "rectangle")
 		return GAME_RECTANGLE;
 	return GAME_CIRCLE;

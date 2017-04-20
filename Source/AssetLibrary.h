@@ -22,8 +22,8 @@ public:
 	std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>	SearchPhysics(std::string);
 
 private:
-	GAME_BODY_TYPE	getBodyType(char const*);
-	GAME_OBJECT_SHAPE	getShape(char const*);
+	GAME_BODY_TYPE	getBodyType(std::string const&);
+	GAME_OBJECT_SHAPE	getShape(std::string const&);
 
 private:
 	std::map<std::string, std::shared_ptr<Texture>> artLibrary;
