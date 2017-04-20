@@ -24,6 +24,18 @@
     <Component name="Body" x="35.0f" y="100.0f" angle="0.0f"/>
     <Component name="Sprite"/>
   </GameAsset>
+  <GameAsset name="Rock" >
+    <Component name="Body" x="100.0f" y="100.0f" angle="0.0f"/>
+    <Component name="Sprite"/>
+  </GameAsset>
+  <GameAsset name="Rock" >
+    <Component name="Body" x="150.0f" y="150.0f" angle="0.0f"/>
+    <Component name="Sprite"/>
+  </GameAsset>
+  <GameAsset name="Rock" >
+    <Component name="Body" x="125.0f" y="100.0f" angle="0.0f"/>
+    <Component name="Sprite"/>
+  </GameAsset>
   <GameAsset name="Blue Octorok" >
     <Component name="Body" x="125.0f" y="40.0f" angle="270.0f"/>
     <Component name="Sprite"/>
