@@ -18,16 +18,16 @@ bool View::Initialize(InputDevice *i, GAME_FLT x, GAME_FLT y)
 //Update view according to the player's position, returns false when the player quits the game
 bool View::Update(GAME_FLT gameTime)
 {
-	GAME_VEC	body = player->GetComponent<BodyComponent>()->getPosition();
+	GAME_VEC	body = player->pDevice->GetPosition(player);
 
 	if (body.x - position.x <= DIST_TO_BORDER)
-		center.x -= VIEW_MOVEMENT;
+		center.x -= VIEW_MOVEMENT * 20;
 	if (position.x + SCREEN_WIDTH - body.x - SPRITE_WIDTH <= DIST_TO_BORDER)
-		center.x += VIEW_MOVEMENT;
+		center.x += VIEW_MOVEMENT * 20;
 	if (body.y - position.y <= DIST_TO_BORDER)
-		center.y -= VIEW_MOVEMENT;
+		center.y -= VIEW_MOVEMENT * 20;
 	if (position.y + SCREEN_HEIGHT - body.y - SPRITE_HEIGHT <= DIST_TO_BORDER)
-		center.y += VIEW_MOVEMENT;
+		center.y += VIEW_MOVEMENT * 20;
 	if (iDevice->GetEvent(GAME_W))
 	{
 		center.x -= VIEW_MOVEMENT * sin(angle);
