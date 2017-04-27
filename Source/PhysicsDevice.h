@@ -28,13 +28,23 @@ public:
 	GAME_VEC GetVelocity(Object* object);
 	GAME_VEC GetLinearVelocity(Object* object);
 	b2World* getWorld() { return world.get(); }
+	bool createDistanceJoint(Object* object1, Object* object2, GAME_FLT maxDistance, GAME_VEC anchor1, GAME_VEC anchor2);
+	bool createDistanceJoint(Object* object1, Object* object2, GAME_FLT maxDistance);
+	bool createRopeJoint(Object* object1, Object* object2, GAME_FLT maxDistance, GAME_VEC anchor1, GAME_VEC anchor2, bool collide);
+	bool createRopeJoint(Object* object1, Object* object2, GAME_FLT maxDistance, bool collide);
+	bool createRevolvingJoint(Object* object1, Object* object2, bool collide, GAME_VEC anchor1, GAME_VEC anchor2, GAME_FLT referenceAngle,
+		bool enableLimit, GAME_FLT lowerAngle, GAME_FLT upperAngle, bool enableMotor, GAME_FLT motorSpeed, GAME_FLT maxMotorTorque);
+	bool createRevolvingJoint(Object* object1, Object* object2, GAME_VEC anchor1, GAME_VEC anchor2);
+	bool createRevolvingJoint(Object * object1, Object * object2);
 private:
-	inline float PW2RW(GAME_FLT x) { return x * fPRV; }
-	inline float RW2PW(GAME_FLT x) { return x / fPRV; }
-	inline float RW2PW(GAME_INT x) { return (float)x / fPRV; }
 	b2Body* FindBody(Object*);
 	b2Vec2 GV2PV(GAME_VEC gv);
 	GAME_VEC PV2GV(b2Vec2 pv);
+
+	inline float PW2RW(GAME_FLT x) { return x * fPRV; }
+	inline float RW2PW(GAME_FLT x) { return x / fPRV; }
+	inline float RW2PW(GAME_INT x) { return (float)x / fPRV; }
+
 	GAME_VEC AlignCenters(Object* object);	
 	
 private:

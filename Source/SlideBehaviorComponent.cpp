@@ -18,6 +18,10 @@ std::unique_ptr<Object> SlideBehaviorComponent::Update(GAME_FLT dt)
 	GAME_VEC position = body->getPosition();
 	GAME_VEC startPosition = body->getStartPosition();
 
+	/*
+	USE DT TIME TO KNOW WHEN TO SWITCH DIRECTION
+	*/
+
 	if (_vertical)
 	{
 		position.y += (int)_movement;

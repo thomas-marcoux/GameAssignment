@@ -16,6 +16,7 @@
     <ClCompile Include="Source\BodyComponent.cpp" />
     <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
     <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\ContactListener.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GraphicsDevice.cpp" />
     <ClCompile Include="Source\InputDevice.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="Source\CircleBehaviorComponentFactory.h.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\ComponentFactory.h" />
+    <ClInclude Include="Source\ContactListener.h" />
     <ClInclude Include="Source\Definitions.h" />
     <ClInclude Include="Source\Exceptions.h" />
     <ClInclude Include="Source\Game.h" />

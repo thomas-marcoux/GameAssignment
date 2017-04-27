@@ -62,9 +62,6 @@ void SpriteComponent::UpdateTexture()
 
 bool SpriteComponent::Draw(View* p_view)
 {
-	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
-
-	if (!body)	return false;
 	_texture->Draw(_gDevice->getRenderer(), p_view, _owner->pDevice->GetPosition(_owner), _owner->pDevice->GetAngle(_owner));
 	return true;
 }

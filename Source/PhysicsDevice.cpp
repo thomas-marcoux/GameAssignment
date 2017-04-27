@@ -1,4 +1,5 @@
 #include "PhysicsDevice.h"
+#include "ContactListener.h"
 #include "Object.h"
 #include "Texture.h"
 
@@ -14,7 +15,11 @@ PhysicsDevice::~PhysicsDevice()
 bool PhysicsDevice::Initialize()
 {
 	world = std::make_unique<b2World>(gravity);
-	return (world) ? true : false;
+	if (!world)
+		return false;
+	ContactListener* cl = new ContactListener();
+	world->SetContactListener(cl);
+	return true; 
 }
 
 bool PhysicsDevice::Update(float dt)
@@ -146,6 +151,75 @@ GAME_VEC PhysicsDevice::GetLinearVelocity(Object * object)
 {
 	b2Body* body = FindBody(object);
 	return PV2GV(body->GetLinearVelocity());
+}
+
+bool PhysicsDevice::createDistanceJoint(Object * object1, Object * object2, GAME_FLT maxDistance, GAME_VEC anchor1, GAME_VEC anchor2)
+{
+	b2DistanceJointDef jd;
+	jd.bodyA = FindBody(object1);
+	jd.bodyB = FindBody(object2);
+	jd.collideConnected = false;
+	jd.localAnchorA = GV2PV(anchor1);
+	jd.localAnchorB = GV2PV(anchor2);
+	jd.length = RW2PW(maxDistance);
+	world->CreateJoint(&jd);
+	return true;
+}
+
+bool PhysicsDevice::createDistanceJoint(Object * object1, Object * object2, GAME_FLT maxDistance)
+{
+	return createDistanceJoint(object1, object2, maxDistance, 
+		PV2GV(FindBody(object1)->GetLocalCenter()), PV2GV(FindBody(object2)->GetLocalCenter()));
+}
+
+bool PhysicsDevice::createRopeJoint(Object * object1, Object * object2, GAME_FLT maxDistance, GAME_VEC anchor1, GAME_VEC anchor2, bool collide)
+{
+	b2RopeJointDef jd;
+	jd.bodyA = FindBody(object1);
+	jd.bodyB = FindBody(object2);
+	jd.collideConnected = collide;
+	jd.localAnchorA = GV2PV(anchor1);
+	jd.localAnchorB = GV2PV(anchor2);
+	jd.maxLength= RW2PW(maxDistance);
+	world->CreateJoint(&jd);
+	return true;
+}
+
+bool PhysicsDevice::createRopeJoint(Object * object1, Object * object2, GAME_FLT maxDistance, bool collide)
+{
+	return createRopeJoint(object1, object2, maxDistance,
+		PV2GV(FindBody(object1)->GetLocalCenter()), PV2GV(FindBody(object2)->GetLocalCenter()), collide);
+}
+
+bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2, bool collide, GAME_VEC anchor1, GAME_VEC anchor2,
+	GAME_FLT referenceAngle, bool enableLimit, GAME_FLT lowerAngle, GAME_FLT upperAngle, bool enableMotor, GAME_FLT motorSpeed, GAME_FLT maxMotorTorque)
+{
+	b2RevoluteJointDef jd;
+	jd.bodyA = FindBody(object1);
+	jd.bodyB = FindBody(object2);
+	jd.collideConnected = collide;
+	jd.localAnchorA = GV2PV(anchor1);
+	jd.localAnchorB = GV2PV(anchor2);
+	jd.referenceAngle = TO_RADIAN(referenceAngle);
+	jd.enableLimit = enableLimit;
+	jd.lowerAngle = TO_RADIAN(lowerAngle);
+	jd.upperAngle = TO_RADIAN(upperAngle);
+	jd.enableMotor = enableMotor;
+	jd.motorSpeed = RW2PW(motorSpeed);
+	jd.maxMotorTorque = RW2PW(maxMotorTorque);
+	world->CreateJoint(&jd);
+	return true;
+}
+
+bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2, GAME_VEC anchor1, GAME_VEC anchor2)
+{
+	return createRevolvingJoint(object1, object2, false, anchor1, anchor2, 0, false, 0, 0, true, 20.0f, 100.0f);
+}
+
+bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2)
+{
+	return createRevolvingJoint(object1, object2,
+		PV2GV(FindBody(object1)->GetLocalCenter()), PV2GV(FindBody(object2)->GetLocalCenter()));
 }
 
 b2Body * PhysicsDevice::FindBody(Object* object)

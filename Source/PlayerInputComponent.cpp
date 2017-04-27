@@ -63,7 +63,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
-		if (!_owner->hasChild())
+		if (!_owner->hasChild()) //If an arrow does not already exist
 			return oFactory->createArrow(_owner);
 	}
 
