@@ -63,11 +63,8 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
-		if (_owner->canFreeTimedComponent())
-		{
-			_owner->setTimedComponentStatus(USED);
+		if (!_owner->hasChild())
 			return oFactory->createArrow(_owner);
-		}
 	}
 
 	body->setAngle(angle);

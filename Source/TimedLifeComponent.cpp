@@ -22,6 +22,6 @@ bool TimedLifeComponent::Finish()
 {
 	if (_health > 0)
 		return false;
-	_owner->getParent()->setTimedComponentStatus(FREE);
+	_owner->getParent()->setChild(nullptr);
 	return true;
 }

@@ -10,7 +10,7 @@ Object::Object()
 {
 	type = "null";
 	dead = false;
-	timedComponentStatus = FREE;
+	child = nullptr;
 	parent = nullptr;
 }
 

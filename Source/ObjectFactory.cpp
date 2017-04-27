@@ -85,6 +85,7 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	arrow = create(componentNames, GOI);
 	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
 	arrow->setParent(player);
+	player->setChild(arrow.get());
 	loadPhysics(arrow);
 	return arrow;
 }
