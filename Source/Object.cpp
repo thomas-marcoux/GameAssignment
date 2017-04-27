@@ -10,6 +10,8 @@ Object::Object()
 {
 	type = "null";
 	dead = false;
+	timedComponentStatus = FREE;
+	parent = nullptr;
 }
 
 Object::~Object()

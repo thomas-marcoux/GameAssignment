@@ -3,6 +3,8 @@
 
 #include "Component.h"
 
+class Object;
+
 //Decreases health until Object death
 class TimedLifeComponent : public Component
 {
@@ -16,6 +18,7 @@ public:
 private:
 	GAME_INT _health;
 	GAME_INT _decrement;
+	Object*	source;
 };
 
 #endif // !TIMEDLIFECOMPONENT_H

@@ -69,6 +69,8 @@ const GAME_FLT PI2 = 2 * PI;
 inline GAME_FLT TO_RADIAN(GAME_FLT d) {	return d * PI / 180; }
 inline GAME_FLT TO_DEGREE(GAME_FLT r) { return r * 180 / PI; }
 const float fPRV = 10.0f;
+const bool FREE = true;
+const bool USED = false;
 
 //Movement
 const GAME_FLT BLUEOCTOROK_MOVEMENT_MIN = (float)0.4;

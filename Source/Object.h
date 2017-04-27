@@ -34,15 +34,21 @@ public:
 		return NULL;
 	}
 	bool isDead() { return dead; }
+	bool canFreeTimedComponent() { return timedComponentStatus; }
+	Object* getParent() { return parent; }
 	std::string getType() { return type; }
 	std::shared_ptr<Texture>	getTexture();
 	void setType(std::string t) { type = t; }
 	void setPhysics(PhysicsDevice* p) { pDevice = p; }
+	void setParent(Object* o) { parent = o; }
+	void setTimedComponentStatus(bool b) { timedComponentStatus = b; }
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;
 	std::string type;
 	bool dead;
+	Object* parent;
+	bool timedComponentStatus;
 
 public:
 	PhysicsDevice*	pDevice;

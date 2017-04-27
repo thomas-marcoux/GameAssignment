@@ -62,7 +62,14 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
-		return oFactory->createArrow(_owner);
+	{
+		if (_owner->canFreeTimedComponent())
+		{
+			_owner->setTimedComponentStatus(USED);
+			return oFactory->createArrow(_owner);
+		}
+	}
+
 	body->setAngle(angle);
 	return nullptr;
 }

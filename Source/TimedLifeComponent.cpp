@@ -20,5 +20,8 @@ std::unique_ptr<Object> TimedLifeComponent::Update(GAME_FLT dt)
 
 bool TimedLifeComponent::Finish()
 {
-	return (_health <= 0);
+	if (_health > 0)
+		return false;
+	_owner->getParent()->setTimedComponentStatus(FREE);
+	return true;
 }

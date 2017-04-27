@@ -38,7 +38,7 @@ std::unique_ptr<Object> CircleBehaviorComponent::Update(GAME_FLT dt)
 	}
 	else
 	{
-		_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) - 2.0f * dt);
+		_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) + 200.0f * dt);
 		//_owner->pDevice->SetAngularVelocity(_owner, _owner->pDevice->GetAngularVelocity(_owner) + 2.0f * dt);
 		/*
 		angle -= _movement;
