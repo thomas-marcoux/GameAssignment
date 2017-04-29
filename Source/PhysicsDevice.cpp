@@ -63,6 +63,8 @@ bool PhysicsDevice::CreateFixture(Object *object, GAME_OBJECTFACTORY_INITIALIZER
 	shapefd.density = GOI.density;
 	shapefd.friction = GOI.friction;
 	shapefd.restitution = GOI.restitution;
+	if (!GOI.collision) //Disable collision for the body
+		shapefd.filter.maskBits = 0x0000;
 	body->CreateFixture(&shapefd);
 	object->setPhysics(this);
 	return true;
@@ -205,8 +207,8 @@ bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2, boo
 	jd.lowerAngle = TO_RADIAN(lowerAngle);
 	jd.upperAngle = TO_RADIAN(upperAngle);
 	jd.enableMotor = enableMotor;
-	jd.motorSpeed = RW2PW(motorSpeed);
-	jd.maxMotorTorque = RW2PW(maxMotorTorque);
+	jd.motorSpeed = TO_RADIAN(motorSpeed);
+	jd.maxMotorTorque = TO_RADIAN(maxMotorTorque);
 	world->CreateJoint(&jd);
 	return true;
 }

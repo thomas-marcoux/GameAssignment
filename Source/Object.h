@@ -41,7 +41,7 @@ public:
 	void setPhysics(PhysicsDevice* p) { pDevice = p; }
 	void setParent(Object* o) { parent = o; }
 	void setChild(Object* o) { child = o; }
-	bool hasChild() { return (child); }
+	bool hasChild() { return (child) ? true : false; }
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;

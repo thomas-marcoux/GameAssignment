@@ -20,6 +20,8 @@ public:
 	void loadPhysics(std::unique_ptr<Object> const&);
 	std::unique_ptr<Object> create(TiXmlElement*);
 	std::unique_ptr<Object> createArrow(Object*);
+	std::unique_ptr<Object> createAnchor(Object*, GAME_VEC);
+	std::unique_ptr<Object> createLever(GAME_VEC, GAME_FLT);
 	
 private:
 	std::unique_ptr<Object> create(std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS const&);

@@ -12,7 +12,7 @@ typedef struct GAME_VEC
 } GAME_VEC;
 
 //Physics
-enum GAME_OBJECT_SHAPE { GAME_RECTANGLE, GAME_CIRCLE };
+enum GAME_OBJECT_SHAPE { GAME_RECTANGLE, GAME_CIRCLE, GAME_OTHER };
 enum GAME_BODY_TYPE { GAME_STATIC, GAME_KINEMATIC, GAME_DYNAMIC };
 
 typedef struct GAME_OBJECTFACTORY_INITIALIZERS
@@ -35,6 +35,7 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	GAME_FLT	restitution;
 	GAME_FLT	angularDamping;
 	GAME_FLT	linearDamping;
+	bool		collision;
 } GAME_OBJECTFACTORY_INITIALIZERS;
 
 //========================================
@@ -71,12 +72,9 @@ inline GAME_FLT TO_DEGREE(GAME_FLT r) { return r * 180 / PI; }
 const float fPRV = 10.0f;
 
 //Movement
-const GAME_FLT BLUEOCTOROK_MOVEMENT_MIN = (float)0.4;
-const GAME_FLT BLUEOCTOROK_MOVEMENT_MAX = (float)1.2;
-const GAME_FLT REDOCTOROK_MOVEMENT = PI/356;
-const GAME_FLT REDOCTOROK_RADIUS_MIN = (float)0.7;
-const GAME_FLT REDOCTOROK_RADIUS_MAX = (float)1.5;
-const GAME_FLT LEEVER_MOVEMENT = (float)2.0;
+const GAME_FLT REDOCTOROK_RADIUS_MIN = 5.0f;
+const GAME_FLT REDOCTOROK_RADIUS_MAX = 80.0f;
+const GAME_FLT LEEVER_MOVEMENT = 2.0f;
 const int LEEVER_MIN_DISTANCE = 50;
 const int LEEVER_MAX_DISTANCE = 150;
 //View Movement

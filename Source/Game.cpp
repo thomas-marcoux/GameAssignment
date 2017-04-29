@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "Game.h"
+#include "CircleBehaviorComponent.h"
 #include "SpriteComponent.h"
 #include "PlayerInputComponent.h"
 #include "tinyxml\tinystr.h"
@@ -78,6 +79,19 @@ bool Game::LoadSprites()
 	return true;
 }
 
+//Loads anchors for CircleBehavior Components
+bool Game::LoadJoints()
+{
+	CircleBehaviorComponent *component;
+	for (auto const& object : objects)
+	{
+		component = object->GetComponent<CircleBehaviorComponent>();
+		if (component)
+			component->Initialize(oFactory.get());
+	}
+	return true;
+}
+
 //Loads PlayerInputComponent
 bool Game::LoadPlayer()
 {
@@ -107,9 +121,10 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		view->Initialize(iDevice.get(), 0, 0);
 		LoadAssets(objectConfigFile, physicsConfigFile);
 		LoadGameAssets(levelConfigFile);
+		LoadPhysics();
 		LoadSprites();
 		LoadPlayer();
-		LoadPhysics();
+		LoadJoints();
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}

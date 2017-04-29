@@ -9,5 +9,5 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 	Object* objectA = static_cast<Object*>(bodyA->GetUserData());
 	Object* objectB = static_cast<Object*>(bodyB->GetUserData());
 
-	objectA->pDevice->SetLinearVelocity(objectA, { -300, 0 });
+	//objectA->pDevice->SetLinearVelocity(objectA, { -300, 0 });
 }

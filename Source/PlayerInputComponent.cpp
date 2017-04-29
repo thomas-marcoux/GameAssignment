@@ -33,41 +33,40 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 
 	_owner->GetComponent<SpriteComponent>()->UpdateTexture();
 	iDevice->Update();
+	applyForce.x = 0.0f;
+	applyForce.y = 0.0f;
 	if (iDevice->GetEvent(GAME_UP))
 	{
 		angle = FACE_UP;
 		applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
 		applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
-		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	}
 	if (iDevice->GetEvent(GAME_DOWN))
 	{
 		angle = FACE_DOWN;
 		applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
 		applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
-		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	}
 	if (iDevice->GetEvent(GAME_LEFT))
 	{
 		angle = FACE_LEFT;
 		applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
 		applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
-		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	}
 	if (iDevice->GetEvent(GAME_RIGHT))
 	{
 		angle = FACE_RIGHT;
 		applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
 		applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
-		_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
-		if (!_owner->hasChild()) //If an arrow does not already exist
+		if (!_owner->hasChild())
 			return oFactory->createArrow(_owner);
 	}
-
+	_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	body->setAngle(angle);
+	//_owner->pDevice->SetAngle(_owner, TO_DEGREE(angle));
 	return nullptr;
 }
 

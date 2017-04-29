@@ -30,6 +30,7 @@ public:
 private:
 	bool LoadGameAssets(std::string);
 	bool LoadAssets(std::string, std::string);
+	bool LoadJoints();
 	bool LoadSprites();
 	bool LoadPlayer();
 	bool LoadPhysics();

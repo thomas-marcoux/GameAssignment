@@ -24,6 +24,7 @@ public:
 private:
 	GAME_BODY_TYPE	getBodyType(std::string const&);
 	GAME_OBJECT_SHAPE	getShape(std::string const&);
+	bool getCollision(std::string const& collision);
 
 private:
 	std::map<std::string, std::shared_ptr<Texture>> artLibrary;

@@ -47,6 +47,15 @@ GAME_OBJECT_SHAPE AssetLibrary::getShape(std::string const& shape)
 	return GAME_CIRCLE;
 }
 
+//Reads boolean
+bool AssetLibrary::getCollision(std::string const& collision)
+{
+	if (collision.empty()) throw LoadException(PARSE_ERROR, "physicsConfigFile");
+	if (collision == "false")
+		return false;
+	return true;;
+}
+
 //Loads all physics information
 bool AssetLibrary::LoadPhysics(std::string physicsConfigFile)
 {
@@ -65,6 +74,7 @@ bool AssetLibrary::LoadPhysics(std::string physicsConfigFile)
 		if (!name) throw LoadException(PARSE_ERROR, physicsConfigFile);
 		GOI.body_type = getBodyType(itemNode->Attribute("type"));
 		GOI.shape = getShape(itemNode->Attribute("shape"));
+		GOI.collision = getCollision(itemNode->Attribute("collision"));
 		itemNode->QueryFloatAttribute("density", &GOI.density);
 		itemNode->QueryFloatAttribute("friction", &GOI.friction);
 		itemNode->QueryFloatAttribute("restitution", &GOI.restitution);
