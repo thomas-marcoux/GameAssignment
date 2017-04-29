@@ -35,9 +35,9 @@ public:
 	}
 	bool isDead() { return dead; }
 	Object* getParent() { return parent; }
-	std::string getType() { return type; }
+	std::string getName() { return name; }
 	std::shared_ptr<Texture>	getTexture();
-	void setType(std::string t) { type = t; }
+	void setType(std::string t);
 	void setPhysics(PhysicsDevice* p) { pDevice = p; }
 	void setParent(Object* o) { parent = o; }
 	void setChild(Object* o) { child = o; }
@@ -45,7 +45,8 @@ public:
 
 protected:
 	std::vector<std::unique_ptr<Component>>	components;
-	std::string type;
+	std::string name;
+	OBJECT_TYPE	type;
 	bool dead;
 	Object* parent;
 	Object* child;

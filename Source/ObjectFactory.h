@@ -3,11 +3,13 @@
 
 #include <map>
 #include <memory>
-#include "ComponentFactory.h"
+#include <vector>
+#include "Definitions.h"
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 
 class AssetLibrary;
+class Component;
 class PhysicsDevice;
 class Object;
 
@@ -28,7 +30,7 @@ private:
 	std::unique_ptr<Component> Search(std::string const&, std::unique_ptr<Object> const&);
 
 private:
-	std::map<std::string, std::unique_ptr<ComponentFactory>>	cLibrary;
+	std::map<std::string, COMPONENT_TYPE>	cLibrary;
 	AssetLibrary* aLibrary;
 	PhysicsDevice*	pDevice;
 };

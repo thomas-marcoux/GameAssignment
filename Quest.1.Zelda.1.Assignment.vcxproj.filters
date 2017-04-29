@@ -149,29 +149,11 @@
     <ClInclude Include="Source\SpriteComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BodyComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerInputComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PlayerInputComponent.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CircleBehaviorComponentFactory.h.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SlideBehaviorComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\CircleBehaviorComponent.h">
       <Filter>Header Files</Filter>
@@ -184,12 +166,6 @@
     </ClInclude>
     <ClInclude Include="Source\ArrowBehaviorComponent.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimedLifeComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ArrowBehaviorComponentFactory.h">
-      <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Source\PhysicsDevice.h">
       <Filter>Header Files</Filter>

@@ -14,7 +14,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 	_lever = nullptr;
 	return true;
 }
-#include<iostream>
+
 bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 {
 	BodyComponent*	body = _owner->GetComponent<BodyComponent>();

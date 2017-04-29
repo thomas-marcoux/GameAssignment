@@ -1,32 +1,61 @@
 #include "ObjectFactory.h"
 #include "AssetLibrary.h"
-#include "PhysicsDevice.h"
-#include "BodyComponentFactory.h"
-#include "SpriteComponentFactory.h"
-#include "SlideBehaviorComponentFactory.h"
-#include "CircleBehaviorComponentFactory.h.h"
-#include "Object.h"
-#include "PlayerInputComponentFactory.h"
-#include "TimedLifeComponentFactory.h"
-#include "ArrowBehaviorComponentFactory.h"
 #include "Exceptions.h"
+#include "Object.h"
+#include "PhysicsDevice.h"
+#include "ArrowBehaviorComponent.h"
+#include "BodyComponent.h"
+#include "CircleBehaviorComponent.h"
+#include "PlayerInputComponent.h"
+#include "TimedLifeComponent.h"
+#include "SlideBehaviorComponent.h"
+#include "SpriteComponent.h"
 
 ObjectFactory::ObjectFactory()
 {
-	cLibrary["Body"] = std::make_unique<BodyComponentFactory>();
-	cLibrary["Sprite"] = std::make_unique<SpriteComponentFactory>();
-	cLibrary["Slide"] = std::make_unique<SlideBehaviorComponentFactory>();
-	cLibrary["Circle"] = std::make_unique<CircleBehaviorComponentFactory>();
-	cLibrary["Input"] = std::make_unique<PlayerInputComponentFactory>();
-	cLibrary["TimedLife"] = std::make_unique<TimedLifeComponentFactory>();
-	cLibrary["Arrow"] = std::make_unique<ArrowBehaviorComponentFactory>();
+	cLibrary["Body"] = BODY_COMPONENT;
+	cLibrary["Sprite"] = SPRITE_COMPONENT;
+	cLibrary["Slide"] = SLIDE_COMPONENT;
+	cLibrary["Circle"] = CIRCLE_COMPONENT;
+	cLibrary["Input"] = INPUT_COMPONENT;
+	cLibrary["TimedLife"] = TIMEDLIFE_COMPONENT;
+	cLibrary["Arrow"] = ARROW_COMPONENT;
 }
 
 //Return an instance of the requested component if it is in the factory, nullptr otherwise.
 std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, std::unique_ptr<Object> const& owner)
 {
-	std::map<std::string, std::unique_ptr<ComponentFactory>>::iterator it = cLibrary.find(component);
-	return (it == cLibrary.end()) ? nullptr : it->second->create(owner);
+	std::map<std::string, COMPONENT_TYPE>::iterator it = cLibrary.find(component);
+	
+	if (it == cLibrary.end())
+		return nullptr;
+	switch (it->second)
+	{
+	case BODY_COMPONENT:
+		return std::make_unique<BodyComponent>(owner);
+		break;
+	case SPRITE_COMPONENT:
+		return std::make_unique<SpriteComponent>(owner);
+		break;
+	case SLIDE_COMPONENT:
+		return std::make_unique<SlideBehaviorComponent>(owner);
+		break;
+	case CIRCLE_COMPONENT:
+		return std::make_unique<CircleBehaviorComponent>(owner);
+		break;
+	case INPUT_COMPONENT:
+		return std::make_unique<PlayerInputComponent>(owner);
+		break;
+	case TIMEDLIFE_COMPONENT:
+		return std::make_unique<TimedLifeComponent>(owner);
+		break;
+	case ARROW_COMPONENT:
+		return std::make_unique<ArrowBehaviorComponent>(owner);
+		break;
+	default:
+		break;
+	}
+	return nullptr;
 }
 
 bool ObjectFactory::Initialize(std::unique_ptr<AssetLibrary> const& aL, std::unique_ptr<PhysicsDevice> const& pD)
@@ -145,7 +174,7 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 
 void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object)
 {
-	std::string type = object->getType();
+	std::string type = object->getName();
 	GAME_OBJECTFACTORY_INITIALIZERS GOI = *aLibrary->SearchPhysics(type);
 	BodyComponent* body = object->GetComponent<BodyComponent>();
 

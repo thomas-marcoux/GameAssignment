@@ -8,7 +8,8 @@
 
 Object::Object()
 {
-	type = "null";
+	name = "null";
+	type = DEFAULT_TYPE;
 	dead = false;
 	child = nullptr;
 	parent = nullptr;
@@ -44,4 +45,18 @@ void Object::addComponent(std::unique_ptr<Component> component)
 std::shared_ptr<Texture> Object::getTexture()
 {
 	return GetComponent<SpriteComponent>()->getTexture();
+}
+
+void Object::setType(std::string t)
+{
+	name = t;
+	type = DEFAULT_TYPE;
+	if (name == "Arrow")
+		type = ARROW_TYPE;
+	if (name == "Link")
+		type = PLAYER_TYPE;
+	if (name == "Rock")
+		type = ROCK_TYPE;
+	if (name.find("Leever") || name.find("Octorock"))
+		type = ENEMY_TYPE;
 }

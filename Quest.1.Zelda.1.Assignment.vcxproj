@@ -39,14 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ArrowBehaviorComponent.h" />
-    <ClInclude Include="Source\ArrowBehaviorComponentFactory.h" />
     <ClInclude Include="Source\AssetLibrary.h" />
     <ClInclude Include="Source\BodyComponent.h" />
-    <ClInclude Include="Source\BodyComponentFactory.h" />
     <ClInclude Include="Source\CircleBehaviorComponent.h" />
-    <ClInclude Include="Source\CircleBehaviorComponentFactory.h.h" />
     <ClInclude Include="Source\Component.h" />
-    <ClInclude Include="Source\ComponentFactory.h" />
     <ClInclude Include="Source\ContactListener.h" />
     <ClInclude Include="Source\Definitions.h" />
     <ClInclude Include="Source\Exceptions.h" />
@@ -57,15 +53,11 @@
     <ClInclude Include="Source\ObjectFactory.h" />
     <ClInclude Include="Source\PhysicsDevice.h" />
     <ClInclude Include="Source\PlayerInputComponent.h" />
-    <ClInclude Include="Source\PlayerInputComponentFactory.h" />
     <ClInclude Include="Source\Random.h" />
     <ClInclude Include="Source\SlideBehaviorComponent.h" />
-    <ClInclude Include="Source\SlideBehaviorComponentFactory.h" />
     <ClInclude Include="Source\SpriteComponent.h" />
-    <ClInclude Include="Source\SpriteComponentFactory.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\TimedLifeComponent.h" />
-    <ClInclude Include="Source\TimedLifeComponentFactory.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\View.h" />
   </ItemGroup>
