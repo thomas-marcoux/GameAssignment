@@ -17,6 +17,7 @@ public:
 
 private:
 	GAME_FLT _radius;
+	GAME_FLT _speed;
 	GAME_INT _forceMultiplier;
 	GAME_VEC _applyForce;
 	std::unique_ptr<Object> _anchor;
