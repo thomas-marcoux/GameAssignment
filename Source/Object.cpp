@@ -57,6 +57,8 @@ void Object::setType(std::string t)
 		type = PLAYER_TYPE;
 	if (name == "Rock")
 		type = ROCK_TYPE;
-	if (name.find("Leever") || name.find("Octorock"))
-		type = ENEMY_TYPE;
+	if (name.find("Leever") != std::string::npos)
+		type = LEEVER_TYPE;
+	if (name.find("Octorock") != std::string::npos)
+		type = OCTOROCK_TYPE;
 }

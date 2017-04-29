@@ -43,6 +43,8 @@ bool PhysicsDevice::CreateFixture(Object *object, GAME_OBJECTFACTORY_INITIALIZER
 	}
 	bd->position.Set(RW2PW(GOI.pos.x), RW2PW(GOI.pos.y));
 	bd->angle = TO_RADIAN(GOI.angle);
+	if (object->getType() == LEEVER_TYPE || object->getType() == ARROW_TYPE)
+		bd->fixedRotation = true;
 
 	b2Body* body = world->CreateBody(bd.release());
 	b2FixtureDef	shapefd;

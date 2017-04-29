@@ -4,7 +4,6 @@
 #include "Object.h"
 #include "PhysicsDevice.h"
 #include "ArrowBehaviorComponent.h"
-#include "BodyComponent.h"
 #include "CircleBehaviorComponent.h"
 #include "PlayerInputComponent.h"
 #include "TimedLifeComponent.h"
@@ -13,7 +12,6 @@
 
 ObjectFactory::ObjectFactory()
 {
-	cLibrary["Body"] = BODY_COMPONENT;
 	cLibrary["Sprite"] = SPRITE_COMPONENT;
 	cLibrary["Slide"] = SLIDE_COMPONENT;
 	cLibrary["Circle"] = CIRCLE_COMPONENT;
@@ -31,9 +29,6 @@ std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, s
 		return nullptr;
 	switch (it->second)
 	{
-	case BODY_COMPONENT:
-		return std::make_unique<BodyComponent>(owner);
-		break;
 	case SPRITE_COMPONENT:
 		return std::make_unique<SpriteComponent>(owner);
 		break;
