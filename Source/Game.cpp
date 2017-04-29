@@ -105,13 +105,6 @@ bool Game::LoadPlayer()
 	return true;
 }
 
-bool Game::LoadPhysics()
-{
-	for (auto const& object : objects)
-		oFactory->loadPhysics(object);
-	return true;
-}
-
 //Loads game info from both config files, catches errors occuring during loading
 bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile)
 {
@@ -121,7 +114,6 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		view->Initialize(iDevice.get(), 0, 0);
 		LoadAssets(objectConfigFile, physicsConfigFile);
 		LoadGameAssets(levelConfigFile);
-		LoadPhysics();
 		LoadSprites();
 		LoadPlayer();
 		LoadJoints();

@@ -113,7 +113,6 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
 	arrow->setParent(player);
 	player->setChild(arrow.get());
-	loadPhysics(arrow);
 	return arrow;
 }
 
@@ -129,7 +128,6 @@ std::unique_ptr<Object> ObjectFactory::createAnchor(Object* o, GAME_VEC pos)
 	GOI.pos = pos;
 	GOI.angle = 0.0f;
 	anchor = create(componentNames, GOI);
-	loadPhysics(anchor);
 	//anchor->GetComponent<SpriteComponent>()->Initialize(o->GetComponent<SpriteComponent>()->getGDevice(), aLibrary->SearchArt("Rock"));
 	return anchor;
 }
@@ -148,7 +146,6 @@ std::unique_ptr<Object> ObjectFactory::createLever(GAME_VEC pos, GAME_FLT radius
 	GOI.width = 1;
 	GOI.height = radius;
 	lever = create(componentNames, GOI);
-	loadPhysics(lever);
 	return lever;
 }
 
@@ -168,26 +165,25 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 		}
 	}
 	object->setType(GOI.name);
+	loadPhysics(object, GOI);
 	return object;
 }
 
-void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object)
+void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object, GAME_OBJECTFACTORY_INITIALIZERS const& GOI)
 {
-	std::string type = object->getName();
-	GAME_OBJECTFACTORY_INITIALIZERS GOI = *aLibrary->SearchPhysics(type);
-	BodyComponent* body = object->GetComponent<BodyComponent>();
+	GAME_OBJECTFACTORY_INITIALIZERS physicsGOI = *aLibrary->SearchPhysics(object->getName());
 
-	GOI.pos = body->getPosition();
-	GOI.angle = body->getAngle();
-	if (GOI.shape == GAME_CIRCLE)
+	physicsGOI.pos = GOI.pos;
+	physicsGOI.angle = GOI.angle;
+	if (physicsGOI.shape == GAME_CIRCLE)
 	{
-		GOI.width = SPRITE_WIDTH;
-		GOI.height = 0.0f;
+		physicsGOI.width = SPRITE_WIDTH;
+		physicsGOI.height = 0.0f;
 	}
-	if (GOI.shape == GAME_RECTANGLE)
+	if (physicsGOI.shape == GAME_RECTANGLE)
 	{
-		GOI.width = SPRITE_WIDTH;
-		GOI.height = SPRITE_HEIGHT;
+		physicsGOI.width = SPRITE_WIDTH;
+		physicsGOI.height = SPRITE_HEIGHT;
 	}
-	pDevice->CreateFixture(object.get(), GOI);
+	pDevice->CreateFixture(object.get(), physicsGOI);
 }

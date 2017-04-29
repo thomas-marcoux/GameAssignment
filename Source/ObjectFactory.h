@@ -19,7 +19,7 @@ public:
 	ObjectFactory();
 	~ObjectFactory() {}
 	bool Initialize(std::unique_ptr<AssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&);
-	void loadPhysics(std::unique_ptr<Object> const&);
+	void loadPhysics(std::unique_ptr<Object> const&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::unique_ptr<Object> create(TiXmlElement*);
 	std::unique_ptr<Object> createArrow(Object*);
 	std::unique_ptr<Object> createAnchor(Object*, GAME_VEC);
