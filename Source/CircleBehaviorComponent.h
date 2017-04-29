@@ -4,7 +4,7 @@
 #include "Component.h"
 #include "ObjectFactory.h"
 
-//Updates Octorok Objects's BodyComponent by circling around a point or on itself
+//Apply forces to the Object's physics body
 class CircleBehaviorComponent : public Component
 {
 public:

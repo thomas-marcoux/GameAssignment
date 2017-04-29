@@ -1,5 +1,4 @@
 #include "SlideBehaviorComponent.h"
-#include "BodyComponent.h"
 #include "Object.h"
 #include "Random.h"
 
@@ -18,24 +17,24 @@ std::unique_ptr<Object> SlideBehaviorComponent::Update(GAME_FLT dt)
 
 	if (_vertical)
 	{
-		_applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
-		_applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
 		if (abs(position.y - _startPosition.y) >= _maxDistance)
 		{
 			_owner->pDevice->SetAngle(_owner, _owner->pDevice->GetAngle(_owner) + 180.0f);
 			//std::cout << "x = " << position.x << " y = " << position.y <<  "max = " << abs(position.x - _startPosition.x) << std::endl;
 		}
+		_applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
+		_applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
 	}
 	else
 	{
-		_applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
-		_applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
 		//std::cout << "x = " << position.x << " y = " << position.y << " start x = " << _startPosition.x << " y = " << _startPosition.y << std::endl;
 		if (abs(position.x - _startPosition.x) >= _maxDistance)
 		{
 			_owner->pDevice->SetAngle(_owner, _owner->pDevice->GetAngle(_owner) + 180.0f);
 			//std::cout << "x = " << position.x << " y = " << position.y << "max = " << abs(position.x - _startPosition.x) << std::endl;
 		}
+		_applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
+		_applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, _applyForce);
 	return NULL;

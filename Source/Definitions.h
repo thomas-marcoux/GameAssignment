@@ -11,9 +11,24 @@ typedef struct GAME_VEC
     GAME_FLT y;
 } GAME_VEC;
 
-//Physics
+//========================================
+//Physics Constants
+//========================================
+const GAME_FLT PI = 3.14159f;
+const GAME_FLT PI_2 = PI / 2;
+const GAME_FLT PI2 = 2 * PI;
+inline GAME_FLT TO_RADIAN(GAME_FLT d) { return d * PI / 180; }
+inline GAME_FLT TO_DEGREE(GAME_FLT r) { return r * 180 / PI; }
+const float fPRV = 10.0f;
+
 enum GAME_OBJECT_SHAPE { GAME_RECTANGLE, GAME_CIRCLE, GAME_OTHER };
 enum GAME_BODY_TYPE { GAME_STATIC, GAME_KINEMATIC, GAME_DYNAMIC };
+
+//Angles
+const GAME_FLT ANGLE_UP = 0;
+const GAME_FLT ANGLE_DOWN = PI;
+const GAME_FLT ANGLE_RIGHT = PI_2;
+const GAME_FLT ANGLE_LEFT = 3 * PI_2;
 
 typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 {
@@ -25,10 +40,9 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	bool	vertical;
 	GAME_INT	arrow_health;
 	GAME_INT	arrow_decrement;
-	GAME_INT	arrow_movement;
 	GAME_OBJECT_SHAPE	shape;
 	GAME_BODY_TYPE		body_type;
-	GAME_FLT	width; //radius
+	GAME_FLT	width;
 	GAME_FLT	height;
 	GAME_FLT	density;
 	GAME_FLT	friction;
@@ -63,32 +77,19 @@ enum GAME_EVENT {GAME_NA, GAME_W, GAME_A, GAME_S, GAME_D,
 	GAME_UP,GAME_DOWN,GAME_LEFT,GAME_RIGHT,
 	GAME_SPACE, GAME_TAB, GAME_ESC, GAME_QUIT, NB_EVENTS};
 
-//Constants
-const GAME_FLT PI = 3.14159f;
-const GAME_FLT PI_2 = PI / 2;
-const GAME_FLT PI2 = 2 * PI;
-inline GAME_FLT TO_RADIAN(GAME_FLT d) {	return d * PI / 180; }
-inline GAME_FLT TO_DEGREE(GAME_FLT r) { return r * 180 / PI; }
-const float fPRV = 10.0f;
-
-//Movement
+//Enemy Movement
 const GAME_FLT REDOCTOROK_RADIUS_MIN = 5.0f;
 const GAME_FLT REDOCTOROK_RADIUS_MAX = 80.0f;
 const int LEEVER_MIN_DISTANCE = 50;
 const int LEEVER_MAX_DISTANCE = 150;
+
 //View Movement
 const GAME_INT VIEW_MOVEMENT = 5;
 const GAME_FLT DEFAULT_VIEW_ANGLE = 0;
 const GAME_FLT VIEW_ROTATION = PI / 36;
 const GAME_INT DIST_TO_BORDER = 50;
 
-//Physics Angles
-const GAME_FLT ANGLE_UP = 0;
-const GAME_FLT ANGLE_DOWN = PI;
-const GAME_FLT ANGLE_RIGHT = PI_2;
-const GAME_FLT ANGLE_LEFT = 3 * PI_2;
-
-//Arrow
+//Arrow Life
 const GAME_INT ARROW_HEALTH = 350;
 const GAME_INT ARROW_HEALTH_DECREMENT = 5;
 
@@ -102,7 +103,7 @@ enum COMPONENT_TYPE {
 	BODY_COMPONENT, SPRITE_COMPONENT, CIRCLE_COMPONENT, SLIDE_COMPONENT, INPUT_COMPONENT, TIMEDLIFE_COMPONENT, ARROW_COMPONENT
 };
 
-//Objects
+//Object Types
 enum OBJECT_TYPE {
 	ARROW_TYPE, ENEMY_TYPE, PLAYER_TYPE, ROCK_TYPE, DEFAULT_TYPE
 };

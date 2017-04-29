@@ -1,5 +1,4 @@
 #include "PlayerInputComponent.h"
-#include "BodyComponent.h"
 #include "InputDevice.h"
 #include "ObjectFactory.h"
 #include "SpriteComponent.h"
@@ -27,9 +26,7 @@ bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* 
 
 std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 {
-	BodyComponent* body = _owner->GetComponent<BodyComponent>();
 	SpriteComponent* sprite = _owner->GetComponent<SpriteComponent>();
-	GAME_FLT angle = body->getAngle();
 	GAME_VEC applyForce;
 
 	iDevice->Update();
@@ -65,7 +62,6 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 			return oFactory->createArrow(_owner);
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);
-	body->setAngle(angle);
 	_owner->pDevice->SetAngle(_owner, TO_DEGREE(ANGLE_UP)); //Ensures the axis sprites do not rotate and remain aligned
 	return nullptr;
 }

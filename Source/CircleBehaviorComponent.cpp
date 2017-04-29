@@ -1,5 +1,4 @@
 #include "CircleBehaviorComponent.h"
-#include "BodyComponent.h"
 #include "Object.h"
 #include "ObjectFactory.h"
 #include "Random.h"
@@ -17,8 +16,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 
 bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 {
-	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
-	GAME_VEC	object_pos = body->getPosition();
+	GAME_VEC	object_pos = _owner->pDevice->GetPosition(_owner);
 	GAME_VEC	anchor_pos = object_pos;
 
 	anchor_pos.y -= _radius;

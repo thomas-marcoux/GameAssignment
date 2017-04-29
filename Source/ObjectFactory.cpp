@@ -121,7 +121,8 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 std::unique_ptr<Object> ObjectFactory::createAnchor(Object* o, GAME_VEC pos)
 {
 	std::unique_ptr<Object>	anchor;
-	std::vector<std::string>	componentNames = { "Body", "Sprite"};
+	//std::vector<std::string>	componentNames = { "Body", "Sprite"};
+	std::vector<std::string>	componentNames = { "Body"};
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 
 	GOI.name = "Anchor";
@@ -129,7 +130,7 @@ std::unique_ptr<Object> ObjectFactory::createAnchor(Object* o, GAME_VEC pos)
 	GOI.angle = 0.0f;
 	anchor = create(componentNames, GOI);
 	loadPhysics(anchor);
-	anchor->GetComponent<SpriteComponent>()->Initialize(o->GetComponent<SpriteComponent>()->getGDevice(), aLibrary->SearchArt("Rock"));
+	//anchor->GetComponent<SpriteComponent>()->Initialize(o->GetComponent<SpriteComponent>()->getGDevice(), aLibrary->SearchArt("Rock"));
 	return anchor;
 }
 

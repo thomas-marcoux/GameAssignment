@@ -1,5 +1,4 @@
 #include "SpriteComponent.h"
-#include "BodyComponent.h"
 #include "GraphicsDevice.h"
 #include "Object.h"
 
