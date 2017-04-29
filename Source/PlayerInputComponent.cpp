@@ -21,6 +21,7 @@ bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* 
 	view = v;
 	view->setPlayer(_owner);
 	_forceMultiplier = 100;
+	_angle = ANGLE_UP;
 	return true;
 }
 
@@ -34,24 +35,28 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	applyForce.y = 0.0f;
 	if (iDevice->GetEvent(GAME_UP))
 	{
+		_angle = ANGLE_UP;
 		sprite->UpdateTexture(TEXTURE_UP);
 		applyForce.x = (float)cosf(ANGLE_UP - (PI / 2))*_forceMultiplier;
 		applyForce.y = (float)sinf(ANGLE_UP - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_DOWN))
 	{
+		_angle = ANGLE_DOWN;
 		sprite->UpdateTexture(TEXTURE_DOWN);
 		applyForce.x = (float)cosf(ANGLE_DOWN - (PI / 2))*_forceMultiplier;
 		applyForce.y = (float)sinf(ANGLE_DOWN - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_LEFT))
 	{
+		_angle = ANGLE_LEFT;
 		sprite->UpdateTexture(TEXTURE_LEFT);
 		applyForce.x = (float)cosf(ANGLE_LEFT - (PI / 2))*_forceMultiplier;
 		applyForce.y = (float)sinf(ANGLE_LEFT - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_RIGHT))
 	{
+		_angle = ANGLE_RIGHT;
 		sprite->UpdateTexture(TEXTURE_RIGHT);
 		applyForce.x = (float)cosf(ANGLE_RIGHT - (PI / 2))*_forceMultiplier;
 		applyForce.y = (float)sinf(ANGLE_RIGHT - (PI / 2))*_forceMultiplier;
@@ -59,7 +64,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
 		if (!_owner->hasChild())
-			return oFactory->createArrow(_owner);
+			return oFactory->createArrow(_owner, _angle);
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	_owner->pDevice->SetAngle(_owner, TO_DEGREE(ANGLE_UP)); //Ensures the axis sprites do not rotate and remain aligned

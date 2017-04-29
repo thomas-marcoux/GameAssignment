@@ -30,7 +30,7 @@ bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 		GAME_VEC	lever_anchorB = lever_pos;
 
 		lever_anchorB.y += _radius;
-		_anchor = oFactory->createAnchor(_owner, anchor_pos);
+		_anchor = oFactory->createAnchor(anchor_pos);
 		_lever = oFactory->createLever(lever_pos, _radius);
 		_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get(), anchor_pos, lever_anchorA);
 		_owner->pDevice->createRevolvingJoint(_owner, _lever.get(), object_pos, lever_anchorB);

@@ -59,6 +59,6 @@ void Object::setType(std::string t)
 		type = ROCK_TYPE;
 	if (name.find("Leever") != std::string::npos)
 		type = LEEVER_TYPE;
-	if (name.find("Octorock") != std::string::npos)
-		type = OCTOROCK_TYPE;
+	if (name.find("Octorok") != std::string::npos)
+		type = OCTOROK_TYPE;
 }

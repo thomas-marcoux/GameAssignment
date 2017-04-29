@@ -88,22 +88,21 @@ std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 }
 
 //Create arrow from player Object
-std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
+std::unique_ptr<Object> ObjectFactory::createArrow(Object *player, GAME_FLT angle)
 {
 	std::unique_ptr<Object>	arrow;
 	std::vector<std::string>	componentNames = { "Body", "Sprite", "TimedLife", "Arrow" };
 	SpriteComponent*	link_sprite = player->GetComponent<SpriteComponent>();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 	GAME_VEC link_pos = player->pDevice->GetPosition(player);
-	GAME_FLT angle = player->pDevice->GetAngle(player);
 
 	GOI.name = "Arrow";
-	GOI.pos.x = link_pos.x;
-	GOI.pos.y = link_pos.y;
-	GOI.angle = -(angle - PI_2) * 180 / PI;
-	GOI.movement_angle = angle;
+	std::cout << "angle = " << angle << std::endl;
+	GOI.pos.x = link_pos.x + cosf(angle) * SPRITE_WIDTH_2;
+	GOI.pos.y = link_pos.y + sinf(angle) * SPRITE_HEIGHT_2;
+	GOI.angle = TO_DEGREE(angle);
 	GOI.arrow_health = ARROW_HEALTH;
-	GOI.arrow_decrement = ARROW_HEALTH_DECREMENT;
+	GOI.arrow_decrement = 5;
 	arrow = create(componentNames, GOI);
 	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
 	arrow->setParent(player);

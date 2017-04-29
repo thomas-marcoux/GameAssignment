@@ -9,5 +9,12 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 	Object* objectA = static_cast<Object*>(bodyA->GetUserData());
 	Object* objectB = static_cast<Object*>(bodyB->GetUserData());
 
-	//objectA->pDevice->SetLinearVelocity(objectA, { -300, 0 });
+	if (((objectB->getType() == OCTOROK_TYPE || objectB->getType() == LEEVER_TYPE) && objectA->getType() == ARROW_TYPE)
+		|| (objectB->getType() == ARROW_TYPE && (objectA->getType() == OCTOROK_TYPE || objectA->getType() == LEEVER_TYPE)))
+	{
+		if (objectA->getType() == ARROW_TYPE)
+			objectB->kill();
+		else
+			objectA->kill();
+	}
 }

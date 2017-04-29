@@ -7,7 +7,7 @@ class InputDevice;
 class ObjectFactory;
 class View;
 
-//Queries InputDevice for input, updates the Object's other components
+//Queries InputDevice for input, applies forces, updates textures, creates arrow
 class PlayerInputComponent : public Component
 {
 public:
@@ -24,6 +24,7 @@ private:
 	View*	view;
 	GAME_INT _forceMultiplier;
 	GAME_VEC _force;
+	GAME_FLT _angle;
 };
 
 #endif // !PLAYERINPUTCOMPONENT_H

@@ -33,6 +33,7 @@ public:
 		}
 		return NULL;
 	}
+	void kill() { dead = true; }
 	bool isDead() { return dead; }
 	Object* getParent() { return parent; }
 	std::string getName() { return name; }

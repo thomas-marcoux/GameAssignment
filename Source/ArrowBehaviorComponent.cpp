@@ -2,7 +2,7 @@
 
 bool ArrowBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
-	_forceMultiplier = 100;
+	_forceMultiplier = ARROW_FORCE;
 	return true;
 }
 
