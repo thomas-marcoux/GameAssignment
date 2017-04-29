@@ -15,7 +15,9 @@ public:
 
 private:
 	bool		_vertical;
-	GAME_FLT	_movement;
+	GAME_VEC	_startPosition;
 	GAME_FLT	_maxDistance;
+	GAME_INT	_forceMultiplier;
+	GAME_VEC	_applyForce;
 };
 #endif // !SLIDEBEHAVIORCOMPONENT_H

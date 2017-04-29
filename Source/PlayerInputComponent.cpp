@@ -21,43 +21,43 @@ bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* 
 	oFactory = oF;
 	view = v;
 	view->setPlayer(_owner);
+	_forceMultiplier = 100;
 	return true;
 }
 
 std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 {
 	BodyComponent* body = _owner->GetComponent<BodyComponent>();
+	SpriteComponent* sprite = _owner->GetComponent<SpriteComponent>();
 	GAME_FLT angle = body->getAngle();
-	GAME_INT forceMultiplier = 100;
 	GAME_VEC applyForce;
 
-	_owner->GetComponent<SpriteComponent>()->UpdateTexture();
 	iDevice->Update();
 	applyForce.x = 0.0f;
 	applyForce.y = 0.0f;
 	if (iDevice->GetEvent(GAME_UP))
 	{
-		angle = FACE_UP;
-		applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
-		applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
+		sprite->UpdateTexture(TEXTURE_UP);
+		applyForce.x = (float)cosf(ANGLE_UP - (PI / 2))*_forceMultiplier;
+		applyForce.y = (float)sinf(ANGLE_UP - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_DOWN))
 	{
-		angle = FACE_DOWN;
-		applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
-		applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
+		sprite->UpdateTexture(TEXTURE_DOWN);
+		applyForce.x = (float)cosf(ANGLE_DOWN - (PI / 2))*_forceMultiplier;
+		applyForce.y = (float)sinf(ANGLE_DOWN - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_LEFT))
 	{
-		angle = FACE_LEFT;
-		applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
-		applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*forceMultiplier;
+		sprite->UpdateTexture(TEXTURE_LEFT);
+		applyForce.x = (float)cosf(ANGLE_LEFT - (PI / 2))*_forceMultiplier;
+		applyForce.y = (float)sinf(ANGLE_LEFT - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_RIGHT))
 	{
-		angle = FACE_RIGHT;
-		applyForce.x = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
-		applyForce.y = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) + (PI / 2))*forceMultiplier;
+		sprite->UpdateTexture(TEXTURE_RIGHT);
+		applyForce.x = (float)cosf(ANGLE_RIGHT - (PI / 2))*_forceMultiplier;
+		applyForce.y = (float)sinf(ANGLE_RIGHT - (PI / 2))*_forceMultiplier;
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
@@ -66,7 +66,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	body->setAngle(angle);
-	//_owner->pDevice->SetAngle(_owner, TO_DEGREE(angle));
+	_owner->pDevice->SetAngle(_owner, TO_DEGREE(ANGLE_UP)); //Ensures the axis sprites do not rotate and remain aligned
 	return nullptr;
 }
 

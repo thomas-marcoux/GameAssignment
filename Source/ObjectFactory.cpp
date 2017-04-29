@@ -97,11 +97,10 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 {
 	std::unique_ptr<Object>	arrow;
 	std::vector<std::string>	componentNames = { "Body", "Sprite", "TimedLife", "Arrow" };
-	BodyComponent*	link_body = player->GetComponent<BodyComponent>();
 	SpriteComponent*	link_sprite = player->GetComponent<SpriteComponent>();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
-	GAME_VEC link_pos = link_body->getPosition();
-	GAME_FLT angle = link_body->getAngle();
+	GAME_VEC link_pos = player->pDevice->GetPosition(player);
+	GAME_FLT angle = player->pDevice->GetAngle(player);
 
 	GOI.name = "Arrow";
 	GOI.pos.x = link_pos.x;
@@ -110,7 +109,6 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player)
 	GOI.movement_angle = angle;
 	GOI.arrow_health = ARROW_HEALTH;
 	GOI.arrow_decrement = ARROW_HEALTH_DECREMENT;
-	GOI.arrow_movement = ARROW_MOVEMENT;
 	arrow = create(componentNames, GOI);
 	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
 	arrow->setParent(player);

@@ -73,7 +73,7 @@ bool Game::LoadSprites()
 			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Link Down"));
 			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Link Left"));
 			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Link Right"));
-			sprite->UpdateTexture();
+			sprite->UpdateTexture(TEXTURE_UP);
 		}	
 	}
 	return true;

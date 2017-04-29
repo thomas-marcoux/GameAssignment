@@ -45,19 +45,9 @@ bool SpriteComponent::LoadTexture(TEXTURE_ID id, std::shared_ptr<Texture> textur
 }
 
 //Update the active texture depending on what direction the object is facing
-void SpriteComponent::UpdateTexture()
+void SpriteComponent::UpdateTexture(TEXTURE_ID id)
 {
-	BodyComponent*	body = _owner->GetComponent<BodyComponent>();
-	GAME_FLT angle = body->getAngle();
-
-	if (angle == FACE_DOWN)
-		_texture = _textures[TEXTURE_DOWN];
-	else if (angle == FACE_RIGHT)
-		_texture = _textures[TEXTURE_RIGHT];
-	else if (angle == FACE_LEFT)
-		_texture = _textures[TEXTURE_LEFT];
-	else
-		_texture = _textures[TEXTURE_UP];
+	_texture = _textures[id];
 }
 
 bool SpriteComponent::Draw(View* p_view)

@@ -13,8 +13,8 @@ public:
 	bool Finish() { return false; }
 
 private:
-	GAME_FLT _movement;
-	GAME_FLT _movementAngle;
+	GAME_INT	_forceMultiplier;
+	GAME_VEC	_applyForce;
 };
 
 #endif // !ARROWBEHAVIORCOMPONENT_H

@@ -22,6 +22,8 @@ private:
 	InputDevice* iDevice;
 	ObjectFactory* oFactory;
 	View*	view;
+	GAME_INT _forceMultiplier;
+	GAME_VEC _force;
 };
 
 #endif // !PLAYERINPUTCOMPONENT_H

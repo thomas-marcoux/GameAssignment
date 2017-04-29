@@ -36,6 +36,7 @@ public:
 	bool isDead() { return dead; }
 	Object* getParent() { return parent; }
 	std::string getName() { return name; }
+	OBJECT_TYPE getType() { return type; }
 	std::shared_ptr<Texture>	getTexture();
 	void setType(std::string t);
 	void setPhysics(PhysicsDevice* p) { pDevice = p; }

@@ -21,7 +21,7 @@ public:
 	GraphicsDevice* getGDevice() { return _gDevice; }
 	std::shared_ptr<Texture> getTexture() { return _texture; }
 	bool LoadTexture(TEXTURE_ID, std::shared_ptr<Texture>);
-	void UpdateTexture();
+	void UpdateTexture(TEXTURE_ID);
 
 private:
 	std::string	_name;

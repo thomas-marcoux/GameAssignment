@@ -74,27 +74,23 @@ const float fPRV = 10.0f;
 //Movement
 const GAME_FLT REDOCTOROK_RADIUS_MIN = 5.0f;
 const GAME_FLT REDOCTOROK_RADIUS_MAX = 80.0f;
-const GAME_FLT LEEVER_MOVEMENT = 2.0f;
 const int LEEVER_MIN_DISTANCE = 50;
 const int LEEVER_MAX_DISTANCE = 150;
 //View Movement
 const GAME_INT VIEW_MOVEMENT = 5;
 const GAME_FLT DEFAULT_VIEW_ANGLE = 0;
 const GAME_FLT VIEW_ROTATION = PI / 36;
-//Player Movement
-const GAME_INT LINK_MOVEMENT = 3;
 const GAME_INT DIST_TO_BORDER = 50;
 
-//Angles
-const GAME_FLT FACE_UP = PI_2;
-const GAME_FLT FACE_DOWN = 3 * PI_2;
-const GAME_FLT FACE_RIGHT = 0;
-const GAME_FLT FACE_LEFT = PI;
+//Physics Angles
+const GAME_FLT ANGLE_UP = 0;
+const GAME_FLT ANGLE_DOWN = PI;
+const GAME_FLT ANGLE_RIGHT = PI_2;
+const GAME_FLT ANGLE_LEFT = 3 * PI_2;
 
 //Arrow
 const GAME_INT ARROW_HEALTH = 350;
 const GAME_INT ARROW_HEALTH_DECREMENT = 5;
-const GAME_INT ARROW_MOVEMENT = 3;
 
 //Textures
 enum TEXTURE_ID {
