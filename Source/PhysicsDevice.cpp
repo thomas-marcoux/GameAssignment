@@ -43,7 +43,7 @@ bool PhysicsDevice::CreateFixture(Object *object, GAME_OBJECTFACTORY_INITIALIZER
 	}
 	bd->position.Set(RW2PW(GOI.pos.x), RW2PW(GOI.pos.y));
 	bd->angle = TO_RADIAN(GOI.angle);
-	if (object->getType() == LEEVER_TYPE || object->getType() == ARROW_TYPE)
+	if (!GOI.rotation) //Disable rotation so some bodies stay on the axis
 		bd->fixedRotation = true;
 
 	b2Body* body = world->CreateBody(bd.release());
@@ -224,6 +224,30 @@ bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2)
 {
 	return createRevolvingJoint(object1, object2,
 		PV2GV(FindBody(object1)->GetLocalCenter()), PV2GV(FindBody(object2)->GetLocalCenter()));
+}
+
+bool PhysicsDevice::DestroyJoint(Object * object)
+{
+	b2Body* body = FindBody(object);
+	return (body != NULL) ? DestroyJoint(FindBody(object)) : false;
+}
+
+bool PhysicsDevice::DestroyJoint(b2Body * body)
+{
+	for (b2JointEdge* j = body->GetJointList(); j; j = j->next)
+		world->DestroyJoint(j->joint);
+	return true;
+}
+
+bool PhysicsDevice::RemoveObject(Object * object)
+{
+	b2Body* body = FindBody(object);
+
+	if (body == NULL)
+		return false;
+	DestroyJoint(body);
+	world->DestroyBody(body);
+	return true;
 }
 
 b2Body * PhysicsDevice::FindBody(Object* object)

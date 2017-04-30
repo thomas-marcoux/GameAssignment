@@ -45,8 +45,6 @@ void Object::addComponent(std::unique_ptr<Component> component)
 void Object::kill()
 {
 	dead = true;
-	if (parent)
-		parent->setChild(nullptr);
 }
 
 std::shared_ptr<Texture> Object::getTexture()
@@ -54,6 +52,7 @@ std::shared_ptr<Texture> Object::getTexture()
 	return GetComponent<SpriteComponent>()->getTexture();
 }
 
+//Set OBJECT_TYPE in accordance with the object's name
 void Object::setType(std::string t)
 {
 	name = t;

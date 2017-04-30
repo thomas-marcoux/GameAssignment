@@ -3,10 +3,11 @@
 #include "ObjectFactory.h"
 #include "Random.h"
 
+//Initializes and randomizes attributes
 bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	_radius = 0;
-	_forceMultiplier = 100;
+	_forceMultiplier = DEFAULT_FORCE_MULTIPLIER;
 	if (initializers.radius)
 		_radius = random(OCTOROK_RADIUS_MIN, OCTOROK_RADIUS_MAX);
 	else
@@ -16,7 +17,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 	return true;
 }
 
-//Create Joints for circling Octorock
+//If Blue Octorok, create Joints: one anchor and one lever
 bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 {
 	if (_radius)

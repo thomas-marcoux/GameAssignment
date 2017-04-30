@@ -79,7 +79,7 @@ bool Game::LoadSprites()
 	return true;
 }
 
-//Loads anchors for CircleBehavior Components
+//Create Joints for CircleBehavior Components
 bool Game::LoadJoints()
 {
 	CircleBehaviorComponent *component;
@@ -163,14 +163,17 @@ bool Game::Update()
 	return false;
 }
 
-//Delete dead objects
+//Delete dead objects, calls PhysicsDevice's RemoveObject and resets the parent's child pointer
 void Game::Finish()
 {
 	while (deadObjectIDs.size() > 0)
 	{
 		GAME_INT id = deadObjectIDs.back();
 		Object* object = objects[id].get();
-		object->pDevice->SetStopPhysics(object);
+		Object* parent = object->getParent();
+		if (parent != nullptr)
+			parent->setChild(nullptr);
+		object->pDevice->RemoveObject(object);
 		objects.erase(objects.begin() + id);
 		deadObjectIDs.pop_back();
 	}

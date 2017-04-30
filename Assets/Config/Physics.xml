@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <Objects>
-  <Item name="Link" type="dynamic" shape="circle" density="1.0f" friction ="0.3f" restitution="18.0f" angular="10.0f" linear="1.0f" collision="true"/>
-  <Item name="Leever" type="dynamic" shape="rectangle" density="2.0f" friction="0.9f" restitution="4.0f" angular="5.0f" linear="0.1f" collision="true"/>
-  <Item name="Rock" type="static" shape="circle" density="25.0f" friction="0.0f" restitution="20.0f" angular="0.0f" linear="0.0f" collision="true"/>
-  <Item name="Octorok" type="dynamic" shape="circle" density="13.0f" friction="0.9f" restitution="4.0f" angular="20.0f" linear="0.0f" collision="true"/>
-  <Item name="Arrow" type="dynamic" shape="rectangle" density="0.5f" friction="0.0f" restitution="1.0f" angular="0.0f" linear="0.0f" collision="true"/>
-  <Item name="Anchor" type="static" shape="circle" density="0.0f" friction="0.0f" restitution="0.0f" angular="20.0f" linear="0.0f" collision="false"/>
-  <Item name="Lever" type="dynamic" shape="rectangle" density="0.0f" friction="0.0f" restitution="0.0f" angular="20.0f" linear="0.0f" collision="false"/>
+  <Item name="Link" type="dynamic" shape="circle" density="1.0f" friction ="0.3f" restitution="18.0f" angular="10.0f" linear="1.0f" collision="true" rotation="true"/>
+  <Item name="Leever" type="dynamic" shape="rectangle" density="2.0f" friction="0.9f" restitution="4.0f" angular="5.0f" linear="0.1f" collision="true" rotation="false"/>
+  <Item name="Rock" type="static" shape="circle" density="25.0f" friction="0.0f" restitution="20.0f" angular="0.0f" linear="0.0f" collision="true" rotation="true"/>
+  <Item name="Octorok" type="dynamic" shape="circle" density="13.0f" friction="0.9f" restitution="4.0f" angular="20.0f" linear="0.0f" collision="true" rotation="true"/>
+  <Item name="Arrow" type="dynamic" shape="rectangle" density="0.5f" friction="0.0f" restitution="1.0f" angular="0.0f" linear="0.0f" collision="true" rotation="false"/>
+  <Item name="Anchor" type="static" shape="circle" density="0.0f" friction="0.0f" restitution="0.0f" angular="20.0f" linear="0.0f" collision="false" rotation="true"/>
+  <Item name="Lever" type="dynamic" shape="rectangle" density="0.0f" friction="0.0f" restitution="0.0f" angular="20.0f" linear="0.0f" collision="false" rotation="true"/>
 </Objects>

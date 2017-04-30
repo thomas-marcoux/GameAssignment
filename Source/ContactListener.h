@@ -3,8 +3,6 @@
 
 #include "Box2D/Box2D.h"
 
-class Object;
-
 class ContactListener : public b2ContactListener
 {
 public:

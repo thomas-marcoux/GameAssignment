@@ -6,7 +6,8 @@
 
 PlayerInputComponent::PlayerInputComponent(std::unique_ptr<Object> const& owner) : Component(owner)
 {
-
+	_forceMultiplier = DEFAULT_FORCE_MULTIPLIER;
+	_angle = ANGLE_UP;
 }
 
 bool PlayerInputComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
@@ -20,11 +21,10 @@ bool PlayerInputComponent::Initialize(InputDevice *iD, ObjectFactory* oF, View* 
 	oFactory = oF;
 	view = v;
 	view->setPlayer(_owner);
-	_forceMultiplier = 100;
-	_angle = ANGLE_UP;
 	return true;
 }
 
+//Reads input and updates accordingly: velocity, texture, and angle to be passed to the CreateArrow method
 std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 {
 	SpriteComponent* sprite = _owner->GetComponent<SpriteComponent>();
@@ -63,7 +63,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
-		if (!_owner->hasChild())
+		if (!_owner->hasChild()) //If no arrow already exists
 			return oFactory->createArrow(_owner, _angle);
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);

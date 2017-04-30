@@ -47,11 +47,11 @@ GAME_OBJECT_SHAPE AssetLibrary::getShape(std::string const& shape)
 	return GAME_CIRCLE;
 }
 
-//Reads boolean
-bool AssetLibrary::getCollision(std::string const& collision)
+//Reads collision boolean, defaults to true (detects collision)
+bool AssetLibrary::getBoolean(std::string const& attribute)
 {
-	if (collision.empty()) throw LoadException(PARSE_ERROR, "physicsConfigFile");
-	if (collision == "false")
+	if (attribute.empty()) throw LoadException(PARSE_ERROR, "physicsConfigFile");
+	if (attribute == "false")
 		return false;
 	return true;;
 }
@@ -74,7 +74,8 @@ bool AssetLibrary::LoadPhysics(std::string physicsConfigFile)
 		if (!name) throw LoadException(PARSE_ERROR, physicsConfigFile);
 		GOI.body_type = getBodyType(itemNode->Attribute("type"));
 		GOI.shape = getShape(itemNode->Attribute("shape"));
-		GOI.collision = getCollision(itemNode->Attribute("collision"));
+		GOI.collision = getBoolean(itemNode->Attribute("collision"));
+		GOI.rotation = getBoolean(itemNode->Attribute("rotation"));
 		itemNode->QueryFloatAttribute("density", &GOI.density);
 		itemNode->QueryFloatAttribute("friction", &GOI.friction);
 		itemNode->QueryFloatAttribute("restitution", &GOI.restitution);
@@ -96,6 +97,7 @@ bool AssetLibrary::AddArtAsset(std::string name, std::string path)
 	return true;
 }
 
+//Store GOI in physicsLibrary
 bool AssetLibrary::AddPhysicsAsset(std::string const& type, GAME_OBJECTFACTORY_INITIALIZERS const& GOI)
 {
 	physicsLibrary[type] = std::make_shared<GAME_OBJECTFACTORY_INITIALIZERS>(GOI);

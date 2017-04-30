@@ -8,7 +8,7 @@
 class GraphicsDevice;
 class Texture;
 
-//Stores object textures
+//Stores Game assets
 class AssetLibrary
 {
 public:
@@ -24,7 +24,7 @@ public:
 private:
 	GAME_BODY_TYPE	getBodyType(std::string const&);
 	GAME_OBJECT_SHAPE	getShape(std::string const&);
-	bool getCollision(std::string const& collision);
+	bool getBoolean(std::string const&);
 
 private:
 	std::map<std::string, std::shared_ptr<Texture>> artLibrary;

@@ -50,6 +50,7 @@ typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 	GAME_FLT	angularDamping;
 	GAME_FLT	linearDamping;
 	bool		collision;
+	bool		rotation;
 } GAME_OBJECTFACTORY_INITIALIZERS;
 
 //========================================
@@ -73,6 +74,8 @@ const int WINDOW_MAX_WIDTH = SCREEN_WIDTH;
 const int WINDOW_MAX_HEIGHT = SCREEN_HEIGHT;
 const int WINDOW_MIN_WIDTH = WINDOW_MAX_WIDTH * (-1);
 const int WINDOW_MIN_HEIGHT = WINDOW_MAX_HEIGHT * (-1);
+
+const GAME_INT DEFAULT_FORCE_MULTIPLIER = 100;
 
 //Event Types
 enum GAME_EVENT {GAME_NA, GAME_W, GAME_A, GAME_S, GAME_D,

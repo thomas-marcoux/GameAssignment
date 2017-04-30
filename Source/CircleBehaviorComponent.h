@@ -16,12 +16,12 @@ public:
 	bool Finish();
 
 private:
-	GAME_FLT _radius;
-	GAME_FLT _speed;
+	GAME_FLT _radius; //Radius from center of rotation to Octorok
+	GAME_FLT _speed; //Rotation speed
 	GAME_INT _forceMultiplier;
 	GAME_VEC _applyForce;
-	std::unique_ptr<Object> _anchor;
-	std::unique_ptr<Object> _lever;
+	std::unique_ptr<Object> _anchor; //Center of rotation
+	std::unique_ptr<Object> _lever; //anchor-to-Octorok joint
 };
 
 #endif // !CIRCLEBEHAVIORCOMPONENT_H

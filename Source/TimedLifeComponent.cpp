@@ -15,13 +15,10 @@ bool TimedLifeComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initi
 std::unique_ptr<Object> TimedLifeComponent::Update(GAME_FLT dt)
 {
 	_health -= _decrement;
-	return NULL;
+	return nullptr;
 }
 
 bool TimedLifeComponent::Finish()
 {
-	if (_health > 0)
-		return false;
-	_owner->getParent()->setChild(nullptr);
-	return true;
+	return (_health <= 0);
 }

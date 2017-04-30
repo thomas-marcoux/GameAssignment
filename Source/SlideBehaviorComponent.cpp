@@ -5,13 +5,14 @@
 bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
 {
 	_vertical = initializers.vertical;
-	_forceMultiplier = 100;
+	_forceMultiplier = DEFAULT_FORCE_MULTIPLIER;
 	_startPosition = initializers.pos;
 	_maxDistance = (GAME_FLT)random(LEEVER_MIN_DISTANCE, LEEVER_MAX_DISTANCE);
 	_forward = true;
 	return true;
 }
 
+//Check the distance traveled and applies a sliding movement depending on the two possible directions
 std::unique_ptr<Object> SlideBehaviorComponent::Update(GAME_FLT dt)
 {
 	checkDistance();
