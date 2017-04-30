@@ -17,4 +17,12 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		else
 			objectA->kill();
 	}
+	if ((objectA->getType() == ROCK_TYPE && objectB->getType() == ARROW_TYPE)
+		|| (objectB->getType() == ROCK_TYPE && objectA->getType() == ARROW_TYPE))
+	{
+		if (objectA->getType() == ARROW_TYPE)
+			objectA->kill();
+		else
+			objectB->kill();
+	}
 }

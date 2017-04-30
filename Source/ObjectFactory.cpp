@@ -96,10 +96,27 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player, GAME_FLT angl
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 	GAME_VEC link_pos = player->pDevice->GetPosition(player);
 
-	GOI.name = "Arrow";
-	std::cout << "angle = " << angle << std::endl;
-	GOI.pos.x = link_pos.x + cosf(angle) * SPRITE_WIDTH_2;
-	GOI.pos.y = link_pos.y + sinf(angle) * SPRITE_HEIGHT_2;
+	GOI.name = "Arrow"; 
+	if (angle == ANGLE_UP)
+	{
+		GOI.pos.x = link_pos.x + cosf(angle) * SPRITE_WIDTH_2;
+		GOI.pos.y = link_pos.y + sinf(angle) * SPRITE_HEIGHT_2;
+	}
+	if (angle == ANGLE_DOWN)
+	{
+		GOI.pos.x = link_pos.x + SPRITE_WIDTH_2;
+		GOI.pos.y = link_pos.y + SPRITE_HEIGHT;
+	}
+	if (angle == ANGLE_LEFT)
+	{
+		GOI.pos.x = link_pos.x + sinf(angle) * SPRITE_WIDTH_2;
+		GOI.pos.y = link_pos.y + cosf(angle) * SPRITE_HEIGHT + SPRITE_HEIGHT_2;
+	}
+	if (angle == ANGLE_RIGHT)
+	{
+		GOI.pos.x = link_pos.x + sinf(angle) * SPRITE_WIDTH;
+		GOI.pos.y = link_pos.y + cosf(angle) * SPRITE_HEIGHT + SPRITE_HEIGHT_2;
+	}
 	GOI.angle = TO_DEGREE(angle);
 	GOI.arrow_health = ARROW_HEALTH;
 	GOI.arrow_decrement = 5;

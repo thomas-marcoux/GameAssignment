@@ -42,6 +42,13 @@ void Object::addComponent(std::unique_ptr<Component> component)
 	components.push_back(std::move(component));
 }
 
+void Object::kill()
+{
+	dead = true;
+	if (parent)
+		parent->setChild(nullptr);
+}
+
 std::shared_ptr<Texture> Object::getTexture()
 {
 	return GetComponent<SpriteComponent>()->getTexture();
