@@ -175,15 +175,10 @@ void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object, GAME_OBJE
 
 	physicsGOI.pos = GOI.pos;
 	physicsGOI.angle = GOI.angle;
-	if (physicsGOI.shape == GAME_CIRCLE)
+	if (physicsGOI.shape != GAME_OTHER)
 	{
-		physicsGOI.width = SPRITE_WIDTH;
-		physicsGOI.height = 0.0f;
-	}
-	if (physicsGOI.shape == GAME_RECTANGLE)
-	{
-		physicsGOI.width = SPRITE_WIDTH;
-		physicsGOI.height = SPRITE_HEIGHT;
+		physicsGOI.width = SPRITE_WIDTH_2;
+		physicsGOI.height = SPRITE_HEIGHT_2;
 	}
 	pDevice->CreateFixture(object.get(), physicsGOI);
 }
