@@ -1,6 +1,7 @@
 #include "ContactListener.h"
 #include "Object.h"
 #include "PhysicsDevice.h"
+#include "SlideBehaviorComponent.h"
 
 void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold)
 {
@@ -12,21 +13,37 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 	OBJECT_TYPE	typeB = objectB->getType();
 
 	//If an arrow collides with an enemy type, kill it
-	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE) && typeA == ARROW_TYPE)
-		|| (typeB == ARROW_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE)))
+	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE) && typeA == BLAST_TYPE)
+		|| (typeB == BLAST_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE)))
 	{
-		if (typeA == ARROW_TYPE)
+		if (typeA == BLAST_TYPE)
 			objectB->kill();
 		else
 			objectA->kill();
 	}
 	//If an arrow collides with a rock, kill the arrow
-	if ((typeA == ROCK_TYPE && typeB == ARROW_TYPE)
-		|| (typeB == ROCK_TYPE && typeA == ARROW_TYPE))
+	if ((typeA == ROCK_TYPE && typeB == BLAST_TYPE)
+		|| (typeB == ROCK_TYPE && typeA == BLAST_TYPE))
 	{
-		if (typeA == ARROW_TYPE)
+		if (typeA == BLAST_TYPE)
 			objectA->kill();
 		else
 			objectB->kill();
+	}
+	if (typeA == LEEVER_TYPE || typeB == LEEVER_TYPE)
+	{
+		SlideBehaviorComponent*	leever;
+		if (typeA == LEEVER_TYPE)
+		{
+			leever = objectA->GetComponent<SlideBehaviorComponent>();
+			if (leever)
+				leever->turn();
+		}
+		else
+		{
+			leever = objectA->GetComponent<SlideBehaviorComponent>();
+			if (leever)
+				leever->turn();
+		}
 	}
 }

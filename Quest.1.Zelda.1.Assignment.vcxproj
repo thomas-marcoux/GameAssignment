@@ -77,11 +77,11 @@
     <Xml Include="Assets\Config\level1.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="Assets\Config\music.xml" />
     <Xml Include="Assets\Config\objects.xml" />
     <Xml Include="Assets\Config\Physics.xml" />
-    <Xml Include="Assets\Images\sprites.xml" />
-    <Xml Include="Assets\Sounds\music.xml" />
-    <Xml Include="Assets\Sounds\sounds.xml" />
+    <Xml Include="Assets\Config\sounds.xml" />
+    <Xml Include="Assets\Config\sprites.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Config\bomberman_level_1.map" />

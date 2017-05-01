@@ -219,13 +219,13 @@
     <Xml Include="Assets\Config\Physics.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="Assets\Sounds\sounds.xml">
+    <Xml Include="Assets\Config\sprites.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="Assets\Sounds\music.xml">
+    <Xml Include="Assets\Config\music.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="Assets\Images\sprites.xml">
+    <Xml Include="Assets\Config\sounds.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

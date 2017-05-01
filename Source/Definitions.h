@@ -1,6 +1,8 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#include <string>
+
 //Basic Types
 typedef unsigned int	Uint32;
 typedef float			GAME_FLT;
@@ -32,14 +34,14 @@ const GAME_FLT ANGLE_LEFT = -PI_2;
 
 typedef struct GAME_OBJECTFACTORY_INITIALIZERS
 {
-	const char*	name;
+	std::string	name;
 	GAME_VEC	pos;
 	GAME_FLT	angle;
 	GAME_FLT	movement_angle;
 	bool	radius;
 	bool	vertical;
-	GAME_INT	arrow_health;
-	GAME_INT	arrow_decrement;
+	GAME_INT	timer;
+	GAME_INT	timer_speed;
 	GAME_OBJECT_SHAPE	shape;
 	GAME_BODY_TYPE		body_type;
 	GAME_FLT	width;
@@ -100,14 +102,14 @@ const GAME_FLT DEFAULT_VIEW_ANGLE = 0;
 const GAME_FLT VIEW_ROTATION = PI / 36;
 const GAME_INT DIST_TO_BORDER = 50;
 
-//Arrow
-const GAME_INT ARROW_HEALTH = 350;
-const GAME_INT ARROW_HEALTH_DECREMENT = 5;
-const GAME_INT ARROW_FORCE = 350;
+//Bomb
+const GAME_INT BOMB_TIMER = 300;
+const GAME_INT BOMB_TIMER_SPEED = 1;
+const GAME_INT BLAST_FORCE = 350;
 
 //Textures
 enum TEXTURE_ID {
-	TEXTURE_UP, TEXTURE_DOWN, TEXTURE_LEFT, TEXTURE_RIGHT, NB_TEXTURES
+	TEXTURE_UP, TEXTURE_DOWN, TEXTURE_LEFT, TEXTURE_RIGHT, TEXTURE_RED_BOMB, NB_TEXTURES
 };
 
 //Components
@@ -117,7 +119,7 @@ enum COMPONENT_TYPE {
 
 //Object Types
 enum OBJECT_TYPE {
-	ARROW_TYPE, LEEVER_TYPE, PLAYER_TYPE, OCTOROK_TYPE, ROCK_TYPE, DEFAULT_TYPE
+	DEFAULT_TYPE, BOMB_TYPE, BLAST_TYPE, LEEVER_TYPE, PLAYER_TYPE, OCTOROK_TYPE, ROCK_TYPE
 };
 
 //Error messages

@@ -26,6 +26,7 @@ public:
 	bool LoadSoundEffects(std::string);
 	bool AddArtAsset(std::string, std::string);
 	bool AddMusicAsset(std::string, std::string);
+	bool AddObject(std::string, std::vector<std::string>&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	bool AddSoundEffectAsset(std::string, std::string);
 	bool AddPhysicsAsset(std::string const&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::shared_ptr<Texture> SearchArt(std::string);

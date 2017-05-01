@@ -2,8 +2,9 @@
 <Objects>
   <Item name="Red Leever" sprite="./Assets/Images/leever_r.png"/>
   <Item name="Blue Leever" sprite="./Assets/Images/leever_b.png"/>
-  <Item name="Red Octorok" sprite="./Assets/Images/octorok_r.png"/>
-  <Item name="Blue Octorok" sprite="./Assets/Images/octorok_b.png"/>
+  <Item name="Bomb" sprite="./Assets/Images/bomb1.png"/>
+  <Item name="RedBomb" sprite="./Assets/Images/bomb2.png"/>
+  <Item name="Blast" sprite="./Assets/Images/blast1.png"/>
   <Item name="Arrow" sprite="./Assets/Images/arrow.png"/>
   <Item name="Rock" sprite="./Assets/Images/rock.png"/>
   <Item name="Link Down" sprite="./Assets/Images/link_d.png"/>

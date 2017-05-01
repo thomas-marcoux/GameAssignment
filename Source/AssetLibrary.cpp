@@ -75,8 +75,7 @@ bool AssetLibrary::LoadObject(TiXmlElement* gameAssetNode)
 		componentNames.push_back(componentNode->Attribute("name"));
 		componentNode->QueryBoolAttribute("vertical", &GOI.vertical);
 	}
-	componentsLibrary[ID] = std::make_shared<std::vector<std::string>>(componentNames);
-	parametersLibrary[ID] = std::make_shared<GAME_OBJECTFACTORY_INITIALIZERS>(GOI);
+	AddObject(ID, componentNames, GOI);
 	return true;
 }
 
@@ -181,6 +180,13 @@ bool AssetLibrary::AddMusicAsset(std::string name, std::string path)
 	return true;
 }
 
+bool AssetLibrary::AddObject(std::string ID, std::vector<std::string>& componentNames, GAME_OBJECTFACTORY_INITIALIZERS const& GOI)
+{
+	componentsLibrary[ID] = std::make_shared<std::vector<std::string>>(componentNames);
+	parametersLibrary[ID] = std::make_shared<GAME_OBJECTFACTORY_INITIALIZERS>(GOI);
+	return false;
+}
+
 bool AssetLibrary::AddSoundEffectAsset(std::string name, std::string path)
 {
 	Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
@@ -232,10 +238,6 @@ std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS> AssetLibrary::SearchParameters(
 //Return an instance of the requested GOI if it is in the library, nullptr otherwise.
 std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>	AssetLibrary::SearchPhysics(std::string name)
 {
-	for (auto item : physicsLibrary)
-	{
-		if (name.find(item.first) != std::string::npos)
-			return item.second;
-	}
-	return nullptr;
+	std::map<std::string, std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>>::iterator it = physicsLibrary.find(name);
+	return (it == physicsLibrary.end()) ? nullptr : it->second;
 }

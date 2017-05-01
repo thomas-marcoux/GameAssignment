@@ -100,15 +100,19 @@ std::unique_ptr<Object> ObjectFactory::create(std::string const& ID, GAME_VEC co
 }
 
 //Create arrow from player Object
-std::unique_ptr<Object> ObjectFactory::createArrow(Object *player, GAME_FLT angle)
+std::unique_ptr<Object> ObjectFactory::createBomb(Object *player)
 {
 	std::unique_ptr<Object>	arrow;
-	std::vector<std::string>	componentNames = {"Sprite", "TimedLife", "Arrow" };
-	SpriteComponent*	link_sprite = player->GetComponent<SpriteComponent>();
+	std::vector<std::string>	componentNames = {"Sprite", "TimedLife"};
+	SpriteComponent*	player_sprite = player->GetComponent<SpriteComponent>();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
-	GAME_VEC link_pos = player->pDevice->GetPosition(player);
 
-	GOI.name = "Arrow"; 
+	GOI.name = "Bomb";
+	GOI.pos = player->pDevice->GetPosition(player);
+	GOI.pos.x += SPRITE_WIDTH_2;
+	GOI.pos.y += SPRITE_HEIGHT_2;
+	GOI.angle = 0.0f;
+	/*
 	if (angle == ANGLE_UP || angle == ANGLE_DOWN)
 	{
 		GOI.pos.x = link_pos.x + SPRITE_WIDTH_2;
@@ -120,10 +124,11 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *player, GAME_FLT angl
 		GOI.pos.y = link_pos.y + cosf(angle) * SPRITE_HEIGHT + SPRITE_HEIGHT_2;
 	}
 	GOI.angle = TO_DEGREE(angle);
-	GOI.arrow_health = ARROW_HEALTH;
-	GOI.arrow_decrement = ARROW_HEALTH_DECREMENT;
+	*/
+	GOI.timer = BOMB_TIMER;
+	GOI.timer_speed = BOMB_TIMER_SPEED;
 	arrow = create(componentNames, GOI);
-	arrow->GetComponent<SpriteComponent>()->Initialize(link_sprite->getGDevice(), aLibrary->SearchArt("Arrow"));
+	arrow->GetComponent<SpriteComponent>()->Initialize(player_sprite->getGDevice(), aLibrary->SearchArt("RedBomb"));
 	arrow->setParent(player);
 	player->setChild(arrow.get());
 	return arrow;
@@ -189,8 +194,8 @@ void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object, GAME_OBJE
 	physicsGOI.angle = GOI.angle;
 	if (physicsGOI.shape != GAME_OTHER)
 	{
-		physicsGOI.width = SPRITE_WIDTH_2;
-		physicsGOI.height = SPRITE_HEIGHT_2;
+		physicsGOI.width = SPRITE_WIDTH_2 * 0.8;
+		physicsGOI.height = SPRITE_HEIGHT_2 * 0.8;
 	}
 	pDevice->CreateFixture(object.get(), physicsGOI);
 }

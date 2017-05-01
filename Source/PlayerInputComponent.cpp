@@ -64,7 +64,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
 		if (!_owner->hasChild()) //If no arrow already exists
-			return oFactory->createArrow(_owner, _angle);
+			return oFactory->createBomb(_owner);
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);
 	_owner->pDevice->SetAngle(_owner, TO_DEGREE(ANGLE_UP)); //Ensures the axis sprites do not rotate and remain aligned
