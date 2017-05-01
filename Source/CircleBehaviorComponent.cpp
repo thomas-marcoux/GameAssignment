@@ -10,8 +10,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 	_forceMultiplier = DEFAULT_FORCE_MULTIPLIER;
 	if (initializers.radius)
 		_radius = random(OCTOROK_RADIUS_MIN, OCTOROK_RADIUS_MAX);
-	else
-		_speed = random(OCTOROK_SPEED_MIN, OCTOROK_SPEED_MAX);
+	_speed = random(OCTOROK_SPEED_MIN, OCTOROK_SPEED_MAX);
 	_anchor = nullptr;
 	_lever = nullptr;
 	return true;
@@ -20,35 +19,38 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 //If Blue Octorok, create Joints: one anchor and one lever
 bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 {
+	GAME_VEC	object_pos = _owner->pDevice->GetPosition(_owner);
+	GAME_VEC	anchor_pos = object_pos;
+
 	if (_radius)
 	{
-		GAME_VEC	object_pos = _owner->pDevice->GetPosition(_owner);
-		GAME_VEC	anchor_pos = object_pos;
-		anchor_pos.y -= _radius;
-
+		anchor_pos.y -= _radius/2;
 		GAME_VEC	lever_pos = anchor_pos;
 		GAME_VEC	lever_anchorA = lever_pos;
 		GAME_VEC	lever_anchorB = lever_pos;
-
+		//lever_pos.y -= _radius;
 		lever_anchorB.y += _radius;
 		_anchor = oFactory->createAnchor(anchor_pos);
 		_lever = oFactory->createLever(lever_pos, _radius);
 		_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get(), anchor_pos, lever_anchorA);
 		_owner->pDevice->createRevolvingJoint(_owner, _lever.get(), object_pos, lever_anchorB);
+		//_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get());
+		//_owner->pDevice->createRevolvingJoint(_lever.get(), _owner);
+	}
+	else
+	{
+		_anchor = oFactory->createAnchor(anchor_pos);
+		_owner->pDevice->createRevolvingJoint(_anchor.get(), _owner, false, { 0, 0 }, { 0,0 }, 0, false, 0, 0, true, _speed, 100.0f);
 	}
 	return true;
 }
 
 std::unique_ptr<Object> CircleBehaviorComponent::Update(GAME_FLT dt)
 {
-	if (_radius)
-	{
-		_applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
-		_applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
-		_owner->pDevice->SetLinearVelocity(_owner, _applyForce);
-	}
-	else
-		_owner->pDevice->SetAngle(_owner, _owner->pDevice->GetAngle(_owner) + _speed);
+	_applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
+	_applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
+	_owner->pDevice->SetLinearVelocity(_owner, _applyForce);
+	_owner->pDevice->SetAngularVelocity(_owner, _speed);
 	return nullptr;
 }
 

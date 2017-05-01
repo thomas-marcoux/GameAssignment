@@ -11,7 +11,7 @@
     <Component name="Sprite"/>
   </GameAsset>
   <GameAsset name="Blue Octorok">
-    <Component name="Body" x="100.0f" y="50.0f" angle="0.0f"/>
+    <Component name="Body" x="200.0f" y="50.0f" angle="0.0f"/>
     <Component name="Circle" radius="true"/>
     <Component name="Sprite"/>
   </GameAsset>

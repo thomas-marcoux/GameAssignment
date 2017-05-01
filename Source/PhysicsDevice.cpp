@@ -209,15 +209,15 @@ bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2, boo
 	jd.lowerAngle = TO_RADIAN(lowerAngle);
 	jd.upperAngle = TO_RADIAN(upperAngle);
 	jd.enableMotor = enableMotor;
-	jd.motorSpeed = TO_RADIAN(motorSpeed);
-	jd.maxMotorTorque = TO_RADIAN(maxMotorTorque);
+	jd.motorSpeed = RW2PW(motorSpeed);
+	jd.maxMotorTorque = RW2PW(maxMotorTorque);
 	world->CreateJoint(&jd);
 	return true;
 }
 
 bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2, GAME_VEC anchor1, GAME_VEC anchor2)
 {
-	return createRevolvingJoint(object1, object2, false, anchor1, anchor2, 0, false, 0, 0, true, 20.0f, 100.0f);
+	return createRevolvingJoint(object1, object2, false, anchor1, anchor2, 0, false, 0, 0, true, 10.0f, 100.0f);
 }
 
 bool PhysicsDevice::createRevolvingJoint(Object * object1, Object * object2)
