@@ -16,7 +16,7 @@ bool CircleBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& 
 	return true;
 }
 
-//If Blue Octorok, create Joints: one anchor and one lever
+//Create the joints needed to rotate the object, one anchor and one lever if blue octorok
 bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 {
 	GAME_VEC	object_pos = _owner->pDevice->GetPosition(_owner);
@@ -24,18 +24,11 @@ bool CircleBehaviorComponent::Initialize(ObjectFactory *oFactory)
 
 	if (_radius)
 	{
-		anchor_pos.y -= _radius/2;
-		GAME_VEC	lever_pos = anchor_pos;
-		GAME_VEC	lever_anchorA = lever_pos;
-		GAME_VEC	lever_anchorB = lever_pos;
-		//lever_pos.y -= _radius;
-		lever_anchorB.y += _radius;
+		anchor_pos.y -= _radius;
 		_anchor = oFactory->createAnchor(anchor_pos);
-		_lever = oFactory->createLever(lever_pos, _radius);
-		_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get(), anchor_pos, lever_anchorA);
-		_owner->pDevice->createRevolvingJoint(_owner, _lever.get(), object_pos, lever_anchorB);
-		//_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get());
-		//_owner->pDevice->createRevolvingJoint(_lever.get(), _owner);
+		_lever = oFactory->createLever(anchor_pos, _radius);
+		_owner->pDevice->createRevolvingJoint(_anchor.get(), _lever.get(), anchor_pos, anchor_pos);
+		_owner->pDevice->createRevolvingJoint(_owner, _lever.get(), object_pos, object_pos);
 	}
 	else
 	{
