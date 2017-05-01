@@ -65,7 +65,7 @@ std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 {
 	TiXmlElement* componentNode;
 	std::vector<std::string>	componentNames;
-	GAME_OBJECTFACTORY_INITIALIZERS	GOI;;
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 
 	GOI.name = gameAssetNode->Attribute("name");
 	GOI.pos.x = 0.0f;
@@ -87,15 +87,16 @@ std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 	return create(componentNames, GOI);
 }
 
-std::unique_ptr<Object> ObjectFactory::create(GAME_VEC const& coord)
+std::unique_ptr<Object> ObjectFactory::create(std::string const& ID, GAME_VEC const& coord)
 {
-	std::vector<std::string>	componentNames = { "Sprite" };
-	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+	std::shared_ptr<std::vector<std::string>>	componentNames = aLibrary->SearchComponents(ID);
+	std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>	GOI = aLibrary->SearchParameters(ID);
 
-	GOI.name = "Rock";
-	GOI.pos = coord;
-	GOI.angle = 0.0f;
-	return create(componentNames, GOI);
+	if (!componentNames || !GOI)
+		return nullptr;
+	GOI->pos = coord;
+	GOI->angle = 0.0f;
+	return create(*componentNames, *GOI);
 }
 
 //Create arrow from player Object
@@ -182,7 +183,7 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 //Sets some physics attributes and create fixture
 void ObjectFactory::loadPhysics(std::unique_ptr<Object> const& object, GAME_OBJECTFACTORY_INITIALIZERS const& GOI)
 {
-	GAME_OBJECTFACTORY_INITIALIZERS physicsGOI = *aLibrary->SearchPhysics(object->getName());
+	GAME_OBJECTFACTORY_INITIALIZERS physicsGOI = *(aLibrary->SearchPhysics(object->getName()));
 
 	physicsGOI.pos = GOI.pos;
 	physicsGOI.angle = GOI.angle;

@@ -79,11 +79,12 @@
     </Xml>
     <Xml Include="Assets\Config\objects.xml" />
     <Xml Include="Assets\Config\Physics.xml" />
+    <Xml Include="Assets\Images\sprites.xml" />
     <Xml Include="Assets\Sounds\music.xml" />
     <Xml Include="Assets\Sounds\sounds.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bomberman_level_1.map" />
+    <None Include="Assets\Config\bomberman_level_1.map" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6D0C0CC1-2E46-41F4-94C1-0F91F125C4A8}</ProjectGuid>

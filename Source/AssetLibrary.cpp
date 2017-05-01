@@ -57,6 +57,29 @@ bool AssetLibrary::LoadMusic(std::string file)
 	return true;
 }
 
+bool AssetLibrary::LoadObject(TiXmlElement* gameAssetNode)
+{
+	TiXmlElement* componentNode;
+	std::vector<std::string>	componentNames;
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+	std::string ID;
+
+	ID = gameAssetNode->Attribute("ID");
+	if (ID.empty())
+		return false;
+	GOI.name = gameAssetNode->Attribute("name");
+	GOI.vertical = false;
+	componentNode = TiXmlHandle(gameAssetNode).FirstChild("Component").Element();
+	for (componentNode; componentNode; componentNode = componentNode->NextSiblingElement())
+	{
+		componentNames.push_back(componentNode->Attribute("name"));
+		componentNode->QueryBoolAttribute("vertical", &GOI.vertical);
+	}
+	componentsLibrary[ID] = std::make_shared<std::vector<std::string>>(componentNames);
+	parametersLibrary[ID] = std::make_shared<GAME_OBJECTFACTORY_INITIALIZERS>(GOI);
+	return true;
+}
+
 //Loads all physics information
 bool AssetLibrary::LoadPhysics(std::string physicsConfigFile)
 {
@@ -192,6 +215,18 @@ Mix_Music* AssetLibrary::SearchMusic(std::string name)
 {
 	std::map<std::string, Mix_Music*>::iterator it = musicLibrary.find(name);
 	return (it == musicLibrary.end()) ? nullptr : it->second;
+}
+
+std::shared_ptr<std::vector<std::string>> AssetLibrary::SearchComponents(std::string name)
+{
+	std::map<std::string, std::shared_ptr<std::vector<std::string>>>::iterator it = componentsLibrary.find(name);
+	return (it == componentsLibrary.end()) ? nullptr : it->second;
+}
+
+std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS> AssetLibrary::SearchParameters(std::string name)
+{
+	std::map<std::string, std::shared_ptr<GAME_OBJECTFACTORY_INITIALIZERS>>::iterator it = parametersLibrary.find(name);
+	return (it == parametersLibrary.end()) ? nullptr : it->second;
 }
 
 //Return an instance of the requested GOI if it is in the library, nullptr otherwise.

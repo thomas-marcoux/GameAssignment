@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<Objects>
+  <Item name="Red Leever" sprite="./Assets/Images/leever_r.png"/>
+  <Item name="Blue Leever" sprite="./Assets/Images/leever_b.png"/>
+  <Item name="Red Octorok" sprite="./Assets/Images/octorok_r.png"/>
+  <Item name="Blue Octorok" sprite="./Assets/Images/octorok_b.png"/>
+  <Item name="Arrow" sprite="./Assets/Images/arrow.png"/>
+  <Item name="Rock" sprite="./Assets/Images/rock.png"/>
+  <Item name="Link Down" sprite="./Assets/Images/link_d.png"/>
+  <Item name="Link Left" sprite="./Assets/Images/link_l.png"/>
+  <Item name="Link Right" sprite="./Assets/Images/link_r.png"/>
+  <Item name="Link Up" sprite="./Assets/Images/link_u.png"/>
+</Objects>

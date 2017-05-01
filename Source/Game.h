@@ -23,7 +23,7 @@ public:
 	~Game() {}
 	bool Initialize();
 	void Reset();
-	bool LoadLevel(std::string, std::string, std::string);
+	bool LoadLevel(std::string, std::string, std::string, std::string);
 	bool Run();
 	bool Update();
 	void Draw();
@@ -31,6 +31,7 @@ public:
 private:
 	bool LoadGameAssets(std::string);
 	bool LoadAssets(std::string, std::string, std::string, std::string);
+	bool LoadObjects(std::string);
 	bool LoadJoints();
 	bool LoadSprites();
 	bool LoadPlayer();

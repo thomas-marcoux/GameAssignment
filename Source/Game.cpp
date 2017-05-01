@@ -60,6 +60,20 @@ bool Game::LoadAssets(std::string objectConfigFile, std::string physicsConfigFil
 	return true;
 }
 
+bool Game::LoadObjects(std::string objectConfigFile)
+{
+	TiXmlDocument doc;
+	TiXmlElement* gameAssetNode;
+
+	if (!doc.LoadFile(objectConfigFile.c_str())) throw LoadException(LOAD_ERROR, objectConfigFile);
+	gameAssetNode = TiXmlHandle(doc.RootElement()).FirstChild("GameAsset").Element();
+	if (!gameAssetNode) throw LoadException(PARSE_ERROR, objectConfigFile);
+	//Goes through every game asset node and sends them to the object factory which returns an object
+	for (gameAssetNode; gameAssetNode; gameAssetNode = gameAssetNode->NextSiblingElement())
+		aLibrary->LoadObject(gameAssetNode);
+	return true;
+}
+
 //Loads Textures and GraphicsDevice into the Sprite components, throws error for missing sprites
 bool Game::LoadSprites()
 {
@@ -113,6 +127,7 @@ bool Game::LoadPlayer()
 bool Game::LoadMap(std::string const& mapFile)
 {
 	std::ifstream file;
+	std::unique_ptr<Object> new_object = nullptr;
 	GAME_VEC	start = { 50, 50 };
 	GAME_VEC	increment = { SPRITE_WIDTH, SPRITE_HEIGHT };
 	GAME_VEC	coord;
@@ -127,8 +142,9 @@ bool Game::LoadMap(std::string const& mapFile)
 		coord.x = start.x;
 		for (int i = 0; i < line.size(); i++)
 		{
-			if (line[i] == 'x')
-				objects.push_back(oFactory->create(coord));
+			new_object = oFactory->create(line.substr(i, 1), coord);
+			if (new_object)
+				objects.push_back(std::move(new_object));
 			coord.x += increment.x;
 		}
 		coord.y += increment.y;
@@ -140,14 +156,16 @@ bool Game::LoadMap(std::string const& mapFile)
 
 
 //Loads game info from both config files, catches errors occuring during loading
-bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile)
+bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile,
+	std::string spritesConfigFile)
 {
 	try
 	{
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
-		LoadAssets(objectConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
-		LoadGameAssets(levelConfigFile);
+		LoadAssets(spritesConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
+		//LoadGameAssets(levelConfigFile);
+		LoadObjects(objectConfigFile);
 		LoadMap("./Assets/Config/bomberman_level_1.map");
 		LoadSprites();
 		LoadPlayer();

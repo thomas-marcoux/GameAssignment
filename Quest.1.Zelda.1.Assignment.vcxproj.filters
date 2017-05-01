@@ -225,9 +225,12 @@
     <Xml Include="Assets\Sounds\music.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="Assets\Images\sprites.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bomberman_level_1.map">
+    <None Include="Assets\Config\bomberman_level_1.map">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
