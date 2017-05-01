@@ -21,6 +21,7 @@ public:
 	bool Initialize(std::unique_ptr<AssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&);
 	void loadPhysics(std::unique_ptr<Object> const&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::unique_ptr<Object> create(TiXmlElement*);
+	std::unique_ptr<Object> create(GAME_VEC const&);
 	std::unique_ptr<Object> createArrow(Object*, GAME_FLT);
 	std::unique_ptr<Object> createAnchor(GAME_VEC);
 	std::unique_ptr<Object> createLever(GAME_VEC, GAME_FLT);

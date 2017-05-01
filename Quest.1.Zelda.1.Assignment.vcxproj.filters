@@ -105,6 +105,9 @@
     <ClCompile Include="Source\ContactListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SoundDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Definitions.h">
@@ -170,6 +173,9 @@
     <ClInclude Include="Source\ContactListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SoundDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\arrow.png">
@@ -204,23 +210,25 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Assets\Config\level1.old.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
     <Xml Include="Assets\Config\level1.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="Assets\Config\level2.old.xml">
       <Filter>Resource Files</Filter>
     </Xml>
     <Xml Include="Assets\Config\objects.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="Assets\Config\level1.noPhysics.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
     <Xml Include="Assets\Config\Physics.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="Assets\Sounds\sounds.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Sounds\music.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bomberman_level_1.map">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

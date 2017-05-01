@@ -11,6 +11,7 @@
 #include "Object.h"
 #include "ObjectFactory.h"
 #include "PhysicsDevice.h"
+#include "SoundDevice.h"
 #include "Timer.h"
 #include "View.h"
 
@@ -29,11 +30,11 @@ public:
 
 private:
 	bool LoadGameAssets(std::string);
-	bool LoadAssets(std::string, std::string);
+	bool LoadAssets(std::string, std::string, std::string, std::string);
 	bool LoadJoints();
 	bool LoadSprites();
 	bool LoadPlayer();
-	bool LoadPhysics();
+	bool LoadMap(std::string const&);
 	void Finish();
 
 private:
@@ -42,6 +43,7 @@ private:
 	std::unique_ptr<InputDevice> iDevice;
 	std::unique_ptr<ObjectFactory> oFactory;
 	std::unique_ptr<PhysicsDevice> pDevice;
+	std::unique_ptr<SoundDevice>	sDevice;
 	std::unique_ptr<Timer> timer;
 	const GAME_FLT dt; //Time per frame
 	std::unique_ptr<View> view;

@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 #include "Game.h"
 #include "CircleBehaviorComponent.h"
 #include "SpriteComponent.h"
@@ -13,14 +15,16 @@ bool Game::Initialize()
 	gravity.x = 0.0f;
 	gravity.y = 0.0f;
 	gDevice = std::make_unique<GraphicsDevice>();
-	aLibrary = std::make_unique<AssetLibrary>(gDevice.get());
+	sDevice = std::make_unique<SoundDevice>();
+	aLibrary = std::make_unique<AssetLibrary>(gDevice.get(), sDevice.get());
 	iDevice = std::make_unique<InputDevice>();
 	oFactory = std::make_unique<ObjectFactory>();
 	pDevice = std::make_unique<PhysicsDevice>(gravity);
 	timer = std::make_unique<Timer>();
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
-		&& timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0) && oFactory->Initialize(aLibrary, pDevice))
+		&& sDevice->Initialize(aLibrary) && timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0)
+		&& oFactory->Initialize(aLibrary, pDevice))
 		return true;
 	return false;
 }
@@ -48,9 +52,10 @@ bool Game::LoadGameAssets(std::string levelConfigFile)
 }
 
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
-bool Game::LoadAssets(std::string objectConfigFile, std::string physicsConfigFile)
+bool Game::LoadAssets(std::string objectConfigFile, std::string physicsConfigFile, std::string soundEffectsFile, std::string musicFile)
 {
-	if (!aLibrary->LoadArt(objectConfigFile) || !aLibrary->LoadPhysics(physicsConfigFile))
+	if (!aLibrary->LoadArt(objectConfigFile) || !aLibrary->LoadPhysics(physicsConfigFile) || !aLibrary->LoadSoundEffects(soundEffectsFile)
+		|| !aLibrary->LoadMusic(musicFile))
 		return false;
 	return true;
 }
@@ -105,6 +110,35 @@ bool Game::LoadPlayer()
 	return true;
 }
 
+bool Game::LoadMap(std::string const& mapFile)
+{
+	std::ifstream file;
+	GAME_VEC	start = { 50, 50 };
+	GAME_VEC	increment = { SPRITE_WIDTH, SPRITE_HEIGHT };
+	GAME_VEC	coord;
+	std::string	line;
+
+	file.open(mapFile);
+	if (!file.is_open())
+		throw LoadException(LOAD_ERROR, mapFile);
+	coord.y = start.y;
+	while (std::getline(file, line))
+	{
+		coord.x = start.x;
+		for (int i = 0; i < line.size(); i++)
+		{
+			if (line[i] == 'x')
+				objects.push_back(oFactory->create(coord));
+			coord.x += increment.x;
+		}
+		coord.y += increment.y;
+	}
+	file.close();
+	return true;
+}
+
+
+
 //Loads game info from both config files, catches errors occuring during loading
 bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile)
 {
@@ -112,11 +146,13 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 	{
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
-		LoadAssets(objectConfigFile, physicsConfigFile);
+		LoadAssets(objectConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
 		LoadGameAssets(levelConfigFile);
+		LoadMap("./Assets/Config/bomberman_level_1.map");
 		LoadSprites();
 		LoadPlayer();
 		LoadJoints();
+		sDevice->PlayMusic("Music1");
 		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}

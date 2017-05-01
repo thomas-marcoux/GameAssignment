@@ -62,6 +62,10 @@ const GAME_INT SCREEN_HEIGHT = 600;
 const GAME_INT SCREEN_WIDTH_2 = SCREEN_WIDTH / 2;
 const GAME_INT SCREEN_HEIGHT_2 = SCREEN_HEIGHT / 2;
 const GAME_INT GAME_FPS = 100;
+const GAME_INT BG_R = 244;
+const GAME_INT BG_G = 214;
+const GAME_INT BG_B = 159;
+const GAME_INT BG_ALPHA = 255;
 
 const GAME_INT FPS = 30;
 const bool FULLSCREEN = false;
@@ -119,7 +123,7 @@ enum OBJECT_TYPE {
 //Error messages
 #define NO_SPRITE "Sprite not found: "
 #define NO_COMPONENT "Sprite Component failed to load."
-#define LOAD_ERROR "File does not exist: "
+#define LOAD_ERROR "Could not load: "
 #define PARSE_ERROR "File has been corrupted: "
 
 #endif // !DEFINITIONS_H

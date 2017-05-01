@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<Objects>
+  <Item name="Music1" audio="./Assets/Sounds/music1.wav"/>
+</Objects>

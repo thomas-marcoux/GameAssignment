@@ -87,6 +87,17 @@ std::unique_ptr<Object> ObjectFactory::create(TiXmlElement *gameAssetNode)
 	return create(componentNames, GOI);
 }
 
+std::unique_ptr<Object> ObjectFactory::create(GAME_VEC const& coord)
+{
+	std::vector<std::string>	componentNames = { "Sprite" };
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+
+	GOI.name = "Rock";
+	GOI.pos = coord;
+	GOI.angle = 0.0f;
+	return create(componentNames, GOI);
+}
+
 //Create arrow from player Object
 std::unique_ptr<Object> ObjectFactory::createArrow(Object *player, GAME_FLT angle)
 {
