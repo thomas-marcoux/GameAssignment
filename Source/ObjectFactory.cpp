@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "PhysicsDevice.h"
 #include "ArrowBehaviorComponent.h"
+#include "BombBehaviorComponent.h"
 #include "CircleBehaviorComponent.h"
 #include "PlayerInputComponent.h"
 #include "TimedLifeComponent.h"
@@ -18,6 +19,7 @@ ObjectFactory::ObjectFactory()
 	cLibrary["Input"] = INPUT_COMPONENT;
 	cLibrary["TimedLife"] = TIMEDLIFE_COMPONENT;
 	cLibrary["Arrow"] = ARROW_COMPONENT;
+	cLibrary["Bomb"] = BOMB_COMPONENT;
 }
 
 //Return an instance of the requested component, nullptr if it can't be found.
@@ -46,6 +48,9 @@ std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, s
 		break;
 	case ARROW_COMPONENT:
 		return std::make_unique<ArrowBehaviorComponent>(owner);
+		break;
+	case BOMB_COMPONENT:
+		return std::make_unique<BombBehaviorComponent>(owner);
 		break;
 	default:
 		break;
@@ -99,11 +104,42 @@ std::unique_ptr<Object> ObjectFactory::create(std::string const& ID, GAME_VEC co
 	return create(*componentNames, *GOI);
 }
 
-//Create arrow from player Object
+//Create arrow from the object
+std::unique_ptr<Object> ObjectFactory::createArrow(Object *object)
+{
+	std::unique_ptr<Object>	arrow;
+	std::vector<std::string>	componentNames = { "Sprite", "Arrow", "TimedLife" };
+	SpriteComponent*	object_sprite = object->GetComponent<SpriteComponent>();
+	GAME_VEC	object_pos = object->pDevice->GetPosition(object);
+	GAME_FLT	angle = object->pDevice->GetAngle(object);
+	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
+
+	GOI.name = "Arrow";
+	if (angle == ANGLE_UP || angle == ANGLE_DOWN)
+	{
+	GOI.pos.x = object_pos.x + SPRITE_WIDTH_2;
+	GOI.pos.y = object_pos.y - cosf(angle) * SPRITE_HEIGHT;
+	}
+	if (angle == ANGLE_LEFT || angle == ANGLE_RIGHT)
+	{
+	GOI.pos.x = object_pos.x + sinf(angle) * SPRITE_WIDTH;
+	GOI.pos.y = object_pos.y + cosf(angle) * SPRITE_HEIGHT + SPRITE_HEIGHT_2;
+	}
+	GOI.angle = TO_DEGREE(angle);
+	GOI.timer = ARROW_TIMER;
+	GOI.timer_speed = ARROW_TIMER_SPEED;
+	arrow = create(componentNames, GOI);
+	arrow->GetComponent<SpriteComponent>()->Initialize(object_sprite->getGDevice(), aLibrary->SearchArt("Bomb"));
+	arrow->setParent(object);
+	object->setChild(arrow.get());
+	return arrow;
+}
+
+//Create bomb from player Object
 std::unique_ptr<Object> ObjectFactory::createBomb(Object *player)
 {
 	std::unique_ptr<Object>	arrow;
-	std::vector<std::string>	componentNames = {"Sprite", "TimedLife"};
+	std::vector<std::string>	componentNames = {"Sprite", "Bomb", "TimedLife"};
 	SpriteComponent*	player_sprite = player->GetComponent<SpriteComponent>();
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 
@@ -112,23 +148,10 @@ std::unique_ptr<Object> ObjectFactory::createBomb(Object *player)
 	GOI.pos.x += SPRITE_WIDTH_2;
 	GOI.pos.y += SPRITE_HEIGHT_2;
 	GOI.angle = 0.0f;
-	/*
-	if (angle == ANGLE_UP || angle == ANGLE_DOWN)
-	{
-		GOI.pos.x = link_pos.x + SPRITE_WIDTH_2;
-		GOI.pos.y = link_pos.y - cosf(angle) * SPRITE_HEIGHT;
-	}
-	if (angle == ANGLE_LEFT || angle == ANGLE_RIGHT)
-	{
-		GOI.pos.x = link_pos.x + sinf(angle) * SPRITE_WIDTH;
-		GOI.pos.y = link_pos.y + cosf(angle) * SPRITE_HEIGHT + SPRITE_HEIGHT_2;
-	}
-	GOI.angle = TO_DEGREE(angle);
-	*/
 	GOI.timer = BOMB_TIMER;
 	GOI.timer_speed = BOMB_TIMER_SPEED;
 	arrow = create(componentNames, GOI);
-	arrow->GetComponent<SpriteComponent>()->Initialize(player_sprite->getGDevice(), aLibrary->SearchArt("RedBomb"));
+	arrow->GetComponent<SpriteComponent>()->Initialize(player_sprite->getGDevice(), aLibrary->SearchArt("Bomb"));
 	arrow->setParent(player);
 	player->setChild(arrow.get());
 	return arrow;

@@ -1,4 +1,5 @@
 #include "TimedLifeComponent.h"
+#include "BombBehaviorComponent.h"
 
 TimedLifeComponent::TimedLifeComponent(std::unique_ptr<Object> const&  owner) : Component(owner)
 {
@@ -20,5 +21,11 @@ std::unique_ptr<Object> TimedLifeComponent::Update(GAME_FLT dt)
 
 bool TimedLifeComponent::Finish()
 {
-	return (_health <= 0);
+	if (_health > 0)
+		return false;
+	BombBehaviorComponent*	bomb = _owner->GetComponent<BombBehaviorComponent>();
+	if (_health <= 0 && !bomb)
+		return true;
+	bomb->blast();
+	return true;
 }

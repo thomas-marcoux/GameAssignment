@@ -12,7 +12,7 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 	OBJECT_TYPE	typeA = objectA->getType();
 	OBJECT_TYPE	typeB = objectB->getType();
 
-	//If an arrow collides with an enemy type, kill it
+	//If the blast collides with an enemy type, kill it
 	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE) && typeA == BLAST_TYPE)
 		|| (typeB == BLAST_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE)))
 	{
@@ -21,7 +21,16 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		else
 			objectA->kill();
 	}
-	//If an arrow collides with a rock, kill the arrow
+	//If an arrow collides with a static object, kill the arrow
+	if ((typeA == ROCK_TYPE && typeB == ARROW_TYPE)
+		|| (typeB == ROCK_TYPE && typeA == ARROW_TYPE))
+	{
+		if (typeA == ARROW_TYPE)
+			objectA->kill();
+		else
+			objectB->kill();
+	}
+	//Stop the blast if it runs into a static object
 	if ((typeA == ROCK_TYPE && typeB == BLAST_TYPE)
 		|| (typeB == ROCK_TYPE && typeA == BLAST_TYPE))
 	{
@@ -30,6 +39,7 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		else
 			objectB->kill();
 	}
+	//Turn leever around if they run into each other
 	if (typeA == LEEVER_TYPE || typeB == LEEVER_TYPE)
 	{
 		SlideBehaviorComponent*	leever;
