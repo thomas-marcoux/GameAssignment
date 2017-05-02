@@ -14,8 +14,8 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 	OBJECT_TYPE	typeB = objectB->getType();
 
 	//If the blast collides with an enemy type, kill it
-	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE || typeB == DESTRUCTIBLE_TYPE) && typeA == BLAST_TYPE)
-		|| (typeB == BLAST_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE || typeA == DESTRUCTIBLE_TYPE)))
+	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE || typeB == DESTRUCTIBLE_TYPE || typeB == SECRET_EXIT_TYPE) && typeA == BLAST_TYPE)
+		|| (typeB == BLAST_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE || typeA == DESTRUCTIBLE_TYPE || typeA == SECRET_EXIT_TYPE)))
 	{
 		objectB->kill();
 		objectA->kill();

@@ -32,10 +32,8 @@ public:
 private:
 	bool LoadAssets(std::string, std::string, std::string, std::string);
 	bool LoadObjects(std::string);
-	bool LoadJoints();
-	bool LoadSprites();
-	bool LoadPlayer();
 	bool LoadMap(std::string const&);
+	bool InitializeObjects();
 	void Finish();
 
 private:

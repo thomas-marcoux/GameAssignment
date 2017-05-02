@@ -26,6 +26,7 @@
     <ClCompile Include="Source\PhysicsDevice.cpp" />
     <ClCompile Include="Source\PlayerInputComponent.cpp" />
     <ClCompile Include="Source\Random.cpp" />
+    <ClCompile Include="Source\SecretExitBehaviorComponent.cpp" />
     <ClCompile Include="Source\SlideBehaviorComponent.cpp" />
     <ClCompile Include="Source\SoundDevice.cpp" />
     <ClCompile Include="Source\Source.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Source\PhysicsDevice.h" />
     <ClInclude Include="Source\PlayerInputComponent.h" />
     <ClInclude Include="Source\Random.h" />
+    <ClInclude Include="Source\SecretExitBehaviorComponent.h" />
     <ClInclude Include="Source\SlideBehaviorComponent.h" />
     <ClInclude Include="Source\SoundDevice.h" />
     <ClInclude Include="Source\SpriteComponent.h" />

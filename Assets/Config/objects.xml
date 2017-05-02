@@ -14,10 +14,14 @@
   <GameAsset name="Exit" ID="e">
     <Component name="Sprite"/>
   </GameAsset>
+  <GameAsset name="Secret Exit" ID="?">
+    <Component name="Sprite"/>
+    <Component name="SecretExitBehavior"/>
+  </GameAsset>
   <GameAsset name="Destructible" ID=".">
     <Component name="Sprite"/>
   </GameAsset>
-  <GameAsset name="Link" ID="s">
+  <GameAsset name="Player" ID="s">
     <Component name="Input"/>
     <Component name="Sprite"/>
   </GameAsset>

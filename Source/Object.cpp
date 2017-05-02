@@ -68,7 +68,7 @@ void Object::setType(std::string t)
 		type = BOMB_TYPE;
 	if (name == "Blast")
 		type = BLAST_TYPE;
-	if (name == "Link")
+	if (name == "Player")
 		type = PLAYER_TYPE;
 	if (name == "Rock")
 		type = ROCK_TYPE;
@@ -82,4 +82,6 @@ void Object::setType(std::string t)
 		type = OCTOROK_TYPE;
 	if (name == "Wall")
 		type = WALL_TYPE;
+	if (name == "Secret Exit")
+		type = SECRET_EXIT_TYPE;
 }

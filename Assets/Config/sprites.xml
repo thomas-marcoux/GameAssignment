@@ -12,6 +12,7 @@
   <Item name="Player Right" sprite="./Assets/Images/playerRight.png"/>
   <Item name="Player Up" sprite="./Assets/Images/playerUp.png"/>
   <Item name="Exit" sprite="./Assets/Images/exit1.png"/>
+  <Item name="Secret Exit" sprite="./Assets/Images/destructible1.png"/>
   <Item name="Destructible" sprite="./Assets/Images/destructible1.png"/>
   <Item name="Wall" sprite="./Assets/Images/wall1.png"/>
 </Objects>

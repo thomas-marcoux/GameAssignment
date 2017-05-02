@@ -93,17 +93,15 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *object)
 	std::unique_ptr<Object>	arrow;
 	std::vector<std::string>	componentNames = { "Sprite", "Arrow", "TimedLife" };
 	GraphicsDevice*	gDevice = object->GetComponent<SpriteComponent>()->getGDevice();
-	GAME_VEC	object_pos = object->pDevice->GetPosition(object);
-	GAME_FLT	angle = object->pDevice->GetAngle(object);
 	GAME_OBJECTFACTORY_INITIALIZERS	GOI;
 
 	GOI.name = "Arrow";
-	GOI.pos = object_pos;
-	GOI.angle = angle;
+	GOI.pos = object->pDevice->GetPosition(object);
+	GOI.angle = object->pDevice->GetAngle(object);
 	GOI.timer = ARROW_TIMER;
 	GOI.timer_speed = ARROW_TIMER_SPEED;
 	arrow = create(componentNames, GOI);
-	arrow->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt("Arrow"));
+	arrow->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 	arrow->setParent(object);
 	object->setChild(arrow.get());
 	return arrow;
@@ -126,7 +124,7 @@ std::unique_ptr<Object> ObjectFactory::createBomb(Object *player)
 	GOI.timer_speed = BOMB_TIMER_SPEED;
 	bomb = create(componentNames, GOI);
 	bomb->GetComponent<BombBehaviorComponent>()->Initialize(this, sDevice);
-	bomb->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt("Bomb"));
+	bomb->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 	bomb->GetComponent<SpriteComponent>()->LoadTexture(TEXTURE_RED_BOMB, aLibrary->SearchArt("Red Bomb"));
 	bomb->setParent(player);
 	player->setChild(bomb.get());
@@ -159,7 +157,7 @@ std::unique_ptr<Object> ObjectFactory::createBlast(Object* object)
 		}
 		GOI.angle = TO_DEGREE(angle);
 		blast = create(componentNames, GOI);
-		blast->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt("Blast"));
+		blast->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 		queueObject(std::move(blast));
 	}
 	return nullptr;

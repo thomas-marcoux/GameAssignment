@@ -59,56 +59,6 @@ bool Game::LoadObjects(std::string objectConfigFile)
 	return true;
 }
 
-//Loads Textures and GraphicsDevice into the Sprite components, throws error for missing sprites
-bool Game::LoadSprites()
-{
-	SpriteComponent *sprite;
-	std::string name = "";
-
-	for (auto const& object : objects)
-	{
-		sprite = object->GetComponent<SpriteComponent>();
-		if (!sprite) throw LoadException(NO_COMPONENT);
-		name = sprite->getName();
-		sprite->Initialize(gDevice.get(), aLibrary->SearchArt(name));
-		if (name == "Link")
-		{
-			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Player Up"));
-			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Player Down"));
-			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Player Left"));
-			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Player Right"));
-			sprite->UpdateTexture(TEXTURE_UP);
-		}	
-	}
-	return true;
-}
-
-//Create Joints for CircleBehavior Components
-bool Game::LoadJoints()
-{
-	CircleBehaviorComponent *component;
-	for (auto const& object : objects)
-	{
-		component = object->GetComponent<CircleBehaviorComponent>();
-		if (component)
-			component->Initialize(oFactory.get());
-	}
-	return true;
-}
-
-//Loads PlayerInputComponent
-bool Game::LoadPlayer()
-{
-	PlayerInputComponent *player;
-	for (auto const& object : objects)
-	{
-		player = object->GetComponent<PlayerInputComponent>();
-		if (player)
-			player->Initialize(iDevice.get(), oFactory.get(), view.get());
-	}
-	return true;
-}
-
 bool Game::LoadMap(std::string const& mapFile)
 {
 	std::ifstream file;
@@ -138,6 +88,31 @@ bool Game::LoadMap(std::string const& mapFile)
 	return true;
 }
 
+bool Game::InitializeObjects()
+{
+	for (auto const& object : objects)
+	{
+		SpriteComponent* sprite = object->GetComponent<SpriteComponent>();
+		if (!sprite) throw LoadException(NO_COMPONENT);
+		sprite->Initialize(gDevice.get(), aLibrary->SearchArt(sprite->getName()));
+		switch (object->getType())
+		{
+		case (PLAYER_TYPE):
+			object->GetComponent<PlayerInputComponent>()->Initialize(iDevice.get(), oFactory.get(), view.get());
+			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Player Up"));
+			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Player Down"));
+			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Player Left"));
+			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Player Right"));
+			sprite->UpdateTexture(TEXTURE_UP);
+			break;
+		case (OCTOROK_TYPE):
+			object->GetComponent<CircleBehaviorComponent>()->Initialize(oFactory.get());
+			break;
+		}
+	}
+	return true;
+}
+
 
 
 //Loads game info from both config files, catches errors occuring during loading
@@ -151,9 +126,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		LoadAssets(spritesConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
 		LoadObjects(objectConfigFile);
 		LoadMap("./Assets/Config/bomberman_level_1.map");
-		LoadSprites();
-		LoadPlayer();
-		LoadJoints();
+		InitializeObjects();
 		sDevice->PlayMusic("Music1");
 		std::cout << "Game Loaded." << std::endl;
 		return true;

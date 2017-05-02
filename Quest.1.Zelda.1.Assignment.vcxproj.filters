@@ -114,6 +114,9 @@
     <ClCompile Include="Source\BlastBehaviorComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SecretExitBehaviorComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Definitions.h">
@@ -186,6 +189,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\BlastBehaviorComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SecretExitBehaviorComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
