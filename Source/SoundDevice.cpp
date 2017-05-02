@@ -40,7 +40,8 @@ bool SoundDevice::PlaySound(std::string name, int loops)
 
 bool SoundDevice::PlaySound(std::string name, int loops, int channel)
 {
-	Mix_PlayChannel(channel, aLibrary->SearchSound(name), loops);
+	Mix_PlayChannelTimed(channel, aLibrary->SearchSound(name), loops, -1);
+	//Mix_PlayChannel(channel, aLibrary->SearchSound(name), loops);
 	return true;
 }
 

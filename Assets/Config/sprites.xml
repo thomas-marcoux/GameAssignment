@@ -12,5 +12,6 @@
   <Item name="Link Right" sprite="./Assets/Images/link_r.png"/>
   <Item name="Link Up" sprite="./Assets/Images/link_u.png"/>
   <Item name="Exit" sprite="./Assets/Images/octorok_r.png"/>
-  <Item name="Destructible" sprite="./Assets/Images/octorok_b.png"/>
+  <Item name="Destructible" sprite="./Assets/Images/destructible1.png"/>
+  <Item name="Wall" sprite="./Assets/Images/wall1.png"/>
 </Objects>

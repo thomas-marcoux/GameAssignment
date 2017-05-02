@@ -8,7 +8,7 @@
     <Component name="Slide" vertical="false"/>
     <Component name="Sprite"/>
   </GameAsset>
-  <GameAsset name="Rock" ID="x">
+  <GameAsset name="Wall" ID="x">
     <Component name="Sprite"/>
   </GameAsset>
   <GameAsset name="Exit" ID="e">

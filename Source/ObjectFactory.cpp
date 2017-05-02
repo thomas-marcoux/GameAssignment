@@ -144,7 +144,7 @@ std::unique_ptr<Object> ObjectFactory::createBlast(Object* object)
 	GOI.name = "Blast";
 	GOI.timer = BLAST_TIMER;
 	GOI.timer_speed = BLAST_TIMER_SPEED;
-	for (GAME_FLT angle = 0.0f; angle <= PI2; angle += PI_2)
+	for (GAME_FLT angle = 0.0f; angle < PI2; angle += PI_2)
 	{
 		GOI.pos = object_pos;
 		if (angle == ANGLE_UP || angle == ANGLE_DOWN)

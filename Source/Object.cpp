@@ -80,4 +80,6 @@ void Object::setType(std::string t)
 		type = LEEVER_TYPE;
 	if (name.find("Octorok") != std::string::npos)
 		type = OCTOROK_TYPE;
+	if (name == "Wall")
+		type = WALL_TYPE;
 }

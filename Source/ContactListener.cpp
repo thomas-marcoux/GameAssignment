@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "PhysicsDevice.h"
 #include "SlideBehaviorComponent.h"
+#include <iostream>
 
 void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold)
 {
@@ -20,8 +21,8 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		objectA->kill();
 	}
 	//If an arrow collides with a static object, kill the arrow
-	if ((typeA == ROCK_TYPE && typeB == ARROW_TYPE)
-		|| (typeB == ROCK_TYPE && typeA == ARROW_TYPE))
+	if ((typeA == WALL_TYPE && typeB == ARROW_TYPE)
+		|| (typeB == WALL_TYPE && typeA == ARROW_TYPE))
 	{
 		if (typeA == ARROW_TYPE)
 			objectA->kill();
@@ -29,15 +30,15 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 			objectB->kill();
 	}
 	//Stop the blast if it runs into a static object
-	if ((typeA == ROCK_TYPE && typeB == BLAST_TYPE)
-		|| (typeB == ROCK_TYPE && typeA == BLAST_TYPE))
+	if (false &&(typeA == WALL_TYPE && typeB == BLAST_TYPE)
+		|| (typeB == WALL_TYPE && typeA == BLAST_TYPE))
 	{
 		if (typeA == BLAST_TYPE)
 			objectA->kill();
 		else
 			objectB->kill();
 	}
-	//Turn leever around if they run into each other
+	//Turn leever around if they run into something
 	if (typeA == LEEVER_TYPE || typeB == LEEVER_TYPE)
 	{
 		SlideBehaviorComponent*	leever;
@@ -49,7 +50,7 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		}
 		else
 		{
-			leever = objectA->GetComponent<SlideBehaviorComponent>();
+			leever = objectB->GetComponent<SlideBehaviorComponent>();
 			if (leever)
 				leever->turn();
 		}
