@@ -3,6 +3,7 @@
 #include "Exceptions.h"
 #include "Game.h"
 #include "Object.h"
+#include "GraphicsDevice.h"
 #include "PhysicsDevice.h"
 #include "SoundDevice.h"
 #include "ArrowBehaviorComponent.h"
@@ -11,6 +12,7 @@
 #include "CircleBehaviorComponent.h"
 #include "PlayerInputComponent.h"
 #include "TimedLifeComponent.h"
+#include "SecretExitBehaviorComponent.h"
 #include "SlideBehaviorComponent.h"
 #include "SpriteComponent.h"
 
@@ -24,6 +26,7 @@ ObjectFactory::ObjectFactory()
 	cLibrary["Arrow"] = ARROW_COMPONENT;
 	cLibrary["Bomb"] = BOMB_COMPONENT;
 	cLibrary["Blast"] = BLAST_COMPONENT;
+	cLibrary["SecretExit"] = SECRET_EXIT_COMPONENT;
 }
 
 //Return an instance of the requested component, nullptr if it can't be found.
@@ -59,16 +62,19 @@ std::unique_ptr<Component> ObjectFactory::Search(std::string const& component, s
 	case BLAST_COMPONENT:
 		return std::make_unique<BlastBehaviorComponent>(owner);
 		break;
+	case SECRET_EXIT_COMPONENT:
+		return std::make_unique<SecretExitBehaviorComponent>(owner);
 	default:
 		break;
 	}
 	return nullptr;
 }
 
-bool ObjectFactory::Initialize(Game* game, std::unique_ptr<AssetLibrary> const& aL, std::unique_ptr<PhysicsDevice> const& pD,
-	std::unique_ptr<SoundDevice> const& sD)
+bool ObjectFactory::Initialize(Game* game, std::unique_ptr<AssetLibrary> const& aL, std::unique_ptr<GraphicsDevice> const& gD,
+	std::unique_ptr<PhysicsDevice> const& pD, std::unique_ptr<SoundDevice> const& sD)
 {
 	aLibrary = aL.get();
+	gDevice = gD.get();
 	pDevice = pD.get();
 	sDevice = sD.get();
 	this->game = game;
@@ -101,9 +107,7 @@ std::unique_ptr<Object> ObjectFactory::createArrow(Object *object)
 	GOI.timer = ARROW_TIMER;
 	GOI.timer_speed = ARROW_TIMER_SPEED;
 	arrow = create(componentNames, GOI);
-	arrow->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 	arrow->setParent(object);
-	object->setChild(arrow.get());
 	return arrow;
 }
 
@@ -124,10 +128,8 @@ std::unique_ptr<Object> ObjectFactory::createBomb(Object *player)
 	GOI.timer_speed = BOMB_TIMER_SPEED;
 	bomb = create(componentNames, GOI);
 	bomb->GetComponent<BombBehaviorComponent>()->Initialize(this, sDevice);
-	bomb->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 	bomb->GetComponent<SpriteComponent>()->LoadTexture(TEXTURE_RED_BOMB, aLibrary->SearchArt("Red Bomb"));
 	bomb->setParent(player);
-	player->setChild(bomb.get());
 	return bomb;
 }
 
@@ -157,7 +159,6 @@ std::unique_ptr<Object> ObjectFactory::createBlast(Object* object)
 		}
 		GOI.angle = TO_DEGREE(angle);
 		blast = create(componentNames, GOI);
-		blast->GetComponent<SpriteComponent>()->Initialize(gDevice, aLibrary->SearchArt(GOI.name));
 		queueObject(std::move(blast));
 	}
 	return nullptr;
@@ -204,6 +205,7 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 {
 	std::unique_ptr<Object>		object = std::make_unique<Object>();
 	std::unique_ptr<Component>	component;
+	SpriteComponent*	sprite;
 
 	for (std::vector<std::string>::iterator it = componentNames.begin(); it != componentNames.end(); ++it)
 	{
@@ -215,6 +217,8 @@ std::unique_ptr<Object> ObjectFactory::create(std::vector<std::string>& componen
 		}
 	}
 	object->setType(GOI.name);
+	if (sprite = object->GetComponent<SpriteComponent>())
+		sprite->Initialize(gDevice, aLibrary->SearchArt(object->getName()));
 	loadPhysics(object, GOI);
 	return object;
 }

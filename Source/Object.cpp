@@ -85,3 +85,14 @@ void Object::setType(std::string t)
 	if (name == "Secret Exit")
 		type = SECRET_EXIT_TYPE;
 }
+
+void Object::setParent(Object * o)
+{
+	parent = o;
+	o->setChild(this);
+}
+
+void Object::setChild(Object * o)
+{
+	child = o;
+}

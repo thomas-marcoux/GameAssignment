@@ -41,8 +41,8 @@ public:
 	std::shared_ptr<Texture>	getTexture();
 	void setType(std::string t);
 	void setPhysics(PhysicsDevice* p) { pDevice = p; }
-	void setParent(Object* o) { parent = o; }
-	void setChild(Object* o) { child = o; }
+	void setParent(Object* o);
+	void setChild(Object* o);
 	bool hasChild() { return (child) ? true : false; }
 
 protected:

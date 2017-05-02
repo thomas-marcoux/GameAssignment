@@ -55,4 +55,11 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 				leever->turn();
 		}
 	}
+	if ((typeA == PLAYER_TYPE || typeB == EXIT_TYPE) || typeA == EXIT_TYPE || typeB == PLAYER_TYPE)
+	{
+		if (typeA == PLAYER_TYPE)
+			;
+		else
+			;
+	}
 }

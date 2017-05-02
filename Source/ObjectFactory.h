@@ -11,6 +11,7 @@
 class AssetLibrary;
 class Component;
 class Game;
+class GraphicsDevice;
 class PhysicsDevice;
 class SoundDevice;
 class Object;
@@ -20,7 +21,8 @@ class ObjectFactory
 public:
 	ObjectFactory();
 	~ObjectFactory() {}
-	bool Initialize(Game*, std::unique_ptr<AssetLibrary> const&, std::unique_ptr<PhysicsDevice> const&, std::unique_ptr<SoundDevice> const&);
+	bool Initialize(Game*, std::unique_ptr<AssetLibrary> const&, std::unique_ptr<GraphicsDevice> const&,
+		std::unique_ptr<PhysicsDevice> const&, std::unique_ptr<SoundDevice> const&);
 	void loadPhysics(std::unique_ptr<Object> const&, GAME_OBJECTFACTORY_INITIALIZERS const&);
 	std::unique_ptr<Object> create(std::string const&, GAME_VEC const&);
 	std::unique_ptr<Object> createArrow(Object*);
@@ -37,6 +39,7 @@ private:
 private:
 	std::map<std::string, COMPONENT_TYPE>	cLibrary;
 	AssetLibrary* aLibrary;
+	GraphicsDevice*	gDevice;
 	PhysicsDevice*	pDevice;
 	SoundDevice*	sDevice;
 	Game*			game;

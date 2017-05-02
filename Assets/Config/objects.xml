@@ -16,7 +16,7 @@
   </GameAsset>
   <GameAsset name="Secret Exit" ID="?">
     <Component name="Sprite"/>
-    <Component name="SecretExitBehavior"/>
+    <Component name="SecretExit"/>
   </GameAsset>
   <GameAsset name="Destructible" ID=".">
     <Component name="Sprite"/>

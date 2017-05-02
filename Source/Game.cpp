@@ -5,6 +5,7 @@
 #include "CircleBehaviorComponent.h"
 #include "SpriteComponent.h"
 #include "PlayerInputComponent.h"
+#include "SecretExitBehaviorComponent.h"
 #include "tinyxml\tinystr.h"
 #include "tinyxml\tinyxml.h"
 
@@ -24,7 +25,7 @@ bool Game::Initialize()
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
 		&& sDevice->Initialize(aLibrary) && timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0)
-		&& oFactory->Initialize(this, aLibrary, pDevice, sDevice))
+		&& oFactory->Initialize(this, aLibrary, gDevice, pDevice, sDevice))
 		return true;
 	return false;
 }
@@ -61,17 +62,16 @@ bool Game::LoadObjects(std::string objectConfigFile)
 
 bool Game::LoadMap(std::string const& mapFile)
 {
-	std::ifstream file;
 	std::unique_ptr<Object> new_object = nullptr;
-	GAME_VEC	start = { 50, 50 };
 	GAME_VEC	increment = { SPRITE_WIDTH, SPRITE_HEIGHT };
-	GAME_VEC	coord;
+	GAME_VEC	start = { 50, 50 };
+	GAME_VEC	coord = { 0, start.y };
+	std::ifstream file;
 	std::string	line;
 
 	file.open(mapFile);
 	if (!file.is_open())
 		throw LoadException(LOAD_ERROR, mapFile);
-	coord.y = start.y;
 	while (std::getline(file, line))
 	{
 		coord.x = start.x;
@@ -92,12 +92,11 @@ bool Game::InitializeObjects()
 {
 	for (auto const& object : objects)
 	{
-		SpriteComponent* sprite = object->GetComponent<SpriteComponent>();
-		if (!sprite) throw LoadException(NO_COMPONENT);
-		sprite->Initialize(gDevice.get(), aLibrary->SearchArt(sprite->getName()));
+		SpriteComponent* sprite;
 		switch (object->getType())
 		{
 		case (PLAYER_TYPE):
+			sprite = object->GetComponent<SpriteComponent>();
 			object->GetComponent<PlayerInputComponent>()->Initialize(iDevice.get(), oFactory.get(), view.get());
 			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Player Up"));
 			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Player Down"));
@@ -107,6 +106,11 @@ bool Game::InitializeObjects()
 			break;
 		case (OCTOROK_TYPE):
 			object->GetComponent<CircleBehaviorComponent>()->Initialize(oFactory.get());
+			break;
+		case (SECRET_EXIT_TYPE):
+			object->GetComponent<SecretExitBehaviorComponent>()->Initialize(oFactory.get());
+			break;
+		default:
 			break;
 		}
 	}
