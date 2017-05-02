@@ -47,6 +47,11 @@ void Object::kill()
 	dead = true;
 }
 
+bool Object::isDead()
+{
+	return dead;
+}
+
 std::shared_ptr<Texture> Object::getTexture()
 {
 	return GetComponent<SpriteComponent>()->getTexture();
@@ -67,6 +72,10 @@ void Object::setType(std::string t)
 		type = PLAYER_TYPE;
 	if (name == "Rock")
 		type = ROCK_TYPE;
+	if (name == "Exit")
+		type = EXIT_TYPE;
+	if (name == "Destructible")
+		type = DESTRUCTIBLE_TYPE;
 	if (name.find("Leever") != std::string::npos)
 		type = LEEVER_TYPE;
 	if (name.find("Octorok") != std::string::npos)

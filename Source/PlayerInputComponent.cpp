@@ -63,7 +63,7 @@ std::unique_ptr<Object> PlayerInputComponent::Update(GAME_FLT dt)
 	}
 	if (iDevice->GetEvent(GAME_SPACE))
 	{
-		if (!_owner->hasChild()) //If no arrow already exists
+		if (!_owner->hasChild()) //If no bomb already exists
 			return oFactory->createBomb(_owner);
 	}
 	_owner->pDevice->SetLinearVelocity(_owner, applyForce);

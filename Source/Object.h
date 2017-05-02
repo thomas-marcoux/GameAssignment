@@ -34,7 +34,7 @@ public:
 		return NULL;
 	}
 	void kill();
-	bool isDead() { return dead; }
+	bool isDead();
 	Object* getParent() { return parent; }
 	std::string getName() { return name; }
 	OBJECT_TYPE getType() { return type; }

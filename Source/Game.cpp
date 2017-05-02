@@ -168,7 +168,7 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 
 void Game::queueObject(std::unique_ptr<Object> object)
 {
-	objects.push_back(std::move(object));
+	toBeAdded.push_back(std::move(object));
 }
 
 //Runs one game frame and regulate the fps
@@ -193,6 +193,7 @@ bool Game::Update()
 		return true;
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
+		std::string name = (*object)->getName();
 		new_object = std::move((*object)->Update(dt));
 		if ((*object)->isDead()) //If object is dead, store its ID to be deleted
 			deadObjectIDs.push_back(id);

@@ -11,6 +11,12 @@
   <GameAsset name="Rock" ID="x">
     <Component name="Sprite"/>
   </GameAsset>
+  <GameAsset name="Exit" ID="e">
+    <Component name="Sprite"/>
+  </GameAsset>
+  <GameAsset name="Destructible" ID=".">
+    <Component name="Sprite"/>
+  </GameAsset>
   <GameAsset name="Link" ID="s">
     <Component name="Input"/>
     <Component name="Sprite"/>
