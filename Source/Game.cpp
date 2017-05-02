@@ -148,8 +148,6 @@ bool Game::LoadLevel(std::string levelConfigFile)
 	{
 		LoadMap(levelConfigFile);
 		InitializeObjects();
-		sDevice->PlayMusic("Music1");
-		std::cout << "Game Loaded." << std::endl;
 		return true;
 	}
 	catch (LoadException &e)
@@ -163,6 +161,7 @@ bool Game::LoadLevel(std::string levelConfigFile)
 bool Game::Start(std::vector<std::string>& levels)
 {
 	quit = false;
+	sDevice->PlayMusic("Music1");
 	while (!levels.empty())
 	{
 		win = false;
