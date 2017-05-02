@@ -34,19 +34,12 @@ int main(int argc, char *argv[])
 	//Start Game
 	//========================================
 	std::vector<std::string>	levels;
+	levels.push_back("./Assets/Config/bomberman_level_1.map");
 	levels.push_back("./Assets/Config/bomberman_level_2.map");
 	if (!game->Start(levels))
 	{
 		exit(1);
 	}
-
-	//========================================
-	//Main Game Loop
-	//========================================
-	bool quit = false;
-
-	//While the user hasn't quit
-	while(!game->Run()){	}
 
 	//========================================
 	// Clean-up
@@ -55,8 +48,6 @@ int main(int argc, char *argv[])
 	{
 		game = nullptr;
 	}
-
-
 	return 0;
 
 }

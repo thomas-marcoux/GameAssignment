@@ -30,11 +30,14 @@ bool Game::Initialize()
 	return false;
 }
 
-//Reset view and objects
+//Reset level
 void Game::Reset()
 {
-	view.reset(NULL);
+	for (auto const& object : objects)
+		object->pDevice->RemoveObject(object.get());
 	objects.clear();
+	toBeAdded.clear();
+	deadObjectIDs.clear();
 }
 
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
@@ -159,12 +162,20 @@ bool Game::LoadLevel(std::string levelConfigFile)
 
 bool Game::Start(std::vector<std::string>& levels)
 {
+	quit = false;
 	while (!levels.empty())
 	{
+		win = false;
 		if (!LoadLevel(levels.back()))
 			return false;
-		levels.pop_back();
+		while (!Run()); //Run the game
+		Reset(); //Reset objects
+		if (win)
+			levels.pop_back();
+		if (quit)
+			return true;
 	}
+	std::cout << "win\n";
 	return true;
 }
 
@@ -179,7 +190,8 @@ bool Game::Run()
 	timer->start();
 	if (Update())
 		return true;
-	Finish();
+	if (Finish())
+		return true;
 	Draw();
 	timer->fpsRegulate();
 	return false;
@@ -192,7 +204,7 @@ bool Game::Update()
 	int id = 0;
 
 	if (!view->Update())
-		return true;
+		return (quit = true);
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
 		std::string name = (*object)->getName();
@@ -207,24 +219,32 @@ bool Game::Update()
 }
 
 //Delete dead objects, calls PhysicsDevice's RemoveObject and resets the parent's child pointer
-void Game::Finish()
+bool Game::Finish()
 {
 	while (deadObjectIDs.size() > 0)
 	{
 		GAME_INT id = deadObjectIDs.back();
 		Object* object = objects[id].get();
 		Object* parent = object->getParent();
+		OBJECT_TYPE type = object->getType();
+
 		if (parent != nullptr)
 			parent->setChild(nullptr);
 		object->pDevice->RemoveObject(object);
 		objects.erase(objects.begin() + id);
 		deadObjectIDs.pop_back();
+		if (type == EXIT_TYPE)
+			return (win = true);
+		if (type == PLAYER_TYPE)
+			return true;
+
 	}
 	while (toBeAdded.size() > 0)
 	{
 		objects.push_back(std::move(toBeAdded.back()));
 		toBeAdded.pop_back();
 	}
+	return false;
 }
 
 //Draw all sprites

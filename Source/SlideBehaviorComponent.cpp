@@ -15,7 +15,7 @@ bool SlideBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& i
 //Check the distance traveled and applies a sliding movement depending on the two possible directions
 std::unique_ptr<Object> SlideBehaviorComponent::Update(GAME_FLT dt)
 {
-	checkDistance();
+	//checkDistance();
 	if (_vertical)
 	{
 		if (_forward)

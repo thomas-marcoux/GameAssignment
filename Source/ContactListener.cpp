@@ -20,20 +20,20 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		objectB->kill();
 		objectA->kill();
 	}
+	//If player collides with an enemy type, kill the player
+	if (((typeB == OCTOROK_TYPE || typeB == LEEVER_TYPE || typeB == BLAST_TYPE) && typeA == PLAYER_TYPE)
+		|| (typeB == PLAYER_TYPE && (typeA == OCTOROK_TYPE || typeA == LEEVER_TYPE || typeA == BLAST_TYPE)))
+	{
+		if (typeA == PLAYER_TYPE)
+			objectA->kill();
+		else
+			objectB->kill();
+	}
 	//If an arrow collides with a static object, kill the arrow
 	if ((typeA == WALL_TYPE && typeB == ARROW_TYPE)
 		|| (typeB == WALL_TYPE && typeA == ARROW_TYPE))
 	{
 		if (typeA == ARROW_TYPE)
-			objectA->kill();
-		else
-			objectB->kill();
-	}
-	//Stop the blast if it runs into a static object
-	if (false &&(typeA == WALL_TYPE && typeB == BLAST_TYPE)
-		|| (typeB == WALL_TYPE && typeA == BLAST_TYPE))
-	{
-		if (typeA == BLAST_TYPE)
 			objectA->kill();
 		else
 			objectB->kill();
@@ -55,11 +55,11 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 				leever->turn();
 		}
 	}
-	if ((typeA == PLAYER_TYPE || typeB == EXIT_TYPE) || typeA == EXIT_TYPE || typeB == PLAYER_TYPE)
+	if ((typeA == PLAYER_TYPE && typeB == EXIT_TYPE) || (typeA == EXIT_TYPE && typeB == PLAYER_TYPE))
 	{
 		if (typeA == PLAYER_TYPE)
-			;
+			objectB->kill();
 		else
-			;
+			objectA->kill();
 	}
 }

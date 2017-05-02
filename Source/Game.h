@@ -36,7 +36,7 @@ private:
 	bool LoadObjects(std::string);
 	bool LoadMap(std::string const&);
 	bool InitializeObjects();
-	void Finish();
+	bool Finish();
 
 private:
 	std::unique_ptr<AssetLibrary> aLibrary;
@@ -51,6 +51,8 @@ private:
 	std::vector<std::unique_ptr<Object>> objects;
 	std::vector<std::unique_ptr<Object>> toBeAdded;
 	std::vector<int> deadObjectIDs;
+	bool	win;
+	bool	quit;
 };
 
 #endif // ! GAME_H
