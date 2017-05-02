@@ -25,6 +25,7 @@ public:
 	void Reset();
 	bool LoadResources(std::string, std::string, std::string, std::string, std::string);
 	bool LoadLevel(std::string);
+	bool Start(std::vector<std::string>&);
 	void queueObject(std::unique_ptr<Object>);
 	bool Run();
 	bool Update();

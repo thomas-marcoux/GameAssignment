@@ -157,6 +157,17 @@ bool Game::LoadLevel(std::string levelConfigFile)
 	}
 }
 
+bool Game::Start(std::vector<std::string>& levels)
+{
+	while (!levels.empty())
+	{
+		if (!LoadLevel(levels.back()))
+			return false;
+		levels.pop_back();
+	}
+	return true;
+}
+
 void Game::queueObject(std::unique_ptr<Object> object)
 {
 	toBeAdded.push_back(std::move(object));
