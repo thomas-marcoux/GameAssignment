@@ -118,10 +118,8 @@ bool Game::InitializeObjects()
 }
 
 
-
-//Loads game info from both config files, catches errors occuring during loading
-bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, std::string physicsConfigFile,
-	std::string spritesConfigFile)
+bool Game::LoadResources(std::string objectConfigFile, std::string physicsConfigFile, std::string spritesConfigFile,
+	std::string soundConfigFile, std::string musicConfigFile)
 {
 	try
 	{
@@ -129,7 +127,23 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		view->Initialize(iDevice.get(), 0, 0);
 		LoadAssets(spritesConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
 		LoadObjects(objectConfigFile);
-		LoadMap("./Assets/Config/bomberman_level_1.map");
+		std::cout << "Resources Loaded." << std::endl;
+		return true;
+	}
+	catch (LoadException &e)
+	{
+		std::cout << e.getMsg().c_str() << std::endl;
+		system("PAUSE");
+		return false;
+	}
+}
+
+//Loads game info from both config files, catches errors occuring during loading
+bool Game::LoadLevel(std::string levelConfigFile)
+{
+	try
+	{
+		LoadMap(levelConfigFile);
 		InitializeObjects();
 		sDevice->PlayMusic("Music1");
 		std::cout << "Game Loaded." << std::endl;

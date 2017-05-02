@@ -23,7 +23,8 @@ public:
 	~Game() {}
 	bool Initialize();
 	void Reset();
-	bool LoadLevel(std::string, std::string, std::string, std::string);
+	bool LoadResources(std::string, std::string, std::string, std::string, std::string);
+	bool LoadLevel(std::string);
 	void queueObject(std::unique_ptr<Object>);
 	bool Run();
 	bool Update();

@@ -37,11 +37,20 @@ int main(int argc, char *argv[])
 	//Load Level
 	//========================================
 	game->Reset();
-	std::string levelConfigFile= "./Assets/Config/level1.xml";
+	std::string levelConfigFile = "./Assets/Config/bomberman_level_1.map";
 	std::string spritesConfigFile = "./Assets/Config/sprites.xml";
 	std::string objectConfigFile = "./Assets/Config/objects.xml";
 	std::string physicsConfigFile = "./Assets/Config/Physics.xml";
-	if(!game->LoadLevel(levelConfigFile, objectConfigFile, physicsConfigFile, spritesConfigFile))
+	std::string soundConfigFile = "./Assets/Config/sounds.xml";
+	std::string musicConfigFile = "./Assets/Config/music.xml";
+
+	if (!game->LoadResources(objectConfigFile, physicsConfigFile, spritesConfigFile, soundConfigFile, musicConfigFile))
+	{
+		printf("Game could not load resources");
+		system("pause");
+		exit(1);
+	}
+		if (!game->LoadLevel(levelConfigFile))
 	{
 		printf( "Game could not load level %s: ", levelConfigFile.c_str());
 		system("pause");
