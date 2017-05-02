@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
 <Objects>
-  <Item name="Red Leever" sprite="./Assets/Images/leever_r.png"/>
-  <Item name="Blue Leever" sprite="./Assets/Images/leever_b.png"/>
+  <Item name="Red Leever" sprite="./Assets/Images/enemy2.png"/>
+  <Item name="Blue Leever" sprite="./Assets/Images/enemy1.png"/>
   <Item name="Bomb" sprite="./Assets/Images/bomb1.png"/>
   <Item name="Red Bomb" sprite="./Assets/Images/bomb2.png"/>
   <Item name="Blast" sprite="./Assets/Images/blast1.png"/>
   <Item name="Arrow" sprite="./Assets/Images/arrow.png"/>
   <Item name="Rock" sprite="./Assets/Images/rock.png"/>
-  <Item name="Link Down" sprite="./Assets/Images/link_d.png"/>
-  <Item name="Link Left" sprite="./Assets/Images/link_l.png"/>
-  <Item name="Link Right" sprite="./Assets/Images/link_r.png"/>
-  <Item name="Link Up" sprite="./Assets/Images/link_u.png"/>
-  <Item name="Exit" sprite="./Assets/Images/octorok_r.png"/>
+  <Item name="Player Down" sprite="./Assets/Images/playerDown.png"/>
+  <Item name="Player Left" sprite="./Assets/Images/playerLeft.png"/>
+  <Item name="Player Right" sprite="./Assets/Images/playerRight.png"/>
+  <Item name="Player Up" sprite="./Assets/Images/playerUp.png"/>
+  <Item name="Exit" sprite="./Assets/Images/exit1.png"/>
   <Item name="Destructible" sprite="./Assets/Images/destructible1.png"/>
   <Item name="Wall" sprite="./Assets/Images/wall1.png"/>
 </Objects>

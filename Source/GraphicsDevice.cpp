@@ -19,7 +19,7 @@ GraphicsDevice::~GraphicsDevice()
 bool GraphicsDevice::Initialize(bool fullScreen)
 {
 	//Initialize all SDL subsystems
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cout << "SDL could not initialize. SDL_Init Error: " << SDL_GetError() << std::endl;
 		return false;
 	}

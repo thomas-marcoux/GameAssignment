@@ -73,10 +73,10 @@ bool Game::LoadSprites()
 		sprite->Initialize(gDevice.get(), aLibrary->SearchArt(name));
 		if (name == "Link")
 		{
-			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Link Up"));
-			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Link Down"));
-			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Link Left"));
-			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Link Right"));
+			sprite->LoadTexture(TEXTURE_UP, aLibrary->SearchArt("Player Up"));
+			sprite->LoadTexture(TEXTURE_DOWN, aLibrary->SearchArt("Player Down"));
+			sprite->LoadTexture(TEXTURE_LEFT, aLibrary->SearchArt("Player Left"));
+			sprite->LoadTexture(TEXTURE_RIGHT, aLibrary->SearchArt("Player Right"));
 			sprite->UpdateTexture(TEXTURE_UP);
 		}	
 	}
