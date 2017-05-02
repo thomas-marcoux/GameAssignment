@@ -1,5 +1,5 @@
 #ifndef SOUNDDEVICE_H
-#define SOUNDDEVICE
+#define SOUNDDEVICE_H
 
 #include <memory>
 #include <string>

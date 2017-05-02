@@ -24,7 +24,7 @@ bool Game::Initialize()
 	view = std::make_unique<View>();
 	if (gDevice->Initialize(FULLSCREEN) && iDevice->Initialize() && timer->Initialize(FPS) && pDevice->Initialize()
 		&& sDevice->Initialize(aLibrary) && timer->Initialize(GAME_FPS) && view->Initialize(iDevice.get(), 0, 0)
-		&& oFactory->Initialize(aLibrary, pDevice))
+		&& oFactory->Initialize(this, aLibrary, pDevice, sDevice))
 		return true;
 	return false;
 }
@@ -34,21 +34,6 @@ void Game::Reset()
 {
 	view.reset(NULL);
 	objects.clear();
-}
-
-//Load level file and create objects from attributes. Raises LoadException if an error occurs.
-bool Game::LoadGameAssets(std::string levelConfigFile)
-{
-	TiXmlDocument doc;
-	TiXmlElement* gameAssetNode;
-
-	if (!doc.LoadFile(levelConfigFile.c_str())) throw LoadException(LOAD_ERROR, levelConfigFile);
-	gameAssetNode = TiXmlHandle(doc.RootElement()).FirstChild("GameAsset").Element();
-	if (!gameAssetNode) throw LoadException(PARSE_ERROR, levelConfigFile);
-	//Goes through every game asset node and sends them to the object factory which returns an object
-	for (gameAssetNode; gameAssetNode; gameAssetNode = gameAssetNode->NextSiblingElement())
-		objects.push_back(oFactory->create(gameAssetNode));		
-	return true;
 }
 
 //Load object file and add assets from attributes. Raises LoadException if an error occurs.
@@ -140,7 +125,7 @@ bool Game::LoadMap(std::string const& mapFile)
 	while (std::getline(file, line))
 	{
 		coord.x = start.x;
-		for (int i = 0; i < line.size(); i++)
+		for (GAME_INT i = 0; i < line.size(); i++)
 		{
 			new_object = oFactory->create(line.substr(i, 1), coord);
 			if (new_object)
@@ -164,7 +149,6 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		view = std::make_unique<View>();
 		view->Initialize(iDevice.get(), 0, 0);
 		LoadAssets(spritesConfigFile, physicsConfigFile, "./Assets/Config/sounds.xml", "./Assets/Config/music.xml");
-		//LoadGameAssets(levelConfigFile);
 		LoadObjects(objectConfigFile);
 		LoadMap("./Assets/Config/bomberman_level_1.map");
 		LoadSprites();
@@ -180,6 +164,11 @@ bool Game::LoadLevel(std::string levelConfigFile, std::string objectConfigFile, 
 		system("PAUSE");
 		return false;
 	}
+}
+
+void Game::queueObject(std::unique_ptr<Object> object)
+{
+	objects.push_back(std::move(object));
 }
 
 //Runs one game frame and regulate the fps
@@ -198,22 +187,19 @@ bool Game::Run()
 bool Game::Update()
 {
 	std::unique_ptr<Object> new_object = nullptr;
-	std::unique_ptr<Object>	r;
 	int id = 0;
 
 	if (!view->Update())
 		return true;
 	for (auto object = objects.begin(); object != objects.end(); object++, id++)
 	{
-		r = std::move((*object)->Update(dt));
+		new_object = std::move((*object)->Update(dt));
 		if ((*object)->isDead()) //If object is dead, store its ID to be deleted
 			deadObjectIDs.push_back(id);
-		if (r)
-			new_object = std::move(r);
+		if (new_object)
+			queueObject(std::move(new_object));
 	}
 	pDevice->Update(dt);
-	if (new_object) //If a new object has been created, add it to the vector
-		objects.push_back(std::move(new_object));
 	return false;
 }
 
@@ -230,6 +216,11 @@ void Game::Finish()
 		object->pDevice->RemoveObject(object);
 		objects.erase(objects.begin() + id);
 		deadObjectIDs.pop_back();
+	}
+	while (toBeAdded.size() > 0)
+	{
+		objects.push_back(std::move(toBeAdded.back()));
+		toBeAdded.pop_back();
 	}
 }
 

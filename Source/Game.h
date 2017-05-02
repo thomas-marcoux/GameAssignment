@@ -24,12 +24,12 @@ public:
 	bool Initialize();
 	void Reset();
 	bool LoadLevel(std::string, std::string, std::string, std::string);
+	void queueObject(std::unique_ptr<Object>);
 	bool Run();
 	bool Update();
 	void Draw();
 
 private:
-	bool LoadGameAssets(std::string);
 	bool LoadAssets(std::string, std::string, std::string, std::string);
 	bool LoadObjects(std::string);
 	bool LoadJoints();
@@ -49,6 +49,7 @@ private:
 	const GAME_FLT dt; //Time per frame
 	std::unique_ptr<View> view;
 	std::vector<std::unique_ptr<Object>> objects;
+	std::vector<std::unique_ptr<Object>> toBeAdded;
 	std::vector<int> deadObjectIDs;
 };
 

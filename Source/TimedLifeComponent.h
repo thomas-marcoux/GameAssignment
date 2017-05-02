@@ -12,6 +12,7 @@ public:
 	bool Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers);
 	std::unique_ptr<Object> Update(GAME_FLT);
 	bool Finish();
+	GAME_INT	getTimer() { return _health; }
 
 private:
 	GAME_INT _health;

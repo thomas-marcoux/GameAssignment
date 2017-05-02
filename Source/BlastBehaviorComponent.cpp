@@ -1,12 +1,12 @@
-#include "ArrowBehaviorComponent.h"
+#include "BlastBehaviorComponent.h"
 
-bool ArrowBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const& initializers)
+bool BlastBehaviorComponent::Initialize(GAME_OBJECTFACTORY_INITIALIZERS const & initializers)
 {
-	_forceMultiplier = ARROW_FORCE;
+	_forceMultiplier = BLAST_FORCE;
 	return true;
 }
 
-std::unique_ptr<Object> ArrowBehaviorComponent::Update(GAME_FLT dt)
+std::unique_ptr<Object> BlastBehaviorComponent::Update(GAME_FLT)
 {
 	_applyForce.x = (float)cosf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;
 	_applyForce.y = (float)sinf(TO_RADIAN(_owner->pDevice->GetAngle(_owner)) - (PI / 2))*_forceMultiplier;

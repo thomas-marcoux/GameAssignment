@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Source\ArrowBehaviorComponent.cpp" />
     <ClCompile Include="Source\AssetLibrary.cpp" />
+    <ClCompile Include="Source\BlastBehaviorComponent.cpp" />
     <ClCompile Include="Source\BombBehaviorComponent.cpp" />
     <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
     <ClCompile Include="Source\Component.cpp" />
@@ -41,6 +42,7 @@
   <ItemGroup>
     <ClInclude Include="Source\ArrowBehaviorComponent.h" />
     <ClInclude Include="Source\AssetLibrary.h" />
+    <ClInclude Include="Source\BlastBehaviorComponent.h" />
     <ClInclude Include="Source\BombBehaviorComponent.h" />
     <ClInclude Include="Source\CircleBehaviorComponent.h" />
     <ClInclude Include="Source\Component.h" />

@@ -18,7 +18,7 @@ bool SoundDevice::Initialize(std::unique_ptr<AssetLibrary> const& aL)
 	int flags = MIX_INIT_MP3;
 	int init = Mix_Init(flags);
 
-	if (init&flags != flags)
+	if ((init&flags) != flags)
 	{
 		std::cout << "SDL_Mixer failed to initialize MP3 support. SDL_Mixer Error: " << Mix_GetError() << std::endl;
 		return false;

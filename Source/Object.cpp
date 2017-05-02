@@ -57,8 +57,12 @@ void Object::setType(std::string t)
 {
 	name = t;
 	type = DEFAULT_TYPE;
+	if (name == "Arrow")
+		type = ARROW_TYPE;
 	if (name == "Bomb")
 		type = BOMB_TYPE;
+	if (name == "Blast")
+		type = BLAST_TYPE;
 	if (name == "Link")
 		type = PLAYER_TYPE;
 	if (name == "Rock")
