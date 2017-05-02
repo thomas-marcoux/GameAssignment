@@ -92,6 +92,7 @@
   <ItemGroup>
     <None Include="Assets\Config\bomberman_level_1.map" />
     <None Include="Assets\Config\bomberman_level_2.map" />
+    <None Include="Assets\Config\bomberman_level_3.map" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6D0C0CC1-2E46-41F4-94C1-0F91F125C4A8}</ProjectGuid>

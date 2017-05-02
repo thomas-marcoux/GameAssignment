@@ -254,5 +254,8 @@
     <None Include="Assets\Config\bomberman_level_2.map">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Assets\Config\bomberman_level_3.map">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

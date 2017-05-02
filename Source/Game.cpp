@@ -175,7 +175,6 @@ bool Game::Start(std::vector<std::string>& levels)
 		if (quit)
 			return true;
 	}
-	std::cout << "win\n";
 	return true;
 }
 

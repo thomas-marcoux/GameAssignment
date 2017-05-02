@@ -38,21 +38,24 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * oldManifo
 		else
 			objectB->kill();
 	}
-	//Turn leever around if they run into something
+	//Turn enemy around if they run into something
 	if (typeA == LEEVER_TYPE || typeB == LEEVER_TYPE)
 	{
 		SlideBehaviorComponent*	leever;
 		if (typeA == LEEVER_TYPE)
 		{
 			leever = objectA->GetComponent<SlideBehaviorComponent>();
-			if (leever)
+			leever->turn();
+			if (typeB == LEEVER_TYPE)
+			{
+				leever = objectB->GetComponent<SlideBehaviorComponent>();
 				leever->turn();
+			}
 		}
 		else
 		{
 			leever = objectB->GetComponent<SlideBehaviorComponent>();
-			if (leever)
-				leever->turn();
+			leever->turn();
 		}
 	}
 	if ((typeA == PLAYER_TYPE && typeB == EXIT_TYPE) || (typeA == EXIT_TYPE && typeB == PLAYER_TYPE))
