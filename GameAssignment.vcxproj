@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\ArrowBehaviorComponent.cpp" />
+    <ClCompile Include="Source\AssetLibrary.cpp" />
+    <ClCompile Include="Source\BlastBehaviorComponent.cpp" />
+    <ClCompile Include="Source\BombBehaviorComponent.cpp" />
+    <ClCompile Include="Source\CircleBehaviorComponent.cpp" />
+    <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\ContactListener.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\GraphicsDevice.cpp" />
+    <ClCompile Include="Source\InputDevice.cpp" />
+    <ClCompile Include="Source\Object.cpp" />
+    <ClCompile Include="Source\ObjectFactory.cpp" />
+    <ClCompile Include="Source\PhysicsDevice.cpp" />
+    <ClCompile Include="Source\PlayerInputComponent.cpp" />
+    <ClCompile Include="Source\Random.cpp" />
+    <ClCompile Include="Source\SecretExitBehaviorComponent.cpp" />
+    <ClCompile Include="Source\SlideBehaviorComponent.cpp" />
+    <ClCompile Include="Source\SoundDevice.cpp" />
+    <ClCompile Include="Source\Source.cpp" />
+    <ClCompile Include="Source\SpriteComponent.cpp" />
+    <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\TimedLifeComponent.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\tinyxml\tinystr.cpp" />
+    <ClCompile Include="Source\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="Source\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="Source\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="Source\View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\ArrowBehaviorComponent.h" />
+    <ClInclude Include="Source\AssetLibrary.h" />
+    <ClInclude Include="Source\BlastBehaviorComponent.h" />
+    <ClInclude Include="Source\BombBehaviorComponent.h" />
+    <ClInclude Include="Source\CircleBehaviorComponent.h" />
+    <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\ContactListener.h" />
+    <ClInclude Include="Source\Definitions.h" />
+    <ClInclude Include="Source\Exceptions.h" />
+    <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\GraphicsDevice.h" />
+    <ClInclude Include="Source\InputDevice.h" />
+    <ClInclude Include="Source\Object.h" />
+    <ClInclude Include="Source\ObjectFactory.h" />
+    <ClInclude Include="Source\PhysicsDevice.h" />
+    <ClInclude Include="Source\PlayerInputComponent.h" />
+    <ClInclude Include="Source\Random.h" />
+    <ClInclude Include="Source\SecretExitBehaviorComponent.h" />
+    <ClInclude Include="Source\SlideBehaviorComponent.h" />
+    <ClInclude Include="Source\SoundDevice.h" />
+    <ClInclude Include="Source\SpriteComponent.h" />
+    <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\TimedLifeComponent.h" />
+    <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\arrow.png" />
+    <Image Include="Assets\Images\leever_b.png" />
+    <Image Include="Assets\Images\leever_r.png" />
+    <Image Include="Assets\Images\link_d.png" />
+    <Image Include="Assets\Images\link_l.png" />
+    <Image Include="Assets\Images\link_r.png" />
+    <Image Include="Assets\Images\link_u.png" />
+    <Image Include="Assets\Images\octorok_b.png" />
+    <Image Include="Assets\Images\octorok_r.png" />
+    <Image Include="Assets\Images\rock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Assets\Config\level1.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="Assets\Config\music.xml" />
+    <Xml Include="Assets\Config\objects.xml" />
+    <Xml Include="Assets\Config\Physics.xml" />
+    <Xml Include="Assets\Config\sounds.xml" />
+    <Xml Include="Assets\Config\sprites.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Config\bomberman_level_1.map" />
+    <None Include="Assets\Config\bomberman_level_2.map" />
+    <None Include="Assets\Config\bomberman_level_3.map" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6D0C0CC1-2E46-41F4-94C1-0F91F125C4A8}</ProjectGuid>
+    <RootNamespace>Hmwk1Solution</RootNamespace>
+<<<<<<< HEAD:Quest.1.Zelda.1.Assignment.vcxproj
+    <ProjectName>Quest.3.Zelda.1.Assignment</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+=======
+    <ProjectName>GameAssignment</ProjectName>
+>>>>>>> VS2015:GameAssignment.vcxproj
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)Game\</OutDir>
+    <IntDir>$(ProjectDir)Temp\</IntDir>
+    <IncludePath>$(ProjectDir)ThirdParty\SDL2_mixer-2.0.1\include;$(ProjectDir)ThirdParty\Box2D;$(ProjectDir)ThirdParty\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)ThirdParty\SDL2_mixer-2.0.1\lib\x86;$(ProjectDir)ThirdParty\Box2D\Box2D\lib;$(ProjectDir)ThirdParty\SDL2\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2_mixer.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>copy "$(ProjectDir)ThirdParty\SDL2\lib\*.dll" "$(ProjectDir)"
+copy "$(ProjectDir)ThirdParty\SDL2_mixer-2.0.1\lib\x86\*.dll" "$(ProjectDir)"
+</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>move "$(ProjectDir)*.dll" "$(ProjectDir)Game";
+xcopy "$(ProjectDir)Assets" "$(ProjectDir)Game\Assets" /E /I /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
