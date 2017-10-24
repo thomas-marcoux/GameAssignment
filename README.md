@@ -1,4 +1,4 @@
-# Quest.1.Zelda.1.Assignment
+# GameAssignment
 
 Thomas Marcoux
 
